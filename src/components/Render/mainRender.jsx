@@ -1,22 +1,18 @@
 import React, { useEffect } from "react";
 import { Row, Col, Card } from "antd";
 import useMovieApi from "../../hooks/useMovieApi";
-
 const { Meta } = Card;
-
 const MainRender = ({ navState }) => {
-
   const { data, error,reFetch, loading } = useMovieApi(`movie/${navState}`);
-
-
+  
   useEffect(() => {
     reFetch(`movie/${navState}`);
   }, [navState])
 
   return (
-    <div style={{ margin: "20px 0" }}>
+    <div className="site-layout-content" /*style={{ margin: "20px 0" }}*/>
       {loading ? (
-        <h1 style={{textAlign:"center"}}>LOAIDNG...</h1>
+        <h1 style={{ textAlign: "center" }}>LOAIDNG...</h1>
       ) : (
         <Row justify="center" gutter={[20, 30]}>
           {data?.results?.map((movie) => (
