@@ -21,8 +21,8 @@ const Movies = () => {
     }
   
   return (
-    <div style={{ height: "400px", alignSelf: "center" }}>
-      <Space>
+    <div>
+      <Space style={{padding:"10px 0"}}>
         <h1>movie</h1>
         <Button type="dashed" shape="round" onClick={()=>dayButtonClick()}>
           day
@@ -41,11 +41,15 @@ const Movies = () => {
           <h1 style={{ textAlign: "center" }}>Loading</h1>
         ) : (
           movies.results.map((m) => (
-            <SwiperSlide key={m.id}>
+            <SwiperSlide key={m.id}
+              className="shadow"
+            >
               <Image
+                preview={false}
                 src={`https://image.tmdb.org/t/p/w500/${m.backdrop_path}`}
+                alt={m.title}
               />
-              <p>{m.title}</p>
+              <p style={{textAlign:"center"}}>{m.title}</p>
             </SwiperSlide>
           ))
         )}

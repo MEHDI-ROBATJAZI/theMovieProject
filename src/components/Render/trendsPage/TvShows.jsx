@@ -22,8 +22,8 @@ const TvShows = () => {
   }
 
   return (
-    <div style={{ height: "400px", alignSelf: "center" }}>
-      <Space>
+    <div>
+      <Space style={{padding:"10px 0"}}>
         <h1>tv</h1>
         <Button type="dashed" shape="round" onClick={dayButtonClick}>
           day
@@ -35,18 +35,18 @@ const TvShows = () => {
       <Swiper
         spaceBetween={50}
         slidesPerView={4}
-        // onSlideChange={() => console.log("slide change")}
-        // onSwiper={(swiper) => console.log(swiper)}
       >
         {dayTvsLoading ? (
           <h1 style={{ textAlign: "center" }}>Loading</h1>
         ) : (
           tvs.results.map((t) => (
-            <SwiperSlide key={t.id}>
+            <SwiperSlide key={t.id}  className="shadow">
               <Image
+                preview={false}
                 src={`https://image.tmdb.org/t/p/w500/${t.backdrop_path}`}
+                alt={t.name}
               />
-              <p>{t.name}</p>
+              <p style={{textAlign:"center"}}>{t.name}</p>
             </SwiperSlide>
           ))
         )}

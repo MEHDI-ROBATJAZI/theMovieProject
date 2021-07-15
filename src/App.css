@@ -2,3 +2,9 @@
   min-height:100vh;
   background-color: #efefef;
 }
+
+.shadow :hover{
+  cursor: pointer;
+  box-shadow:  9px 9px 18px #cacaca,
+  -9px -9px 18px #f6f6f6;
+}

@@ -5,15 +5,30 @@ import Movies from "./Movies";
 import TvShows from "./TvShows";
 
 
+const styleSection={
+  backgroundColor:"white",
+  margin:"20px 0",
+  padding:"30px"
+}
+
 
 const TrendingRender = () => {
   
   return (
     <div>
+      <div style={styleSection}>
+        <Movies />
 
-      <Movies />
-      <TvShows />
-      <Persons />
+      </div>
+      <div style={styleSection}>
+        <TvShows />
+
+      </div>
+      <div style={styleSection}>
+        <Persons />
+
+
+      </div>
     </div>
   );
 };

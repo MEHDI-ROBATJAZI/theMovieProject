@@ -1,5 +1,5 @@
-import React from "react";
-import { Button, Space, Image } from "antd";
+import React, { useState } from "react";
+import { Button, Space, Image, Row, Col } from "antd";
 import { Swiper, SwiperSlide } from "swiper/react";
 import useMovieApi from "../../../hooks/useMovieApi";
 
@@ -26,11 +26,17 @@ const Persons = () => {
     refetchPersons(`https://api.themoviedb.org/3/trending//person/week`);
   };
 
+  const [personDetail, setPersonDetail] = useState({});
+  const showDetailPerson = (person) => {
+    setPersonDetail(person)
+    console.log(person);
+  };
+
   return (
-    <div style={{ height: "400px", alignSelf: "center" }}>
-      <Space>
+    <div>
+      <Space style={{padding:"10px 0"}}>
         <h1>persons</h1>
-        <Button type="primary" shape="round" onClick={dayButtonClick}>
+        <Button type="dashed" shape="round" onClick={dayButtonClick}>
           day
         </Button>
         <Button type="dashed" danger shape="round" onClick={weekButtonClick}>
@@ -40,15 +46,14 @@ const Persons = () => {
       <Swiper
         spaceBetween={50}
         slidesPerView={5}
-        onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
       >
         {PersonsLoading ? (
           <h1 style={{ textAlign: "center" }}>Loading</h1>
         ) : (
           persons.results.map((p) => (
-            <SwiperSlide key={p.id}>
+            <SwiperSlide key={p.id}  className="shadow" onClick={() => showDetailPerson(p)}>
               <Image
+                preview={false}
                 height="250px"
                 src={
                   p.profile_path === null
@@ -65,19 +70,35 @@ const Persons = () => {
           ))
         )}
       </Swiper>
-      <div style={{ minHeight: "500px" , margin:"100px"}}>
-        <Swiper navigation={true} className="mySwiper">
-          <SwiperSlide style={{background:"blue" , height:"400px"}}>Slide 1</SwiperSlide>
-          <SwiperSlide style={{background:"blue" , height:"400px"}}>Slide 2</SwiperSlide>
-          <SwiperSlide style={{background:"blue" , height:"400px"}}>Slide 3</SwiperSlide>
-          <SwiperSlide style={{background:"blue" , height:"400px"}}>Slide 4</SwiperSlide>
-          <SwiperSlide style={{background:"blue" , height:"400px"}}>Slide 5</SwiperSlide>
-          <SwiperSlide style={{background:"blue" , height:"400px"}}>Slide 6</SwiperSlide>
-          <SwiperSlide style={{background:"blue" , height:"400px"}}>Slide 7</SwiperSlide>
-          <SwiperSlide style={{background:"blue" , height:"400px"}}>Slide 8</SwiperSlide>
-          <SwiperSlide style={{background:"blue" , height:"400px"}}>Slide 9</SwiperSlide>
-        </Swiper>
-      </div>
+      {personDetail.name && (
+        <Row>
+          <Col span={12} style={{height:"600px" ,position:"relative"}}>
+            <div style={{position:"absolute" , top:"50%" , left:"50%" ,transform:"translate(-50%,-50%)"}}>
+            <h1>name : {personDetail.name}</h1>
+            <h1>known for department : {personDetail.known_for_department}</h1>
+            <h1>gender : {personDetail.gender === 1 ? "female" : 'male'}</h1>
+            </div>
+          </Col>
+          <Col span={12} style={{marginTop:"40px"}} >
+            <Swiper navigation={true} className="mySwiper">
+              {personDetail?.known_for?.map((item) => (
+                <SwiperSlide key={item.id}>
+                  <div style={{textAlign:"center"}}>
+                  <h1>known with</h1>
+                  <Image
+                    height="600px"
+                    preview={false}
+                    alt={item.original_title}
+                    src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                  />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+
+          </Col>
+        </Row>
+      )}
     </div>
   );
 };
