@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { Menu } from "antd";
-import MainRender from "../Render/mainRender";
+import Home from "../Render/Home";
 import TrendingRender from "../Render/trendsPage";
 import { Layout } from "antd";
+import { Link, Route, Switch } from "react-router-dom";
+import MovieDetails from "../Render/MovieDetails";
 
 const { Header, Content, Footer } = Layout;
 
 
 
 const Nav = () => {
-  const [navState, setNavState] = useState("trending");
 
   return (
     <div>
@@ -18,21 +19,28 @@ const Nav = () => {
           <Menu
             theme="dark"
             mode="horizontal"
-            defaultSelectedKeys={["trending"]}
-            onSelect={({ key }) => setNavState(key)}
+            defaultSelectedKeys={["home"]}
+            // onSelect={({ key }) => callback(key)}
           >
-            <Menu.Item key="popular">popular</Menu.Item>
-            <Menu.Item key="upcoming">upcoming</Menu.Item>
-            <Menu.Item key="trending">trending</Menu.Item>
+            <Menu.Item ><Link to="/">home</Link></Menu.Item>
+            <Menu.Item ><Link to="/trending">trending</Link></Menu.Item>
           </Menu>
         </Header>
 
         <Content style={{ padding: "0 50px" }}>
-          <div>
-            {navState === "popular" && <MainRender navState={navState} />}
-            {navState === "upcoming" && <MainRender navState={navState} />}
-            {navState === "trending" && <TrendingRender />}
-          </div>
+        <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/trending">
+          <TrendingRender />
+        </Route>
+        <Route exact path="/movieDetails/:id">
+          <MovieDetails />
+        </Route>
+      </Switch>
+
+
         </Content>
       </Layout>
     </div>

@@ -6,7 +6,7 @@ import TvShows from "./TvShows";
 
 
 const styleSection={
-  backgroundColor:"white",
+  background:"#ded6f1", 
   margin:"20px 0",
   padding:"30px"
 }
