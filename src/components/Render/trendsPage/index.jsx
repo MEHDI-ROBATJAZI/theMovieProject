@@ -3,28 +3,24 @@ import "swiper/swiper-bundle.min.css";
 import Persons from "./Persons";
 import Movies from "./Movies";
 import TvShows from "./TvShows";
+// import classes from './TrendsStyle.module.scss'
+import "./TrendsStyle.css"
 
-
-const styleSection={
-  background:"#ded6f1", 
-  margin:"20px 0",
-  padding:"30px"
-}
 
 
 const TrendingRender = () => {
   
   return (
     <div>
-      <div style={styleSection}>
+      <div className="GlassMorphism">
         <Movies />
 
       </div>
-      <div style={styleSection}>
+      <div className="GlassMorphism">
         <TvShows />
 
       </div>
-      <div style={styleSection}>
+      <div className="GlassMorphism">
         <Persons />
 
 

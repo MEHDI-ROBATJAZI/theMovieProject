@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Space, Image, Row, Col } from "antd";
 import { Swiper, SwiperSlide } from "swiper/react";
 import useMovieApi from "../../../hooks/useMovieApi";
-
+import "./TrendsStyle.css"
 import "swiper/swiper-bundle.min.css";
 import "swiper/components/navigation/navigation.min.css";
 
@@ -29,7 +29,6 @@ const Persons = () => {
   const [personDetail, setPersonDetail] = useState({});
   const showDetailPerson = (person) => {
     setPersonDetail(person)
-    console.log(person);
   };
 
   return (
@@ -51,7 +50,8 @@ const Persons = () => {
           <h1 style={{ textAlign: "center" }}>Loading</h1>
         ) : (
           persons.results.map((p) => (
-            <SwiperSlide key={p.id}  className="shadow" onClick={() => showDetailPerson(p)}>
+            <SwiperSlide key={p.id} onClick={() => showDetailPerson(p)}>
+              <div className="swiper-card-flex">
               <Image
                 preview={false}
                 height="250px"
@@ -62,10 +62,11 @@ const Persons = () => {
                 }
                 alt={p.original_title}
               />
-              <Space>
+                <Space>
                 <p>{p.name} ------</p>
                 <p>{p.known_for_department}</p>
-              </Space>
+                </Space>
+                </div>
             </SwiperSlide>
           ))
         )}

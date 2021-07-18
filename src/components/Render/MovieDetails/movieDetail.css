@@ -107,3 +107,20 @@ body {
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
+#logoStyle{
+  width:500px;
+  position:relative;
+  top:70px;
+  left:100px;
+}
+.card-container .ant-tabs-tab{
+  background: rgba( 237, 132, 255, 0.25 ) !important;
+  backdrop-filter: blur(5.5px) !important;
+  -webkit-backdrop-filter: blur(5.5px) !important;
+  border-radius: 10px  !important;
+}
+.card-container .ant-tabs-tab-active{
+  border-radius: 10px 10px 0 0 !important;
+  border-bottom:none !important;
+
+}

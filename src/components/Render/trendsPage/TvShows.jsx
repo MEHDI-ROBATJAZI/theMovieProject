@@ -40,13 +40,17 @@ const TvShows = () => {
           <h1 style={{ textAlign: "center" }}>Loading</h1>
         ) : (
           tvs.results.map((t) => (
-            <SwiperSlide key={t.id}  className="shadow">
+            <SwiperSlide key={t.id} >
+               <div
+               className="swiper-card-flex"
+              >
               <Image
                 preview={false}
                 src={`https://image.tmdb.org/t/p/w500/${t.backdrop_path}`}
                 alt={t.name}
               />
-              <p style={{textAlign:"center"}}>{t.name}</p>
+              <p>{t.name}</p>
+              </div>
             </SwiperSlide>
           ))
         )}

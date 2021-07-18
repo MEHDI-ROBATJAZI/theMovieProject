@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Card, Pagination, Tabs, Image } from "antd";
-import useMovieApi from "../../hooks/useMovieApi";
+import useMovieApi from "../../../hooks/useMovieApi";
 import { Link } from "react-router-dom";
+import classes from './home.module.scss'
 
 const { Meta } = Card;
 const { TabPane } = Tabs;
@@ -27,13 +28,16 @@ const Home = () => {
     <div>
       <div>
         <Tabs
+        
           size="large"
           centered={true}
           defaultActiveKey="1"
           onChange={(k) => setTabState(k)}
         >
-          <TabPane tab="popular" key="popular" />
+          
+          <TabPane  tab="popular" key="popular" />
           <TabPane tab="upcoming" key="upcoming" />
+          <TabPane tab="top rated" key="top_rated" />
         </Tabs>
       </div>
 
@@ -42,7 +46,6 @@ const Home = () => {
           style={{
             textAlign: "center",
             padding: "20px 0",
-            // background: "#efecf8",
           }}
         >
           <Pagination
@@ -55,7 +58,7 @@ const Home = () => {
           />
         </div>
       )}
-      <div className="HomeGlassMorphism" style={siteLayoutContent}>
+      <div className={classes.HomeGlassMorphism} style={siteLayoutContent}>
         {loading ? (
           <h1 style={{ textAlign: "center" }}>LOAIDNG...</h1>
         ) : (

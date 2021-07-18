@@ -1,0 +1,46 @@
+#Container {
+  min-height: 100vh;
+
+  .shadow :hover {
+    cursor: pointer;
+    box-shadow: 9px 9px 18px #cacaca, -9px -9px 18px #f6f6f6;
+  }
+  #HeaderStyles {
+    height: 80px;
+    background-color: #a19eda;
+    margin: 0 80px;
+    border: 2px solid black;
+    border-top: none;
+  }
+  #NavStyles {
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+
+    #NavLinks {
+      line-height: 80px;
+      //
+      span {
+        display: inline-block;
+        width: 90px;
+        text-align: center;
+        font-style: italic;
+        font-weight: bold;
+        a {
+          color: rgb(139, 0, 0);
+          letter-spacing: 1px;
+        }
+      }
+
+      span:hover {
+        background-color: black;
+        a {
+          color: white;
+        }
+      }
+    }
+    #serachComponentParent {
+      margin-top: 25px;
+    }
+  }
+}
