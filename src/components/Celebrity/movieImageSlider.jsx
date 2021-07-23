@@ -41,7 +41,7 @@ const MovieImageSlider = ({ id }) => {
           {data.cast.map((movie) => (
             <SwiperSlide className="swiper-slide">
               {movie.poster_path ? (
-                  <Link to={`/movieDetails/${movie.id}`}>
+                  <Link to={`/movieDetails/${movie.id}?flag=movie`}>
                 <Space  size={10} direction="vertical">
                   <Image
                   style={{height:"300px"}}

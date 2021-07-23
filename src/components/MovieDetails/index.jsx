@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import useMovieApi from "../../hooks/useMovieApi";
 import { Image, Row, Col, Tabs, Collapse, Rate, Button, Tag } from "antd";
 import "./MovieDetails.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 import "swiper/components/pagination/pagination.min.css";
-import FileImageOutlined from "@ant-design/icons";
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
+
+
 // import Swiper core and required modules
 import SwiperCore, { Navigation } from "swiper/core";
 
@@ -16,8 +17,16 @@ import SwiperCore, { Navigation } from "swiper/core";
 SwiperCore.use([Navigation]);
 
 const MovieDetails = () => {
+
+  function useQuery() {
+    return new URLSearchParams(useLocation().search);
+  }
+  let query = useQuery();
+
+
+
   const { id } = useParams();
-  const { data, loading } = useMovieApi(`/movie/${id}`, {
+  const { data, loading } = useMovieApi(`/${query.get("flag")}/${id}`, {
     append_to_response: "videos,images",
   });
   const { data: credits = {}, loading: castLoading } = useMovieApi(
@@ -26,6 +35,7 @@ const MovieDetails = () => {
   const [imageState, setImageState] = useState([]);
   const [videoState, setVideoState] = useState([]);
   const [castState, setCastState] = useState([]);
+
 
   useEffect(() => {
     // console.log(data);
@@ -70,13 +80,18 @@ const MovieDetails = () => {
           }}
         >
           <div id="logoStyle">
-            <div>
-              <Image
-                preview={false}
-                src={`https://image.tmdb.org/t/p/w500${data.images.logos[0].file_path}`}
-                alt={"no image"}
-              />
-            </div>
+            {
+              data.images.logos[0] && (
+                <div>
+                  <Image
+                    preview={false}
+                    src={`https://image.tmdb.org/t/p/w500${data.images.logos[0].file_path}`}
+                    alt={"no image"}
+                  />
+                </div>
+
+              )
+            }
             <Rate
               className="RateStyles"
               disabled={true}
@@ -137,13 +152,29 @@ const MovieDetails = () => {
               >
                 <Collapse bordered={false}>
                   <Panel header="Title" key="1">
-                    <strong>{data.title}</strong>
+                    {
+                      query.get("flag") === "movie"?(
+                        <strong>{data.title}</strong>
+                       ):
+                       (
+                        <strong>{data.name}</strong>
+                         
+                       )
+                    }
                   </Panel>
                   <Panel header="Overview" key="2">
                     <strong>{data.overview}</strong>
                   </Panel>
                   <Panel header="Release date" key="3">
-                    <strong>{data.release_date}</strong>
+                  {
+                      query.get("flag") === "movie"?(
+                        <strong>{data.release_date}</strong>
+                       ):
+                       (
+                        <strong>{data.first_air_date}</strong>
+                         
+                       )
+                    }
                   </Panel>
                 </Collapse>
               </TabPane>

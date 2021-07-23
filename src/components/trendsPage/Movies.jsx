@@ -5,6 +5,7 @@ import "swiper/swiper-bundle.min.css";
 import { Button, Space, Image } from "antd";
 // import classes from "./TrendsStyle.module.scss";
 import "./trendsStyle.css"
+import { Link } from "react-router-dom";
 
 const Movies = () => {
   const {
@@ -47,6 +48,7 @@ const Movies = () => {
         ) : (
           movies.results.map((m) => (
             <SwiperSlide key={m.id}>
+              <Link to={`/movieDetails/${m.id}?flag=movie`}>
               <div
                className="swiper-card-flex"
               >
@@ -60,6 +62,7 @@ const Movies = () => {
                   {m.title}
                 </p>
               </div>
+              </Link>
             </SwiperSlide>
           ))
         )}

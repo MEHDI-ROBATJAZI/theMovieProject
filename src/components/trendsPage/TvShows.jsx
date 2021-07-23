@@ -3,6 +3,7 @@ import useMovieApi from "../../hooks/useMovieApi";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 import { Button, Space, Image } from "antd";
+import { Link } from "react-router-dom";
 
 const TvShows = () => {
   const {
@@ -41,6 +42,7 @@ const TvShows = () => {
         ) : (
           tvs.results.map((t) => (
             <SwiperSlide key={t.id} >
+              <Link to={`movieDetails/${t.id}?flag=tv`}>
                <div
                className="swiper-card-flex"
               >
@@ -51,6 +53,7 @@ const TvShows = () => {
               />
               <p>{t.name}</p>
               </div>
+              </Link>
             </SwiperSlide>
           ))
         )}

@@ -3,6 +3,7 @@ import { Input, AutoComplete } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import classes from "./Search.module.scss";
 import useDelayFetch from "../../hooks/useDelayFetch";
+import { Link } from "react-router-dom";
 
 const { Search } = Input;
 
@@ -22,7 +23,7 @@ const renderTitle = (title) => (
   </span>
 );
 
-const renderItem = (title, count) => ({
+const renderItem = (media_type, title, id) => ({
   value: title,
   label: (
     <div
@@ -31,41 +32,27 @@ const renderItem = (title, count) => ({
         justifyContent: "space-between",
       }}
     >
-      {title}
-      <span>
-        <UserOutlined /> {count}
-      </span>
+      <Link
+        to={media_type === "movie" && `/movieDetails/${id}?flag=movie`||
+          media_type==="tv" && `/tv/${id}?flag=tv`||
+          media_type === "person" && `/celebrity/${id}`
+        }
+      >
+        {title}
+        {/* <span>
+          <UserOutlined /> {id}
+        </span> */}
+      </Link>
     </div>
   ),
 });
-
-// const options = [
-//   {
-//     label: renderTitle("Libraries"),
-//     options: [
-//       renderItem("AntDesign", 10000),
-//       renderItem("AntDesign UI", 10600),
-//     ],
-//   },
-//   {
-//     label: renderTitle("Solutions"),
-//     options: [
-//       renderItem("AntDesign UI FAQ", 60100),
-//       renderItem("AntDesign FAQ", 30010),
-//     ],
-//   },
-//   {
-//     label: renderTitle("Articles"),
-//     options: [renderItem("AntDesign design language", 100000)],
-//   },
-// ];
 
 const SearchComponent = () => {
   const [query, setQuery] = useState("");
   const debuncedQuery = useDelayFetch(query, 1000);
   const [data, setData] = useState([]);
 
-  // const onSearch = (value) => console.log(value);
+  // const onSearch = (value) =>  console.log(value);
   useEffect(() => {
     if (debuncedQuery) {
       fetch(
@@ -76,23 +63,28 @@ const SearchComponent = () => {
     }
   }, [debuncedQuery]);
 
-  console.log(data);
+  // console.log(data);
 
   const makeOptions = () => {
-    if(debuncedQuery.length){
-
-    return [
+    if (debuncedQuery.length) {
+      return [
         {
           label: renderTitle("Movies"),
-          options: data.filter(d=>d.media_type === "movie").map(movie=>renderItem(movie.title,movie.id))
+          options: data
+            .filter((d) => d.media_type === "movie")
+            .map((movie) => renderItem(movie.media_type, movie.title, movie.id)),
         },
         {
           label: renderTitle("Persons"),
-          options: data.filter(d=>d.media_type === "person").map(movie=>renderItem(movie.title,movie.id))
+          options: data
+            .filter((d) => d.media_type === "person")
+            .map((person) => renderItem(person.media_type, person.name, person.id)),
         },
         {
           label: renderTitle("Tv Shows"),
-          options: data.filter(d=>d.media_type === "tv").map(movie=>renderItem(movie.title,movie.id))
+          options: data
+            .filter((d) => d.media_type === "tv")
+            .map((tv) => renderItem(tv.media_type, tv.name, tv.id)),
         },
       ];
     }
@@ -103,7 +95,7 @@ const SearchComponent = () => {
       <AutoComplete
         dropdownClassName={classes.certainCategorySearchDropdown}
         options={makeOptions()}
-        >
+      >
         <Search
           id={classes.SearchInput}
           placeholder="input search text"

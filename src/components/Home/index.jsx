@@ -107,7 +107,7 @@ const Home = () => {
               >
                 {data?.results?.map((movie) => (
                   <Col key={movie.id} span={{ xs: 24, sm: 12, md: 8, lg: 6 }}>
-                    <Link to={`/movieDetails/${movie.id}`}>
+                    <Link to={`/movieDetails/${movie.id}?flag=movie`}>
                       <Card
                         hoverable
                         style={{ width: 240 }}
