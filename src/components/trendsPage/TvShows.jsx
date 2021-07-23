@@ -1,5 +1,5 @@
 import React from "react";
-import useMovieApi from "../../../hooks/useMovieApi";
+import useMovieApi from "../../hooks/useMovieApi";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 import { Button, Space, Image } from "antd";
@@ -24,7 +24,7 @@ const TvShows = () => {
   return (
     <div>
       <Space style={{padding:"10px 0"}}>
-        <h1>tv</h1>
+        <h1 className="trendsTitle">tv shows</h1>
         <Button type="dashed" shape="round" onClick={dayButtonClick}>
           day
         </Button>

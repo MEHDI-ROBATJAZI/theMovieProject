@@ -1,14 +1,30 @@
 
-
-
 .HomeGlassMorphism{
+  position: relative;
   background: rgba( 255, 255, 255, 0.15 );
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
   backdrop-filter: blur( 17.0px );
   -webkit-backdrop-filter: blur( 17.0px );
   border-radius: 10px;
   border: 1px solid rgba( 255, 255, 255, 0.18 );
+  padding:50px 0; 
+  // margin: "0 0";
+  // padding: "100px 0";
+  
+  
+  .DropDown{
+    // height:100px;
+    position:absolute;
+    right:70px;
+    top:70px;
+  }
+
+  .CardsContainer{
+    margin-top:40px;
+  }
+  
+  
 }
-// .ant-tabs-tab{
-//   background: none !important;
-// }
+.BlurFilter{
+  filter:blur(8px)
+}

@@ -1,0 +1,13 @@
+.ant-tabs-tab-btn{
+  font-family: Tourney;
+  font-size:2rem;
+}
+.TagStyle{
+  cursor: "pointer";
+  letter-spacing: "1px";
+  padding: "2px 6px";
+  font-family: "Montserrat";
+}
+.ant-card-meta-title{
+  font-family: Montserrat;
+}

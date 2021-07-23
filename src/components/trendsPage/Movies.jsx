@@ -1,5 +1,5 @@
 import React from "react";
-import useMovieApi from "../../../hooks/useMovieApi";
+import useMovieApi from "../../hooks/useMovieApi";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 import { Button, Space, Image } from "antd";
@@ -23,7 +23,7 @@ const Movies = () => {
   return (
     <div className="mycarousel">
       <Space style={{ padding: "10px 0" }}>
-        <h1>movie</h1>
+        <h1 className="trendsTitle">movie</h1>
         <Button type="dashed" shape="round" onClick={() => dayButtonClick()}>
           day
         </Button>

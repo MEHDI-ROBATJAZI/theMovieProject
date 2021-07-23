@@ -1,3 +1,6 @@
+$CustomGreen : rgb(91, 255, 50);
+
+
 #Container {
   min-height: 100vh;
 
@@ -8,34 +11,39 @@
   #HeaderStyles {
     height: 80px;
     background-color: #a19eda;
-    margin: 0 80px;
-    border: 2px solid black;
-    border-top: none;
+    margin: 40px 280px;
+    border: 2px solid $CustomGreen;
+    border-radius: 13px;
+    font-family:Montserrat;
+    // border-top: none;
   }
   #NavStyles {
+
     padding: 0 40px;
     display: flex;
     justify-content: space-between;
 
     #NavLinks {
       line-height: 80px;
-      //
       span {
         display: inline-block;
-        width: 90px;
+        width: 110px;
         text-align: center;
-        font-style: italic;
+        // font-style: italic;
         font-weight: bold;
+        font-size:1.3rem;
         a {
-          color: rgb(139, 0, 0);
+          color: $CustomGreen;
           letter-spacing: 1px;
         }
       }
 
       span:hover {
         background-color: black;
+        border-bottom:3px solid red;
+
         a {
-          color: white;
+          color: red;
         }
       }
     }
@@ -43,4 +51,23 @@
       margin-top: 25px;
     }
   }
+  #ProfileBar{
+      div{
+        width:50px;
+        height:80px;
+        text-align: center;
+        line-height: 80px;
+        svg {
+          color:$CustomGreen;
+        }
+        div:hover {
+          background-color: black;
+          border-bottom:3px solid red;
+          svg {
+            color: red;
+          }
+        }
+      }
+  }
+
 }

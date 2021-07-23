@@ -1,0 +1,55 @@
+.GlassMorphism{
+  background: rgba( 255, 255, 255, 0.15 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 17.0px );
+  -webkit-backdrop-filter: blur( 17.0px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  margin:20px 0 ;
+  padding:30px;
+}
+
+.swiper-slide{
+  background: none !important;
+}
+
+.swiper-card-flex{
+  text-align: center;
+  font-size:12px;
+  display: flex;
+  flex-direction: column;
+}
+.trendsTitle{
+  font-family: Tourney;
+  cursor: pointer;
+  transition: all .5s ease;
+}
+.trendsTitle:hover{
+  letter-spacing: 3px;
+  color:red;
+}
+.personInfoBox{
+  position: relative;
+  height:600px;
+}
+
+.infoBox{
+  font-family:Montserrat;
+  
+  position:absolute ;
+  top:50% ;
+  left:50% ;
+  transform:translate(-50%,-50%)
+}
+.infoBox h1 span{
+  background-color: rgb(91, 255, 50);
+  color:black;
+}
+.infoBox h1 :hover{
+  background-color: black;
+  color:red;
+}
+.imageDesc{
+  font-family:Tourney;
+  
+}

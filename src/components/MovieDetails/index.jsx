@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import useMovieApi from "../../../hooks/useMovieApi";
-import { Image, Row, Col, Tabs, Collapse, Rate } from "antd";
-import "./movieDetail.css";
+import { Link, useParams } from "react-router-dom";
+import useMovieApi from "../../hooks/useMovieApi";
+import { Image, Row, Col, Tabs, Collapse, Rate, Button, Tag } from "antd";
+import "./MovieDetails.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 import "swiper/components/pagination/pagination.min.css";
@@ -53,7 +53,9 @@ const MovieDetails = () => {
 
   return (
     <>
-      {!loading && (
+      {loading ? (
+        <h1>LOADING</h1>
+      ) : (
         <div
           style={{
             zIndex: 10,
@@ -70,20 +72,30 @@ const MovieDetails = () => {
           <div id="logoStyle">
             <div>
               <Image
-                width="300px"
                 preview={false}
                 src={`https://image.tmdb.org/t/p/w500${data.images.logos[0].file_path}`}
                 alt={"no image"}
               />
             </div>
             <Rate
+              className="RateStyles"
               disabled={true}
               allowHalf
               defaultValue={data.vote_average / 2}
             />
+          <div className="TagStyles">
+            {data.genres &&
+              data.genres.map((genre) => (
+                  <Tag key={genre.id} className="genre" color="success">{genre.name}</Tag>
+              ))}
           </div>
-          <div style={{ marginTop: "200px" }} className="card-container">
-            <Tabs style={{ padding: "50px" }} animated={true} type="card">
+              </div>
+
+          <div
+            style={{ marginTop: "200px", padding: "30px 0" }}
+            className="cardContainer"
+          >
+            <Tabs style={{ padding: "50px" }} animated={true} type="card" centered>
               <TabPane className="glassMorphism" tab="images" key="1">
                 <Swiper spaceBetween={50} slidesPerView={4}>
                   <div>
@@ -107,7 +119,7 @@ const MovieDetails = () => {
                     slidesPerView={1}
                   >
                     {videoState?.map((vid) => (
-                      <SwiperSlide key={vid.id} style={{ background: "none" }}>
+                      <SwiperSlide key={vid.id} style={{ background: "none",textAlign:"center" }}>
                         <iframe
                           width="70%"
                           height="500"
@@ -118,7 +130,11 @@ const MovieDetails = () => {
                   </Swiper>
                 </div>
               </TabPane>
-              <TabPane className="glassMorphism" tab="informations" key="3">
+              <TabPane
+                className="glassMorphism"
+                tab="informations"
+                key="3"
+              >
                 <Collapse bordered={false}>
                   <Panel header="Title" key="1">
                     <strong>{data.title}</strong>
@@ -139,12 +155,14 @@ const MovieDetails = () => {
                   slidesPerView={4}
                 >
                   {castState?.map((cast) => (
-                    <SwiperSlide span={6}>
+                    <SwiperSlide span={6} key={cast.id}>
+                      <Link to={`/celebrity/${cast.id}`}>
                       <Image
                         preview={false}
                         src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
                         height={500}
                       />
+                      </Link>
                     </SwiperSlide>
                   ))}
                 </Swiper>
