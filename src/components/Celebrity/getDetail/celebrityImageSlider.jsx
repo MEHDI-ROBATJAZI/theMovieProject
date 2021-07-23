@@ -1,7 +1,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Image } from "antd";
-import useMovieApi from "../../hooks/useMovieApi";
+import useMovieApi from "../../../hooks/useMovieApi";
 
 import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css";

@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import useMovieApi from "../../hooks/useMovieApi";
+import useMovieApi from "../../../hooks/useMovieApi";
 import { Image, Row ,Col} from "antd";
 import CelebrityImageSlider from './celebrityImageSlider'
 import MovieImageSlider from "./movieImageSlider";

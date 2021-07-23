@@ -11,7 +11,7 @@ $CustomGreen : rgb(91, 255, 50);
   #HeaderStyles {
     height: 80px;
     background-color: #a19eda;
-    margin: 40px 280px;
+    margin: 40px 180px;
     border: 2px solid $CustomGreen;
     border-radius: 13px;
     font-family:Montserrat;
@@ -27,11 +27,11 @@ $CustomGreen : rgb(91, 255, 50);
       line-height: 80px;
       span {
         display: inline-block;
-        width: 110px;
+        width: 90px;
         text-align: center;
         // font-style: italic;
         font-weight: bold;
-        font-size:1.3rem;
+        font-size:.9rem;
         a {
           color: $CustomGreen;
           letter-spacing: 1px;

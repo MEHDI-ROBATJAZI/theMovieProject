@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import useMovieApi from "../../hooks/useMovieApi";
-import { Image, Row, Col, Tabs, Collapse, Rate, Button, Tag } from "antd";
+import { Image, Row, Col, Tabs, Collapse, Rate, Button, Tag, Spin } from "antd";
 import "./MovieDetails.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
@@ -64,7 +64,9 @@ const MovieDetails = () => {
   return (
     <>
       {loading ? (
-        <h1>LOADING</h1>
+        <div id="SpinContainer">
+          <Spin></Spin>
+        </div>
       ) : (
         <div
           style={{
@@ -178,7 +180,7 @@ const MovieDetails = () => {
                   </Panel>
                 </Collapse>
               </TabPane>
-              <TabPane className="glassMorphism" tab="casts" key="4">
+              <TabPane className="glassMorphism" tab="cast" key="4">
                 <Swiper
                   className="mySwiper"
                   navigation={true}

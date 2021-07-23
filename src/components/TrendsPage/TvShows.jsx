@@ -2,7 +2,7 @@ import React from "react";
 import useMovieApi from "../../hooks/useMovieApi";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
-import { Button, Space, Image } from "antd";
+import { Button, Space, Image, Spin } from "antd";
 import { Link } from "react-router-dom";
 
 const TvShows = () => {
@@ -24,7 +24,7 @@ const TvShows = () => {
 
   return (
     <div>
-      <Space style={{padding:"10px 0"}}>
+      <Space style={{ padding: "10px 0" }}>
         <h1 className="trendsTitle">tv shows</h1>
         <Button type="dashed" shape="round" onClick={dayButtonClick}>
           day
@@ -33,26 +33,23 @@ const TvShows = () => {
           week
         </Button>
       </Space>
-      <Swiper
-        spaceBetween={50}
-        slidesPerView={4}
-      >
+      <Swiper spaceBetween={50} slidesPerView={4}>
         {dayTvsLoading ? (
-          <h1 style={{ textAlign: "center" }}>Loading</h1>
+          <div className="spinContainer">
+            <Spin />
+          </div>
         ) : (
           tvs.results.map((t) => (
-            <SwiperSlide key={t.id} >
+            <SwiperSlide key={t.id}>
               <Link to={`movieDetails/${t.id}?flag=tv`}>
-               <div
-               className="swiper-card-flex"
-              >
-              <Image
-                preview={false}
-                src={`https://image.tmdb.org/t/p/w500/${t.backdrop_path}`}
-                alt={t.name}
-              />
-              <p>{t.name}</p>
-              </div>
+                <div className="swiper-card-flex">
+                  <Image
+                    preview={false}
+                    src={`https://image.tmdb.org/t/p/w500/${t.backdrop_path}`}
+                    alt={t.name}
+                  />
+                  <p>{t.name}</p>
+                </div>
               </Link>
             </SwiperSlide>
           ))

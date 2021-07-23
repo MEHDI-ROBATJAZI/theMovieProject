@@ -2,9 +2,9 @@ import React from "react";
 import useMovieApi from "../../hooks/useMovieApi";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
-import { Button, Space, Image } from "antd";
+import { Button, Space, Image, Spin } from "antd";
 // import classes from "./TrendsStyle.module.scss";
-import "./trendsStyle.css"
+import "./TrendsStyle.css"
 import { Link } from "react-router-dom";
 
 const Movies = () => {
@@ -44,24 +44,21 @@ const Movies = () => {
         // onSwiper={(swiper) => console.log(swiper)}
       >
         {dayMoviesLoading ? (
-          <h1 style={{ textAlign: "center" }}>Loading</h1>
+          <div className="spinContainer">
+            <Spin />
+          </div>
         ) : (
           movies.results.map((m) => (
             <SwiperSlide key={m.id}>
               <Link to={`/movieDetails/${m.id}?flag=movie`}>
-              <div
-               className="swiper-card-flex"
-              >
-                <Image
-                  preview={false}
-                  src={`https://image.tmdb.org/t/p/w500/${m.backdrop_path}`}
-                  alt={m.title}
-                />
-                <p
-                >
-                  {m.title}
-                </p>
-              </div>
+                <div className="swiper-card-flex">
+                  <Image
+                    preview={false}
+                    src={`https://image.tmdb.org/t/p/w500/${m.backdrop_path}`}
+                    alt={m.title}
+                  />
+                  <p>{m.title}</p>
+                </div>
               </Link>
             </SwiperSlide>
           ))

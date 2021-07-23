@@ -1,5 +1,5 @@
 import React from "react";
-import useMovieApi from "../../hooks/useMovieApi";
+import useMovieApi from "../../../hooks/useMovieApi";
 import { Image, Space, Empty } from "antd";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";

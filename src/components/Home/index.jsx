@@ -99,6 +99,25 @@ const Home = () => {
                     </Tag>
                   )
               )}
+            {data && (
+              <div
+                style={{
+                  textAlign: "center",
+                  paddingTop: "60px",
+                }}
+              >
+                <Pagination
+                  defaultCurrent={1}
+                  pageSize={1}
+                  showSizeChanger={false}
+                  showQuickJumper={true}
+                  total={data.total_pages}
+                  onChange={(page) => {
+                    reloadData(page);
+                  }}
+                />
+              </div>
+            )}
             <div>
               <Row
                 justify="center"
@@ -133,26 +152,6 @@ const Home = () => {
                   </Col>
                 ))}
               </Row>
-
-              {data && (
-                <div
-                  style={{
-                    textAlign: "center",
-                    paddingTop: "60px",
-                  }}
-                >
-                  <Pagination
-                    defaultCurrent={1}
-                    pageSize={1}
-                    showSizeChanger={false}
-                    showQuickJumper={true}
-                    total={data.total_pages}
-                    onChange={(page) => {
-                      reloadData(page);
-                    }}
-                  />
-                </div>
-              )}
             </div>
           </div>
         )}
