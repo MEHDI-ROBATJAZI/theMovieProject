@@ -41,15 +41,15 @@
     line-height: 25px;
 
     span{
-      background-color:rgb(91, 255, 50);
-      margin: 0 10px;
-      padding: 0 10px;
-      color:black;
       
     }
   }
 
   h1:hover{
+    background-color: black;
+    color:red;
+  }
+  .ant-typo:hover{
     background-color: black;
     color:red;
   }

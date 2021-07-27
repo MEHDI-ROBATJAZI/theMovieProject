@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useState,useEffect} from "react";
 import classes from "./App.module.scss";
 import Home from "./components/Home";
 import MovieDetails from "./components/MovieDetails";
@@ -9,15 +9,31 @@ import { Col, Layout, Menu, Row, Space } from "antd";
 import { Link, Route, Switch } from "react-router-dom";
 import SearchComponent from "./components/Search/serchComponent";
 import { LoginOutlined } from "@ant-design/icons";
+import Page404 from "./components/Page404";
+import Footer from "./components/Footer";
+import useResponsive from "./hooks/useResponsive";
 const { Content } = Layout;
 
 const App = () => {
+  const [Responsive , setResponsive] = useState(false)
+  const width = useResponsive()
+
+  useEffect(() => {
+    width > 767 ? setResponsive(false) : setResponsive(true)
+  }, [width])
+
+
   return (
     <div id={classes.Container}>
       <Layout style={{ background: "#d1d0e5" }}>
-        <header id={classes.HeaderStyles}>
-          <nav id={classes.NavStyles}>
-            <div id={classes.NavLinks}>
+        <header id={Responsive ? classes.HeaderResponsive : classes.HeaderStyles}>
+          <nav id={Responsive ? classes.NavStylesResponsive : classes.NavStyles}>
+            <div id={classes.Burger} onClick={()=>setResponsive(!Responsive)}>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <div id={Responsive ? classes.NavLinksResponsive : classes.NavLinks}>
               <span>
                 <Link to="/">Home</Link>
               </span>
@@ -27,8 +43,11 @@ const App = () => {
               <span>
                 <Link to="/celebrity">Celebrity</Link>
               </span>
+              <span>
+                <Link to="/about me">About-Me</Link>
+              </span>
             </div>
-            <div id={classes.serachComponentParent}>
+            <div id={Responsive ? classes.serachComponentResponsive : classes.SearchComponent }>
               <SearchComponent />
             </div>
             <Space id={classes.ProfileBar}>
@@ -39,7 +58,7 @@ const App = () => {
           </nav>
         </header>
 
-        <Content style={{ padding: "0 50px" }}>
+        <Content>
           <Switch>
             <Route exact path="/">
               <Home />
@@ -56,9 +75,15 @@ const App = () => {
             <Route path="/celebrity/:id">
               <Celebrity />
             </Route>
+            <Route path="*">
+              <Page404 />
+            </Route>
           </Switch>
         </Content>
       </Layout>
+
+    <Footer />
+
     </div>
   );
 };

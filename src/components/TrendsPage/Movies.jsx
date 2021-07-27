@@ -2,10 +2,16 @@ import React from "react";
 import useMovieApi from "../../hooks/useMovieApi";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
+import "swiper/components/pagination/pagination.min.css"
 import { Button, Space, Image, Spin } from "antd";
 // import classes from "./TrendsStyle.module.scss";
 import "./TrendsStyle.css"
 import { Link } from "react-router-dom";
+import SwiperCore, {
+  Pagination,
+  Navigation,
+  Autoplay
+} from 'swiper/core';
 
 const Movies = () => {
   const {
@@ -20,6 +26,9 @@ const Movies = () => {
   const dayButtonClick = () => {
     refetchMovies("https://api.themoviedb.org/3/trending/movie/day");
   };
+
+  
+  SwiperCore.use([Autoplay,Pagination,Navigation]);
 
   return (
     <div className="mycarousel">
@@ -38,10 +47,28 @@ const Movies = () => {
         </Button>
       </Space>
       <Swiper
+        pagination={{clickable:true}}
+        navigation={true}
         spaceBetween={50}
-        slidesPerView={4}
-        // onSlideChange={() => console.log("slide change")}
-        // onSwiper={(swiper) => console.log(swiper)}
+        slidesPerView={1}
+        autoplay={{
+          "delay": 2500,
+          "disableOnInteraction": false
+        }} 
+        breakpoints={{
+          "640": {
+            "slidesPerView": 1,
+            "spaceBetween": 20
+          },
+          "768": {
+            "slidesPerView": 2,
+            "spaceBetween": 40
+          },
+          "1024": {
+            "slidesPerView": 3,
+            "spaceBetween": 50
+          }
+        }}
       >
         {dayMoviesLoading ? (
           <div className="spinContainer">

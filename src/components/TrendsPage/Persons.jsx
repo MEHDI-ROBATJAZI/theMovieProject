@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Button, Space, Image, Row, Col, Spin } from "antd";
 import { Swiper, SwiperSlide } from "swiper/react";
 import useMovieApi from "../../hooks/useMovieApi";
-import "./TrendsStyle.css"
+import "swiper/components/pagination/pagination.min.css";
+import SwiperCore, { Pagination, Navigation,Autoplay } from "swiper/core";
+import "./TrendsStyle.css";
 import "swiper/swiper-bundle.min.css";
 import "swiper/components/navigation/navigation.min.css";
 
-import SwiperCore, { Navigation } from "swiper/core";
 import { Link } from "react-router-dom";
 
 SwiperCore.use([Navigation]);
@@ -18,20 +19,23 @@ const Persons = () => {
     loading: PersonsLoading,
   } = useMovieApi(`trending/person/day`);
   console.log(persons);
-
+  
   const dayButtonClick = () => {
     refetchPersons(`https://api.themoviedb.org/3/trending//person/day`);
   };
-
+  
   const weekButtonClick = () => {
     refetchPersons(`https://api.themoviedb.org/3/trending//person/week`);
   };
 
   const [personDetail, setPersonDetail] = useState({});
   const showDetailPerson = (person) => {
-    setPersonDetail(person)
+    setPersonDetail(person);
+    window.scrollTo({ top: 1200, behavior: "smooth" });
   };
 
+  SwiperCore.use([Pagination, Navigation,Autoplay]);
+  
   return (
     <div>
       <Space style={{ padding: "10px 0" }}>
@@ -43,7 +47,30 @@ const Persons = () => {
           week
         </Button>
       </Space>
-      <Swiper spaceBetween={50} slidesPerView={5}>
+      <Swiper
+        pagination={{ clickable: true }}
+        navigation={true}
+        spaceBetween={20}
+        slidesPerView={1}
+        autoplay={{
+          "delay": 2500,
+          "disableOnInteraction": false
+        }} 
+        breakpoints={{
+          "640": {
+            "slidesPerView": 2,
+            "spaceBetween": 20
+          },
+          "768": {
+            "slidesPerView": 3,
+            "spaceBetween": 40
+          },
+          "1024": {
+            "slidesPerView": 4,
+            "spaceBetween": 50
+          }
+        }}
+      >
         {PersonsLoading ? (
           <div className="spinContainer">
             <Spin />
@@ -76,15 +103,14 @@ const Persons = () => {
           <Col span={12} className="personInfoBox">
             <div className="infoBox">
               <h1>
-                <span>name : </span>
-                {personDetail.name}
+                <span>name</span>: {personDetail.name}
               </h1>
               <h1>
-                <span>known for department : </span>
+                <span>known for department</span>:{" "}
                 {personDetail.known_for_department}
               </h1>
               <h1>
-                <span>gender : </span>
+                <span>gender </span>:{" "}
                 {personDetail.gender === 1 ? "female" : "male"}
               </h1>
               <Button type="danger">

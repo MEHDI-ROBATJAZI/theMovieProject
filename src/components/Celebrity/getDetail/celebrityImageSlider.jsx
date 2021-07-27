@@ -10,10 +10,10 @@ import "swiper/components/effect-cube/effect-cube.min.css";
 import "./celebrity.scss";
 
 // import Swiper core and required modules
-import SwiperCore, { EffectCube, Pagination } from "swiper/core";
+import SwiperCore, { EffectCube, Pagination , Autoplay } from "swiper/core";
 
 // install Swiper modules
-SwiperCore.use([EffectCube, Pagination]);
+SwiperCore.use([EffectCube, Pagination , Autoplay]);
 
 const CelebrityImageSlider = ({ id }) => {
   const { data: images = {}, loading: imagesLoading = true } = useMovieApi(
@@ -36,6 +36,10 @@ const CelebrityImageSlider = ({ id }) => {
           }
           pagination={true}
           className="swiper-container"
+          autoplay={{
+            "delay": 2500,
+            "disableOnInteraction": false
+          }} 
         >
           {images.profiles.map((pic) => (
             <SwiperSlide key={pic.file_path} className="swiper-slide">

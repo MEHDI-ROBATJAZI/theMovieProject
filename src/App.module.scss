@@ -15,13 +15,33 @@ $CustomGreen : rgb(91, 255, 50);
     border: 2px solid $CustomGreen;
     border-radius: 13px;
     font-family:Montserrat;
-    // border-top: none;
+    transition: .4s all ease;
   }
   #NavStyles {
 
     padding: 0 40px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    
+    #Burger{
+      height:80px;
+      padding:20px 10px 0 10px;
+      div{
+        width:40px;
+        height:4px;
+        background-color: $CustomGreen;
+        margin-bottom:6px;
+      }
+    }
+    #Burger:hover{
+      background-color: black;
+      border-bottom:3px solid red;  
+      
+      div{
+        background-color: red;
+      }
+
+    }
 
     #NavLinks {
       line-height: 80px;
@@ -29,7 +49,6 @@ $CustomGreen : rgb(91, 255, 50);
         display: inline-block;
         width: 90px;
         text-align: center;
-        // font-style: italic;
         font-weight: bold;
         font-size:.9rem;
         a {
@@ -46,8 +65,11 @@ $CustomGreen : rgb(91, 255, 50);
           color: red;
         }
       }
+
+
+
     }
-    #serachComponentParent {
+    #SearchComponent {
       margin-top: 25px;
     }
   }
@@ -69,5 +91,74 @@ $CustomGreen : rgb(91, 255, 50);
         }
       }
   }
+}
 
+#HeaderResponsive{
+  transition: all .4s ease;
+  background-color: #a19eda;
+  margin: 40px 20px;
+  border: 2px solid $CustomGreen;
+  border-radius: 13px;
+  font-family:Montserrat;
+  height:380px;
+
+}
+#NavStylesResponsive{
+  flex-direction: column;
+  margin:30px;
+  text-align: center;
+}
+
+#NavLinksResponsive{
+
+  // margin: 20px 0;
+
+  span{
+    height:50px;
+    line-height:50px;
+    display:block;
+    font-weight: bold;
+    font-size:.9rem;
+    a {
+      color: $CustomGreen;
+      letter-spacing: 1px;
+    }
+  }
+    span:hover {
+      background-color: black;
+      border-bottom:3px solid red;
+
+      a {
+        color: red;
+      }
+    
+  }
+  
+
+}
+#serachComponentResponsive{
+  margin: 30px 0;
+}
+
+@media only screen and (max-width: 900px) {
+  #HeaderStyles {
+    margin: 40px 30px !important;
+  }
+ 
+}
+@media only screen and (max-width: 1200px) {
+  #NavLinks , #SearchComponent {
+    display: none;
+  }
+ 
+}
+
+
+
+
+@media only screen and (min-width: 1200px) {
+  #Burger {
+    display: none;
+  }
+ 
 }

@@ -1,10 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Card, Pagination, Tabs, Image, Spin, Tag } from "antd";
+import {
+  Alert,
+  Row,
+  Col,
+  Card,
+  Pagination,
+  Tabs,
+  Image,
+  Spin,
+  Tag,
+  Radio
+} from "antd";
 import useMovieApi from "../../hooks/useMovieApi";
 import { Link } from "react-router-dom";
 import classes from "./home.module.scss";
 import "./home.css";
-// import { UserOutlined } from "@ant-design/icons";
+import Title from "../../Seo/Title";
 
 const { Meta } = Card;
 
@@ -13,8 +24,10 @@ const { TabPane } = Tabs;
 const Home = () => {
   const [tabState, setTabState] = useState("popular");
   const { data, error, reFetch, loading } = useMovieApi(`movie/${tabState}`);
-  const { data: ApiGenres, loading: genreLoading } =
-    useMovieApi(`genre/movie/list`);
+
+
+  const [dataType, setDataType] = React.useState("movie");
+  const { data: ApiGenres, loading: genreLoading } = useMovieApi(`genre/movie/list`);
   const [MoviesId, setMoviesId] = useState([]);
   const [ActiveGenre, setActiveGenre] = useState({});
 
@@ -32,7 +45,6 @@ const Home = () => {
       const myids = Array.from(new Set(Mid));
 
       setMoviesId(myids);
-      console.log(myids);
     }
   };
   useEffect(() => {
@@ -40,20 +52,38 @@ const Home = () => {
   }, [data]);
 
   useEffect(() => {
-    reFetch(`https://api.themoviedb.org/3/movie/${tabState}`);
+    reFetch(`https://api.themoviedb.org/3/${dataType}/${tabState}`);
     changeGenre();
     setActiveGenre({ id: 0, name: "no filter" });
-  }, [tabState]);
+  }, [tabState,dataType]);
 
   const reloadData = (p) => {
-    reFetch(`https://api.themoviedb.org/3/movie/${tabState}`, { page: p });
+    reFetch(`https://api.themoviedb.org/3/${dataType}/${tabState}`, { page: p });
     window.scrollTo({ top: 0, behavior: "smooth" });
     changeGenre();
     setActiveGenre({ id: 0, name: "no filter" });
   };
 
+  const changeDataType = e => {
+    setDataType(e.target.value);
+  };
+
   return (
-    <div>
+    <div style={{paddingBottom:"60px"}}>
+      {error !== "" && (
+        <Alert
+          message="Warning"
+          description="please check your Interent and Vpn Connection"
+          type="warning"
+          showIcon
+          closable
+        />
+      )}
+      <Title title="Home" description="main page" />
+      <Radio.Group onChange={changeDataType} value={dataType} id={classes.RadioGroup}>
+        <Radio value={"movie"}>Movies</Radio>
+        <Radio value={"tv"}>Tv Shows</Radio>
+      </Radio.Group>             
       <div className={classes.TabsStyle}>
         <Tabs
           size="large"
@@ -64,7 +94,7 @@ const Home = () => {
           }}
         >
           <TabPane tab="popular" key="popular" />
-          <TabPane tab="upcoming" key="upcoming" />
+          {dataType==="movie" && (<TabPane tab="upcoming" key="upcoming" />)}
           <TabPane tab="top rated" key="top_rated" />
         </Tabs>
       </div>
@@ -87,7 +117,6 @@ const Home = () => {
               MoviesId.length &&
               ApiGenres.genres.map(
                 (genre) =>
-                  // console.log(genre);
                   MoviesId.includes(genre.id) && (
                     <Tag
                       className="TagStyle"
@@ -126,7 +155,7 @@ const Home = () => {
               >
                 {data?.results?.map((movie) => (
                   <Col key={movie.id} span={{ xs: 24, sm: 12, md: 8, lg: 6 }}>
-                    <Link to={`/movieDetails/${movie.id}?flag=movie`}>
+                    <Link to={`/movieDetails/${movie.id}?flag=${dataType}`}>
                       <Card
                         hoverable
                         style={{ width: 240 }}
@@ -138,14 +167,14 @@ const Home = () => {
                         cover={
                           <Image
                             preview={false}
-                            alt={movie.title}
+                            alt={dataType==="movie" ?movie.original_title : movie.name}
                             src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                           />
                         }
                       >
                         <Meta
-                          title={movie.original_title}
-                          description={movie.release_date}
+                          title={dataType==="movie" ?movie.original_title : movie.name}
+                          description={dataType==="movie" ?movie.release_date : movie.first_air_date}
                         />
                       </Card>
                     </Link>

@@ -12,34 +12,50 @@ import "swiper/components/navigation/navigation.min.css";
 import "./celebrityImageSlider";
 
 // import Swiper core and required modules
-import SwiperCore, { Pagination, Navigation } from "swiper/core";
+import SwiperCore, { Pagination, Navigation , Autoplay } from "swiper/core";
 import { Link } from "react-router-dom";
 
 // install Swiper modules
-SwiperCore.use([Pagination, Navigation]);
+SwiperCore.use([Pagination, Navigation , Autoplay]);
 
 const MovieImageSlider = ({ id }) => {
   const { data, loading } = useMovieApi(`person/${id}/movie_credits`);
-  console.log(data);
-  console.log(loading);
 
   return (
     <div style={{ margin: "100px 20px" }}>
       {!loading && (
         <Swiper
           className="swiper-container mySwiper"
-          slidesPerView={6}
+          slidesPerView={1}
           spaceBetween={30}
-          slidesPerGroup={4}
+          slidesPerGroup={1}
           loop={true}
           loopFillGroupWithBlank={true}
           pagination={{
             clickable: true,
           }}
           navigation={true}
+          autoplay={{
+            "delay": 5000,
+            "disableOnInteraction": false
+          }} 
+          breakpoints={{
+            "640": {
+              "slidesPerView": 2,
+              "spaceBetween": 20
+            },
+            "768": {
+              "slidesPerView": 3,
+              "spaceBetween": 40
+            },
+            "1024": {
+              "slidesPerView": 4,
+              "spaceBetween": 50
+            }
+          }}
         >
           {data.cast.map((movie) => (
-            <SwiperSlide className="swiper-slide">
+            <SwiperSlide key={movie.id} className="swiper-slide">
               {movie.poster_path ? (
                   <Link to={`/movieDetails/${movie.id}?flag=movie`}>
                 <Space  size={10} direction="vertical">

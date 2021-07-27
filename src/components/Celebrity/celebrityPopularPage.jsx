@@ -2,7 +2,7 @@ import { Card, Col, Image, Pagination, Row, Spin } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 import useMovieApi from "../../hooks/useMovieApi";
-
+import Title from "../../Seo/Title"
 const { Meta } = Card;
 
 const CelebrityPopularPage = () => {
@@ -22,7 +22,8 @@ const CelebrityPopularPage = () => {
   };
 
   return (
-    <div>
+    <div style={{paddingBottom:"60px"}}>
+      <Title title="celebrity page" description="popular celebrities" />
       {data && (
         <div
           style={{
@@ -50,7 +51,7 @@ const CelebrityPopularPage = () => {
           </div>
         ) : (
           data.results.map((celeb) => (
-            <Col span={4}>
+            <Col xs={12} sm={8} md={6} lg={4}  >
               <Link to={`/celebrity/${celeb.id}`}>
                 <Card
                   hoverable

@@ -2,26 +2,25 @@ import React from "react";
 import useMovieApi from "../../hooks/useMovieApi";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
+import "swiper/components/pagination/pagination.min.css";
+
 import { Button, Space, Image, Spin } from "antd";
 import { Link } from "react-router-dom";
-
+import SwiperCore, { Pagination, Navigation,Autoplay } from "swiper/core";
 const TvShows = () => {
   const {
-
     data: tvs = {},
     reFetch: refetchTvs,
     loading: dayTvsLoading,
-
   } = useMovieApi(`trending/tv/day`);
 
-  const weekButtonClick=()=>{
-    refetchTvs("https://api.themoviedb.org/3/trending/tv/week")
-  }
-  const dayButtonClick=()=>{
-    refetchTvs("https://api.themoviedb.org/3/trending/tv/day")
-    
-  }
-
+  const weekButtonClick = () => {
+    refetchTvs("https://api.themoviedb.org/3/trending/tv/week");
+  };
+  const dayButtonClick = () => {
+    refetchTvs("https://api.themoviedb.org/3/trending/tv/day");
+  };
+  SwiperCore.use([Pagination, Navigation , Autoplay]);
   return (
     <div>
       <Space style={{ padding: "10px 0" }}>
@@ -33,7 +32,30 @@ const TvShows = () => {
           week
         </Button>
       </Space>
-      <Swiper spaceBetween={50} slidesPerView={4}>
+      <Swiper
+        pagination={{ clickable: true }}
+        navigation={true}
+        spaceBetween={50}
+        slidesPerView={1}
+        autoplay={{
+          "delay": 2500,
+          "disableOnInteraction": false
+        }} 
+        breakpoints={{
+          "640": {
+            "slidesPerView": 1,
+            "spaceBetween": 20
+          },
+          "768": {
+            "slidesPerView": 2,
+            "spaceBetween": 40
+          },
+          "1024": {
+            "slidesPerView": 3,
+            "spaceBetween": 50
+          }
+        }}
+      >
         {dayTvsLoading ? (
           <div className="spinContainer">
             <Spin />

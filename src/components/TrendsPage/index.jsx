@@ -5,13 +5,15 @@ import Movies from "./Movies";
 import TvShows from "./TvShows";
 // import classes from './TrendsStyle.module.scss'
 import "./TrendsStyle.css"
-
+import Title from "../../Seo/Title"
 
 
 const TrendingRender = () => {
   
   return (
     <div>
+      <Title title="trends page" description="popular trending page" />
+
       <div className="GlassMorphism">
         <Movies />
 
@@ -22,9 +24,9 @@ const TrendingRender = () => {
       </div>
       <div className="GlassMorphism">
         <Persons />
-
-
       </div>
+
+
     </div>
   );
 };

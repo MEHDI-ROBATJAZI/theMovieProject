@@ -8,8 +8,7 @@
   border-radius: 10px;
   border: 1px solid rgba( 255, 255, 255, 0.18 );
   padding:50px 0; 
-  // margin: "0 0";
-  // padding: "100px 0";
+  margin: 0 40px;
   
   
   .DropDown{
@@ -27,4 +26,15 @@
 }
 .BlurFilter{
   filter:blur(8px)
+}
+#RadioGroup{
+  width:100%;
+  text-align: center;
+  height:60px;
+  line-height: 60px;
+  font-family:Tourney;  
+  font-size:2rem;
+  
+  
+
 }

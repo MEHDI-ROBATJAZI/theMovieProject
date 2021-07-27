@@ -6,24 +6,22 @@ import "./MovieDetails.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 import "swiper/components/pagination/pagination.min.css";
+import Title from "../../Seo/Title";
+
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
 
-
 // import Swiper core and required modules
-import SwiperCore, { Navigation } from "swiper/core";
+import SwiperCore, { Navigation, Autoplay } from "swiper/core";
 
 // install Swiper modules
-SwiperCore.use([Navigation]);
+SwiperCore.use([Navigation, Autoplay]);
 
 const MovieDetails = () => {
-
   function useQuery() {
     return new URLSearchParams(useLocation().search);
   }
   let query = useQuery();
-
-
 
   const { id } = useParams();
   const { data, loading } = useMovieApi(`/${query.get("flag")}/${id}`, {
@@ -35,7 +33,6 @@ const MovieDetails = () => {
   const [imageState, setImageState] = useState([]);
   const [videoState, setVideoState] = useState([]);
   const [castState, setCastState] = useState([]);
-
 
   useEffect(() => {
     // console.log(data);
@@ -62,7 +59,11 @@ const MovieDetails = () => {
   }, [data, credits]);
 
   return (
-    <>
+    <div id="container">
+      <Title
+        title="Movie Detail"
+        description="detail for your favorate-movie"
+      />
       {loading ? (
         <div id="SpinContainer">
           <Spin></Spin>
@@ -72,7 +73,7 @@ const MovieDetails = () => {
           style={{
             zIndex: 10,
             backgroundImage: [
-              `linear-gradient(to right, #7edda4 150px, rgb(106 117 255 / 84%) 100%)`,
+              `linear-gradient(to right, rgb(126 221 164 / 70%) 150px, rgb(255 202 106 / 58%) 100%)`,
               `url(
               "https://image.tmdb.org/t/p/w500${data.poster_path}"
             )`,
@@ -82,45 +83,73 @@ const MovieDetails = () => {
           }}
         >
           <div id="logoStyle">
-            {
-              data.images.logos[0] && (
-                <div>
-                  <Image
-                    preview={false}
-                    src={`https://image.tmdb.org/t/p/w500${data.images.logos[0].file_path}`}
-                    alt={"no image"}
-                  />
-                </div>
-
-              )
-            }
+            {data.images.logos[0] && (
+              <div>
+                <Image
+                  preview={false}
+                  src={`https://image.tmdb.org/t/p/w500${data.images.logos[0].file_path}`}
+                  alt={"no image"}
+                />
+              </div>
+            )}
             <Rate
               className="RateStyles"
               disabled={true}
               allowHalf
               defaultValue={data.vote_average / 2}
             />
-          <div className="TagStyles">
-            {data.genres &&
-              data.genres.map((genre) => (
-                  <Tag key={genre.id} className="genre" color="success">{genre.name}</Tag>
-              ))}
+            <div className="TagStyles">
+              {data.genres &&
+                data.genres.map((genre) => (
+                  <Tag key={genre.id} className="genre" color="success">
+                    {genre.name}
+                  </Tag>
+                ))}
+            </div>
           </div>
-              </div>
 
           <div
             style={{ marginTop: "200px", padding: "30px 0" }}
             className="cardContainer"
           >
-            <Tabs style={{ padding: "50px" }} animated={true} type="card" centered>
+            <Tabs
+              animated={true}
+              type="card"
+              centered
+            >
+
+
               <TabPane className="glassMorphism" tab="images" key="1">
-                <Swiper spaceBetween={50} slidesPerView={4}>
+              {/* movie images */}
+                <Swiper
+                  autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                  }}
+                  spaceBetween={50}
+                  slidesPerView={1}
+                  breakpoints={{
+                    "640": {
+                      "slidesPerView": 2,
+                      "spaceBetween": 20
+                    },
+                    "768": {
+                      "slidesPerView": 3,
+                      "spaceBetween": 40
+                    },
+                    "1024": {
+                      "slidesPerView": 4,
+                      "spaceBetween": 50
+                    }
+                  }}
+                >
                   <div>
                     {imageState?.map((img) => (
                       <SwiperSlide key={img.file_path}>
                         <Image
                           preview={false}
                           src={`https://image.tmdb.org/t/p/w500${img.file_path}`}
+                          height="550px"
                         />
                       </SwiperSlide>
                     ))}
@@ -128,18 +157,23 @@ const MovieDetails = () => {
                 </Swiper>
               </TabPane>
               <TabPane className="glassMorphism" tab="trailers" key="2">
+                {/* trailer */}
                 <div>
                   <Swiper
                     className="mySwiper"
                     navigation={true}
                     spaceBetween={50}
                     slidesPerView={1}
+                   
                   >
                     {videoState?.map((vid) => (
-                      <SwiperSlide key={vid.id} style={{ background: "none",textAlign:"center" }}>
+                      <SwiperSlide
+                        key={vid.id}
+                        style={{ background: "none", textAlign: "center" }}
+                      >
                         <iframe
-                          width="70%"
-                          height="500"
+                          className="trailerIframeStyles"
+                          width="80%"
                           src={`https://www.youtube.com/embed/${vid.key}`}
                         ></iframe>
                       </SwiperSlide>
@@ -147,54 +181,62 @@ const MovieDetails = () => {
                   </Swiper>
                 </div>
               </TabPane>
-              <TabPane
-                className="glassMorphism"
-                tab="informations"
-                key="3"
-              >
-                <Collapse bordered={false}>
+              <TabPane className="glassMorphism" tab="informations" key="3">
+                {/* information */}
+                <Collapse bordered={false} style={{width:"600px" , margin:"auto"}}>
                   <Panel header="Title" key="1">
-                    {
-                      query.get("flag") === "movie"?(
-                        <strong>{data.title}</strong>
-                       ):
-                       (
-                        <strong>{data.name}</strong>
-                         
-                       )
-                    }
+                    {query.get("flag") === "movie" ? (
+                      <strong>{data.title}</strong>
+                    ) : (
+                      <strong>{data.name}</strong>
+                    )}
                   </Panel>
                   <Panel header="Overview" key="2">
                     <strong>{data.overview}</strong>
                   </Panel>
                   <Panel header="Release date" key="3">
-                  {
-                      query.get("flag") === "movie"?(
-                        <strong>{data.release_date}</strong>
-                       ):
-                       (
-                        <strong>{data.first_air_date}</strong>
-                         
-                       )
-                    }
+                    {query.get("flag") === "movie" ? (
+                      <strong>{data.release_date}</strong>
+                    ) : (
+                      <strong>{data.first_air_date}</strong>
+                    )}
                   </Panel>
                 </Collapse>
               </TabPane>
               <TabPane className="glassMorphism" tab="cast" key="4">
+                {/* cast  */}
                 <Swiper
+                autoplay={{
+                  "delay": 2500,
+                  "disableOnInteraction": false
+                }} 
                   className="mySwiper"
                   navigation={true}
                   spaceBetween={50}
-                  slidesPerView={4}
+                  slidesPerView={1}
+                  breakpoints={{
+                    "640": {
+                      "slidesPerView": 2,
+                      "spaceBetween": 20
+                    },
+                    "768": {
+                      "slidesPerView": 3,
+                      "spaceBetween": 40
+                    },
+                    "1024": {
+                      "slidesPerView": 4,
+                      "spaceBetween": 50
+                    }
+                  }}
                 >
                   {castState?.map((cast) => (
                     <SwiperSlide span={6} key={cast.id}>
                       <Link to={`/celebrity/${cast.id}`}>
-                      <Image
-                        preview={false}
-                        src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
-                        height={500}
-                      />
+                        <Image
+                          preview={false}
+                          src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
+                          height={500}
+                        />
                       </Link>
                     </SwiperSlide>
                   ))}
@@ -204,7 +246,7 @@ const MovieDetails = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

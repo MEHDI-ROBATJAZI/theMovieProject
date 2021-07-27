@@ -5,7 +5,7 @@ const useFetch = (url , query , method="GET")=>{
 
   const [data,setData] = useState(undefined)
   const [loading,setLoading] = useState(true)
-  const [error,setError] = useState(null)
+  const [error,setError] = useState("")
 
 
   const reFetch=(URL=url ,ExtraQuery={})=>{
