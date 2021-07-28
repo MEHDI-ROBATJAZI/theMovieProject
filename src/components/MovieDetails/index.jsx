@@ -84,13 +84,11 @@ const MovieDetails = () => {
         >
           <div id="logoStyle">
             {data.images.logos[0] && (
-              <div>
                 <Image
                   preview={false}
                   src={`https://image.tmdb.org/t/p/w500${data.images.logos[0].file_path}`}
                   alt={"no image"}
                 />
-              </div>
             )}
             <Rate
               className="RateStyles"
@@ -126,7 +124,7 @@ const MovieDetails = () => {
                     delay: 2500,
                     disableOnInteraction: false,
                   }}
-                  spaceBetween={50}
+                  spaceBetween={10}
                   slidesPerView={1}
                   breakpoints={{
                     "640": {
@@ -149,7 +147,7 @@ const MovieDetails = () => {
                         <Image
                           preview={false}
                           src={`https://image.tmdb.org/t/p/w500${img.file_path}`}
-                          height="550px"
+                          // height="550px"
                         />
                       </SwiperSlide>
                     ))}
@@ -175,7 +173,9 @@ const MovieDetails = () => {
                           className="trailerIframeStyles"
                           width="80%"
                           src={`https://www.youtube.com/embed/${vid.key}`}
-                        ></iframe>
+                        >
+
+                        </iframe>
                       </SwiperSlide>
                     ))}
                   </Swiper>

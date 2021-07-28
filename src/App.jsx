@@ -44,7 +44,7 @@ const App = () => {
                 <Link to="/celebrity">Celebrity</Link>
               </span>
               <span>
-                <Link to="/about me">About-Me</Link>
+                <Link to="/aboutme">About-Me</Link>
               </span>
             </div>
             <div id={Responsive ? classes.serachComponentResponsive : classes.SearchComponent }>
