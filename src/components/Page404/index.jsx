@@ -1,7 +1,11 @@
 import { Image } from 'antd'
 import React from 'react'
+import useResponsive from '../../hooks/useResponsive'
 
 const Page404 = () => {
+
+  const width = useResponsive()
+  
   return (
     <div>
     <div style={{
@@ -11,8 +15,12 @@ const Page404 = () => {
       
     }}>
         <Image 
-          width="70%"
-          height="400px"
+          width={
+            width > 768 ? "700px" : "400px"
+          }
+          height={
+            width>768 ? "400px" : "300px"
+          }
           src="/404.png"
           preview={false}
         />

@@ -86,15 +86,15 @@
   }
 }
 #container{
-  
+  overflow: hidden;
   #logoStyle {
-    width: 500px;
+    // max-width: 500px;
     position: relative;
     top: 170px;
     left: 200px;
     
     img {
-      width: 300px;
+      max-width: 300px;
     }
     .RateStyles {
       width: 250px;
@@ -103,8 +103,8 @@
     }
     .TagStyles {
       padding: 0 10px;
-      .genre {
-      }
+      display: flex;
+      flex-wrap: wrap;
       .ant-tag {
         margin: 0 10px;
         display: inline;
@@ -173,6 +173,14 @@
     height:350px !important ;
   }
 }
+
+@media only screen and (max-width: 600px) {
+  
+  #logoStyle{
+    left:20px;
+  }
+}
+
 @media only screen and (max-width: 1000px) {
   
   .trailerIframeStyles{
