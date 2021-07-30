@@ -43,7 +43,6 @@ const Home = () => {
         }
       }
       const myids = Array.from(new Set(Mid));
-
       setMoviesId(myids);
     }
   };

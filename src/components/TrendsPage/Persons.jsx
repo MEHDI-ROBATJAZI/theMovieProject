@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import { Button, Space, Image, Row, Col, Spin } from "antd";
 import { Swiper, SwiperSlide } from "swiper/react";
+import MySlider from "../Utils/mySlider";
 import useMovieApi from "../../hooks/useMovieApi";
-import "swiper/components/pagination/pagination.min.css";
-import SwiperCore, { Pagination, Navigation,Autoplay } from "swiper/core";
 import "./TrendsStyle.css";
-import "swiper/swiper-bundle.min.css";
-import "swiper/components/navigation/navigation.min.css";
 
 import { Link } from "react-router-dom";
 
-SwiperCore.use([Navigation]);
 
 const Persons = () => {
   const {
@@ -18,7 +14,7 @@ const Persons = () => {
     reFetch: refetchPersons,
     loading: PersonsLoading,
   } = useMovieApi(`trending/person/day`);
-  console.log(persons);
+
   
   const dayButtonClick = () => {
     refetchPersons(`https://api.themoviedb.org/3/trending//person/day`);
@@ -34,7 +30,6 @@ const Persons = () => {
     window.scrollTo({ top: 1200, behavior: "smooth" });
   };
 
-  SwiperCore.use([Pagination, Navigation,Autoplay]);
   
   return (
     <div>
@@ -47,30 +42,7 @@ const Persons = () => {
           week
         </Button>
       </Space>
-      <Swiper
-        pagination={{ clickable: true }}
-        navigation={true}
-        spaceBetween={20}
-        slidesPerView={1}
-        autoplay={{
-          "delay": 2500,
-          "disableOnInteraction": false
-        }} 
-        breakpoints={{
-          "640": {
-            "slidesPerView": 2,
-            "spaceBetween": 20
-          },
-          "768": {
-            "slidesPerView": 3,
-            "spaceBetween": 40
-          },
-          "1024": {
-            "slidesPerView": 4,
-            "spaceBetween": 50
-          }
-        }}
-      >
+      <MySlider slidesPerView={6}>
         {PersonsLoading ? (
           <div className="spinContainer">
             <Spin />
@@ -97,7 +69,7 @@ const Persons = () => {
             </SwiperSlide>
           ))
         )}
-      </Swiper>
+      </MySlider>
       {personDetail.name && (
         <Row>
           <Col span={12} className="personInfoBox">

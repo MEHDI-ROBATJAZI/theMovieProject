@@ -147,7 +147,7 @@ const MovieDetails = () => {
                         <Image
                           preview={false}
                           src={`https://image.tmdb.org/t/p/w500${img.file_path}`}
-                          // height="550px"
+                          // height="550px 
                         />
                       </SwiperSlide>
                     ))}

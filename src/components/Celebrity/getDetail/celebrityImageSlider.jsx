@@ -1,19 +1,11 @@
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { SwiperSlide } from "swiper/react";
+import MySlider from '../../Utils/mySlider'
 import { Image } from "antd";
 import useMovieApi from "../../../hooks/useMovieApi";
-
-import "swiper/swiper.min.css";
-import "swiper/components/pagination/pagination.min.css";
-import "swiper/components/effect-cube/effect-cube.min.css";
-
 import "./celebrity.scss";
 
-// import Swiper core and required modules
-import SwiperCore, { EffectCube, Pagination , Autoplay } from "swiper/core";
 
-// install Swiper modules
-SwiperCore.use([EffectCube, Pagination , Autoplay]);
 
 const CelebrityImageSlider = ({ id }) => {
   const { data: images = {}, loading: imagesLoading = true } = useMovieApi(
@@ -23,24 +15,7 @@ const CelebrityImageSlider = ({ id }) => {
   return (
     <div className={"CelebrityImagesSlider"}>
       {!imagesLoading && (
-        <Swiper
-          effect={"cube"}
-          grabCursor={true}
-          cubeEffect={
-            {
-              shadow: true,
-              slideShadows: true,
-              shadowOffset: 20,
-              shadowScale: 0.94,
-            }
-          }
-          pagination={true}
-          className="swiper-container"
-          autoplay={{
-            "delay": 2500,
-            "disableOnInteraction": false
-          }} 
-        >
+        <MySlider slidesPerView={1} effect="fade" className="swiper-container">
           {images.profiles.map((pic) => (
             <SwiperSlide key={pic.file_path} className="swiper-slide">
               
@@ -51,7 +26,7 @@ const CelebrityImageSlider = ({ id }) => {
               />
             </SwiperSlide>
           ))}
-        </Swiper>
+        </MySlider>
       )}
     </div>
   );
