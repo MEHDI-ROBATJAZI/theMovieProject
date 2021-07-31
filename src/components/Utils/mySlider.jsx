@@ -26,6 +26,10 @@ const MySlider = (props) => {
         shadowOffset: 20,
         shadowScale: 0.94,
       }}
+      pagination={{
+        type: "fraction",
+      }}
+      navigation={true}
       className="mySwiper"
       breakpoints={{
         640: {

@@ -9,14 +9,14 @@ import {
   Image,
   Spin,
   Tag,
-  Radio
+  Radio,
 } from "antd";
 import useMovieApi from "../../hooks/useMovieApi";
 import { Link } from "react-router-dom";
 import classes from "./home.module.scss";
 import "./home.css";
 import Title from "../../Seo/Title";
-
+import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 const { Meta } = Card;
 
 const { TabPane } = Tabs;
@@ -24,7 +24,6 @@ const { TabPane } = Tabs;
 const Home = () => {
   const [tabState, setTabState] = useState("popular");
   const { data, error, reFetch, loading } = useMovieApi(`movie/${tabState}`);
-
 
   const [dataType, setDataType] = React.useState("movie");
   const { data: ApiGenres, loading: genreLoading } = useMovieApi(`genre/movie/list`);
@@ -54,21 +53,25 @@ const Home = () => {
     reFetch(`https://api.themoviedb.org/3/${dataType}/${tabState}`);
     changeGenre();
     setActiveGenre({ id: 0, name: "no filter" });
-  }, [tabState,dataType]);
+  }, [tabState, dataType]);
 
   const reloadData = (p) => {
-    reFetch(`https://api.themoviedb.org/3/${dataType}/${tabState}`, { page: p });
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    reFetch(`https://api.themoviedb.org/3/${dataType}/${tabState}`, {
+      page: p,
+    });
+    // window.scrollTo({ top: 0, behavior: "smooth" });
     changeGenre();
     setActiveGenre({ id: 0, name: "no filter" });
   };
 
-  const changeDataType = e => {
+  const changeDataType = (e) => {
     setDataType(e.target.value);
   };
 
+  const [eyeState, setEyeState] = useState(true);
+
   return (
-    <div style={{paddingBottom:"60px"}}>
+    <div>
       {error !== "" && (
         <Alert
           message="Warning"
@@ -79,10 +82,14 @@ const Home = () => {
         />
       )}
       <Title title="Home" description="main page" />
-      <Radio.Group onChange={changeDataType} value={dataType} id={classes.RadioGroup}>
+      <Radio.Group
+        onChange={changeDataType}
+        value={dataType}
+        id={classes.RadioGroup}
+      >
         <Radio value={"movie"}>Movies</Radio>
         <Radio value={"tv"}>Tv Shows</Radio>
-      </Radio.Group>             
+      </Radio.Group>
       <div className={classes.TabsStyle}>
         <Tabs
           size="large"
@@ -93,7 +100,11 @@ const Home = () => {
           }}
         >
           <TabPane tab="popular" key="popular" />
-          {dataType==="movie" && (<TabPane tab="upcoming" key="upcoming" />)}
+          {
+            dataType === "movie" ? 
+            <TabPane tab="upcoming" key="upcoming" /> : 
+            <TabPane tab="on_the_air" key="on_the_air" />
+          }
           <TabPane tab="top rated" key="top_rated" />
         </Tabs>
       </div>
@@ -130,10 +141,23 @@ const Home = () => {
             {data && (
               <div
                 style={{
-                  textAlign: "center",
+                  display: "flex",
+                  justifyContent: "space-around",
                   paddingTop: "60px",
                 }}
               >
+                <div
+                  style={{ display: ActiveGenre.id !== 0 ? "block" : "none" }}
+                  onClick={() => setEyeState(!eyeState)}
+                >
+                  {eyeState ? (
+                    <EyeInvisibleOutlined
+                      style={{ fontSize: "2rem", color: "green" }}
+                    />
+                  ) : (
+                    <EyeOutlined style={{ fontSize: "2rem", color: "blue" }} />
+                  )}
+                </div>
                 <Pagination
                   defaultCurrent={1}
                   pageSize={1}
@@ -153,27 +177,54 @@ const Home = () => {
                 className={classes.CardsContainer}
               >
                 {data?.results?.map((movie) => (
-                  <Col key={movie.id} span={{ xs: 24, sm: 12, md: 8, lg: 6 }}>
+                  <Col
+                    style={
+                      ActiveGenre.id &&
+                        !movie.genre_ids.includes(ActiveGenre.id) &&
+                        eyeState === false && { padding: "0 0" } || {
+                        padding: "0 10px",
+                      }
+                    }
+                    key={movie.id}
+                    span={{ xs: 24, sm: 12, md: 8, lg: 6 }}
+                  >
                     <Link to={`/movieDetails/${movie.id}?flag=${dataType}`}>
                       <Card
                         hoverable
                         style={{ width: 240 }}
                         className={
-                          ActiveGenre.id &&
-                          !movie.genre_ids.includes(ActiveGenre.id) &&
-                          classes.BlurFilter
+                          (ActiveGenre.id &&
+                            !movie.genre_ids.includes(ActiveGenre.id) &&
+                            eyeState === true &&
+                            "BlurFilter") ||
+                          (ActiveGenre.id &&
+                            !movie.genre_ids.includes(ActiveGenre.id) &&
+                            eyeState === false &&
+                            "CardFilter")
                         }
                         cover={
                           <Image
                             preview={false}
-                            alt={dataType==="movie" ?movie.original_title : movie.name}
+                            alt={
+                              dataType === "movie"
+                                ? movie.original_title
+                                : movie.name
+                            }
                             src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                           />
                         }
                       >
                         <Meta
-                          title={dataType==="movie" ?movie.original_title : movie.name}
-                          description={dataType==="movie" ?movie.release_date : movie.first_air_date}
+                          title={
+                            dataType === "movie"
+                              ? movie.original_title
+                              : movie.name
+                          }
+                          description={
+                            dataType === "movie"
+                              ? movie.release_date
+                              : movie.first_air_date
+                          }
                         />
                       </Card>
                     </Link>

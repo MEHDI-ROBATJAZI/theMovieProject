@@ -51,7 +51,7 @@ const CelebrityPopularPage = () => {
           </div>
         ) : (
           data.results.map((celeb) => (
-            <Col xs={12} sm={8} md={6} lg={4}  >
+            <Col xs={12} sm={8} md={6} lg={4} key={celeb.id}  >
               <Link to={`/celebrity/${celeb.id}`}>
                 <Card
                   hoverable

@@ -1,21 +1,35 @@
+import { UpCircleOutlined } from "@ant-design/icons";
 import React from "react";
-
-const footerStyles = {
-  margin: "30px 10px",
-  textAlign: "center",
-  fontFamily: "Montserrat",
-};
-
-const glassFilters = {
-  background: "#ff604473",
-  boxShadow: " 0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
-  backdropFilter: "blur( 4px )",
-  WebkitBackdropFilter: "blur( 4px )",
-  borderRadius: "10px",
-  border: "1px solid rgba( 255, 255, 255, 0.18 )",
-};
+import useResponsive from "../../hooks/useResponsive";
 
 const Footer = () => {
+  const width = useResponsive();
+
+  const glassFilters = {
+    background: "#a19eda",
+    boxShadow: " 0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+    backdropFilter: "blur( 4px )",
+    WebkitBackdropFilter: "blur( 4px )",
+    borderRadius: "10px",
+    border: "2px solid rgb(91, 255, 50)"
+  };
+
+  const footerStyles = {
+    margin: width < 1000 ? "30px 10px" : "30px 70px",
+    textAlign: "center",
+    fontFamily: "Montserrat",
+    height: "140px",
+    position: "relative",
+  };
+
+  const upIcon = {
+    color: "rgb(91, 255, 50)",
+    fontSize: "3rem",
+    position: "absolute",
+    top: "30px",
+    right: "30px",
+  };
+
   return (
     <div style={footerStyles}>
       <div style={glassFilters}>
@@ -36,6 +50,15 @@ const Footer = () => {
             </a>
           </li>
         </ul>
+        <div
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
+          <UpCircleOutlined
+            style={upIcon}
+            onMouseEnter={(e) => (e.target.style.color = "red")}
+            onMouseLeave={(e) => (e.target.style.color = "rgb(91, 255, 50)")}
+          />
+        </div>
       </div>
     </div>
   );

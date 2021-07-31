@@ -1,12 +1,18 @@
 #SearchComponentStyles {
   input {
     max-width: 300px;
+    border-color:  rgb(68, 207, 33);
+    border-radius:13px 0 0 13px  ;
+    
   }
+ 
+  span{
+    border-radius:0 13px 13px 0 !important;
+    button{
+      border-radius:0 13px 13px 0 ;
+      background-color: rgb(68, 207, 33)
+    }
   
 }
-
-#SearchInput{
-  .ant-btn {
-    background-color: red !important;
-  }
+  
 }
