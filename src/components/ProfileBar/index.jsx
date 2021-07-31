@@ -1,8 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
-import { LoginOutlined, WindowsFilled } from "@ant-design/icons";
-import { Menu, Dropdown, Image } from "antd";
+import React, { useState,useContext } from "react";
+import { LoginOutlined} from "@ant-design/icons";
+import { Menu, Dropdown} from "antd";
 import { UserContext } from "../../context/UserContext";
 import Avatar from "antd/lib/avatar/avatar";
+
+const localAddress = import.meta.env.VITE_LOCAL
+const productAddress = import.meta.env.VITE_PRODUCT
+const DevMode = String(import.meta.env.DEV)
+const Environment_Base_Url = DevMode ? localAddress : productAddress
+
 
 const ProfileBar = () => {
   const url = "https://api.themoviedb.org/3/";
@@ -14,7 +20,7 @@ const ProfileBar = () => {
       .then((resp) => resp.json())
       .then((result) => {
         if (result.success) {
-          window.location = `https://www.themoviedb.org/authenticate/${result.request_token}?redirect_to=http://localhost:3000/Auth`;
+          window.location = `https://www.themoviedb.org/authenticate/${result.request_token}?redirect_to=${Environment_Base_Url}Auth`;
         }
       });
   };
