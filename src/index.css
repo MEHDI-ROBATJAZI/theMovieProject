@@ -19,3 +19,17 @@ code {
   text-align: center;
   border-radius: 4px;
 }
+
+body::-webkit-scrollbar {
+  width: 12px;  /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: rgb(255, 255, 255);        /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #8681e4;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid rgb(44, 228, 84);  /* creates padding around scroll thumb */
+}

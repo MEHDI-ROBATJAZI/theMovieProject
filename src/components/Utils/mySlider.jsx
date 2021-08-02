@@ -37,7 +37,7 @@ const MySlider = (props) => {
           spaceBetween: 20,
         },
         768: {
-          slidesPerView: slidesPerView > 4 ? 3 : 2,
+          slidesPerView: slidesPerView > 4 ? 3 : 1,
           spaceBetween: 40,
         },
         1024: {

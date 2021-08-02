@@ -85,10 +85,13 @@
     object-fit: cover;
   }
 }
-#container{
+div#container{
+  height:1075px;
   overflow: hidden;
-  #logoStyle {
-    // max-width: 500px;
+  
+  div#logoStyle {
+    margin:0;
+    max-width: 500px;
     position: relative;
     top: 170px;
     left: 200px;
@@ -124,8 +127,6 @@
 }
 
 .cardContainer {
-
-
   .ant-tabs{
     padding:0 !important ;
   }

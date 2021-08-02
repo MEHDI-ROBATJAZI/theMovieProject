@@ -24,7 +24,7 @@ const UserContextProvider =({children})=>{
 
 
   return (
-    <UserContext.Provider value={{user,setUser,setSessionId}}>
+    <UserContext.Provider value={{user,setUser,session_id,setSessionId}}>
       {
         children
       }

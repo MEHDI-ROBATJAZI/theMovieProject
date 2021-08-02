@@ -39,12 +39,6 @@ const Celebrity = () => {
               </Typography.Paragraph>
             </Col>
 
-
-
-
-           
-
-
             <Col xs={24} sm={24} md={10} lg={6} >
               <CelebrityImageSlider id={id} />
             </Col>

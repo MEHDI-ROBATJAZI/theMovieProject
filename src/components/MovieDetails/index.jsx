@@ -71,7 +71,7 @@ const MovieDetails = () => {
       ) : (
         <div
           style={{
-            zIndex: 10,
+            width:"100%",
             backgroundImage: [
               `linear-gradient(to right, rgb(126 221 164 / 70%) 150px, rgb(255 202 106 / 58%) 100%)`,
               `url(
@@ -107,7 +107,7 @@ const MovieDetails = () => {
           </div>
 
           <div
-            style={{ marginTop: "200px", padding: "30px 0" }}
+            style={{ marginTop:"200px" , padding: "30px 0" }}
             className="cardContainer"
           >
             <Tabs
@@ -147,7 +147,6 @@ const MovieDetails = () => {
                         <Image
                           preview={false}
                           src={`https://image.tmdb.org/t/p/w500${img.file_path}`}
-                          // height="550px 
                         />
                       </SwiperSlide>
                     ))}

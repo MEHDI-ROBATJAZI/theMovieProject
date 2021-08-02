@@ -41,7 +41,7 @@ const TvShows = () => {
                 <div className="swiper-card-flex">
                   <Image
                     preview={false}
-                    src={`https://image.tmdb.org/t/p/w500/${t.backdrop_path}`}
+                    src={`https://image.tmdb.org/t/p/w400/${t.backdrop_path}`}
                     alt={t.name}
                   />
                   <p>{t.name}</p>

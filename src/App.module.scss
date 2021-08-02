@@ -1,5 +1,4 @@
-$CustomGreen : rgb(91, 255, 50);
-
+$CustomGreen: rgb(91, 255, 50);
 
 #Container {
   min-height: 100vh;
@@ -14,33 +13,31 @@ $CustomGreen : rgb(91, 255, 50);
     margin: 40px 180px;
     border: 2px solid $CustomGreen;
     border-radius: 13px;
-    font-family:Montserrat;
-    transition: .4s all ease;
+    font-family: Montserrat;
+    transition: 0.4s all ease;
   }
   #NavStyles {
-
     padding: 0 40px;
     display: flex;
     justify-content: space-around;
-    
-    #Burger{
-      height:80px;
-      padding:20px 10px 0 10px;
-      div{
-        width:40px;
-        height:4px;
+
+    #Burger {
+      height: 80px;
+      padding: 20px 10px 0 10px;
+      div {
+        width: 40px;
+        height: 4px;
         background-color: $CustomGreen;
-        margin-bottom:6px;
+        margin-bottom: 6px;
       }
     }
-    #Burger:hover{
+    #Burger:hover {
       background-color: black;
-      border-bottom:3px solid red;  
-      
-      div{
+      border-bottom: 3px solid red;
+
+      div {
         background-color: red;
       }
-
     }
 
     #NavLinks {
@@ -50,7 +47,7 @@ $CustomGreen : rgb(91, 255, 50);
         width: 90px;
         text-align: center;
         font-weight: bold;
-        font-size:.9rem;
+        font-size: 0.9rem;
         a {
           color: $CustomGreen;
           letter-spacing: 1px;
@@ -59,106 +56,119 @@ $CustomGreen : rgb(91, 255, 50);
 
       span:hover {
         background-color: black;
-        border-bottom:3px solid red;
+        border-bottom: 3px solid red;
 
         a {
           color: red;
         }
       }
-
-
-
     }
     #SearchComponent {
       margin-top: 25px;
     }
   }
-  #ProfileBar{
-      div{
-        width:80px;
-        height:80px;
-        text-align: center;
-        line-height: 80px;
+  #ProfileBar {
+    div {
+      width: 80px;
+      height: 80px;
+      text-align: center;
+      line-height: 80px;
+      svg {
+        color: $CustomGreen;
+      }
+      div:hover {
+        background-color: black;
+        border-bottom: 3px solid red;
         svg {
-          color:$CustomGreen;
-        }
-        div:hover {
-          background-color: black;
-          border-bottom:3px solid red;
-          svg {
-            color: red;
-          }
+          color: red;
         }
       }
+    }
   }
 }
 
-#HeaderResponsive{
-  transition: all .4s ease;
+#HeaderResponsive {
+  transition: all 0.4s ease;
   background-color: #a19eda;
-  margin: 40px 20px;
+  margin: 10px 10px;
   border: 2px solid $CustomGreen;
   border-radius: 13px;
-  font-family:Montserrat;
-  height:380px;
-
+  font-family: Montserrat;
+  height: 380px;
 }
-#NavStylesResponsive{
+#NavStylesResponsive {
   flex-direction: column;
-  margin:30px;
+  margin: 10px;
   text-align: center;
 }
 
-#NavLinksResponsive{
-
+#NavLinksResponsive {
   // margin: 20px 0;
 
-  span{
-    height:50px;
-    line-height:50px;
-    display:block;
+  span {
+    height: 50px;
+    line-height: 50px;
+    display: block;
     font-weight: bold;
-    font-size:.9rem;
+    font-size: 0.9rem;
     a {
       color: $CustomGreen;
       letter-spacing: 1px;
     }
   }
-    span:hover {
-      background-color: black;
-      border-bottom:3px solid red;
+  span:hover {
+    background-color: black;
+    border-bottom: 3px solid red;
 
-      a {
-        color: red;
-      }
-    
+    a {
+      color: red;
+    }
   }
-  
-
 }
-#serachComponentResponsive{
+.ProfileBarResponsive{
+  position: absolute;
+  top: 20px;
+  right: 50px;
+}
+.MovieIconResponsive {
+  position: absolute;
+  top: 20px;
+  left: 50px;
+}
+
+#serachComponentResponsive {
   margin: 30px 0;
 }
-
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1200px) {
   #HeaderStyles {
     margin: 40px 30px !important;
+    position: relative;
   }
- 
+}
+@media only screen and (max-width: 767px) {
+  #Spacing {
+    height: 70px;
+  }
+  #ProfileBar {
+    position: absolute;
+    top: 20px;
+    right: 50px;
+  }
+  #MovieIcon {
+    position: absolute;
+    top: 20px;
+    left: 50px;
+  }
 }
 @media only screen and (max-width: 1200px) {
-  #NavLinks , #SearchComponent {
+  #NavLinks,
+  #SearchComponent {
     display: none;
   }
- 
 }
-
-
-
 
 @media only screen and (min-width: 1200px) {
   #Burger {
     display: none;
   }
- 
 }

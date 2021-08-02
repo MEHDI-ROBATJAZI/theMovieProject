@@ -1,3 +1,4 @@
+import Title from '../../Seo/Title'
 import React,{useState,useEffect,useContext} from 'react'
 import { useLocation,useHistory } from 'react-router-dom'
 
@@ -37,6 +38,10 @@ const Auth = () => {
 
   return (
     <div style={{height:"60vh"}}>
+      <Title
+          title="Auth Page"
+          description="detail for your favorate-movie"
+        />
       <h1 style={centerMessage}>
         Your Authentication Is Here !!!
       </h1>

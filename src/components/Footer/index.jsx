@@ -13,7 +13,7 @@ const Footer = () => {
     borderRadius: "10px",
     border: "2px solid rgb(91, 255, 50)"
   };
-
+  
   const footerStyles = {
     margin: width < 1000 ? "30px 10px" : "30px 70px",
     textAlign: "center",

@@ -11,19 +11,25 @@ import SearchComponent from "./components/Search/serchComponent";
 import Page404 from "./components/Page404";
 import Footer from "./components/Footer";
 import useResponsive from "./hooks/useResponsive";
-import ProfileBar from "./components/ProfileBar";
+import Dropdown from "./components/ProfileBar/Dropdown";
 import Auth from "./components/ProfileBar/Auth";
 import MyMovieIcon from "./Icon";
+import Profile from "./components/ProfileBar/profile";
 
 const { Content } = Layout;
 
 const App = () => {
   const [Responsive , setResponsive] = useState(false)
+  const [IconProfileResponsive , setIconProfileResponsive] = useState(false)
   const width = useResponsive()
 
   useEffect(() => {
+
+    
     width > 767 ? setResponsive(false) : setResponsive(true)
+    
   }, [width])
+
 
   const handleNavLinksChange=() => {
     let navLinks = document.querySelectorAll('#_NavLinks_1fqut_1 span a') 
@@ -44,12 +50,16 @@ const App = () => {
       <Layout style={{ background: "#d1d0e5" }}>
         <header id={Responsive ? classes.HeaderResponsive : classes.HeaderStyles}>
           <nav id={Responsive ? classes.NavStylesResponsive : classes.NavStyles}>
+            <div id={classes.MovieIcon}>
               <MyMovieIcon />
-            <div id={classes.Burger} onClick={()=>setResponsive(!Responsive)}>
+            </div>
+            <div id={classes.Burger} 
+              onClick={()=>{setResponsive(!Responsive) ; setIconProfileResponsive(!IconProfileResponsive)}}>
               <div></div>
               <div></div>
               <div></div>
             </div>
+            <div id={classes.Spacing}></div>
             <div id={Responsive ? classes.NavLinksResponsive : classes.NavLinks}>
               <span onClick={handleNavLinksChange}>
                 <Link to="/">Home</Link>
@@ -68,7 +78,7 @@ const App = () => {
               <SearchComponent />
             </div>
             <Space id={classes.ProfileBar}>
-              <ProfileBar />
+              <Dropdown />
             </Space>
           </nav>
         </header>
@@ -86,6 +96,9 @@ const App = () => {
             </Route>
             <Route exact path="/celebrity">
               <CelebrityPopularPage />
+            </Route>
+            <Route exact path="/profile">
+              <Profile />
             </Route>
             <Route path="/movieDetails/:id">
               <MovieDetails />

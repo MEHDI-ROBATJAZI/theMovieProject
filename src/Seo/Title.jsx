@@ -8,7 +8,7 @@ const Title = ({title , description}) => {
     <div>
         <Helmet>
         <meta charSet="utf-8" />
-        <title>{title} | mahdi robatjazi</title>
+        <title>{title}</title>
         
         <meta content={description}  name="description" />
       </Helmet>    
