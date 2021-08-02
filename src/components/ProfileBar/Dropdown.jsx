@@ -9,18 +9,19 @@ import {Link} from 'react-router-dom'
 const localAddress = import.meta.env.VITE_LOCAL
 const productAddress = import.meta.env.VITE_PRODUCT
 const DevMode = String(import.meta.env.DEV)
-const Environment_Base_Url = DevMode ? localAddress : productAddress
+const Environment_Base_Url = DevMode === true ?  productAddress :localAddress 
 const url = "https://api.themoviedb.org/3/";
 
+
+
+
 const Dropdown = () => {
-
-
-  console.log(localAddress);
-  console.log(productAddress);
-  console.log(DevMode);
-  console.log(Environment_Base_Url);
-
-
+  
+    console.log(localAddress);
+    console.log(productAddress);
+    console.log(DevMode);
+    console.log(Environment_Base_Url);
+  
 
   const Login = () => {
     fetch(
