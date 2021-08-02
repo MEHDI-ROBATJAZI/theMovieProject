@@ -57,7 +57,7 @@ const Persons = () => {
                   src={
                     p.profile_path === null
                       ? "/userIcon.png"
-                      : `https://image.tmdb.org/t/p/w500${p.profile_path}`
+                      : `https://image.tmdb.org/t/p/w300${p.profile_path}`
                   }
                   alt={p.original_title}
                 />

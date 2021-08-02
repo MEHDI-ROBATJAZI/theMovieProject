@@ -52,7 +52,7 @@ const Movies = () => {
                 <div className="swiper-card-flex">
                   <Image
                     preview={false}
-                    src={`https://image.tmdb.org/t/p/w500/${m.backdrop_path}`}
+                    src={`https://image.tmdb.org/t/p/w400/${m.backdrop_path}`}
                     alt={m.title}
                   />
                   <p>{m.title}</p>

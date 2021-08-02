@@ -3,15 +3,15 @@ import React from "react";
 const MyMovieIcon = () => {
   return (
     <svg
-      enable-background="new 0 0 91 91"
+      enableBackground="new 0 0 91 91"
       height="80px"
       id="Layer_1"
       version="1.1"
       viewBox="0 0 91 91"
       width="50px"
-      xml:space="preserve"
+      xmlSpace="preserve"
       xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
       fill="red"
       cx="50" cy="50" r="40" stroke="green" 
     >

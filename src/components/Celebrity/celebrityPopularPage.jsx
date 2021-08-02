@@ -22,13 +22,13 @@ const CelebrityPopularPage = () => {
   };
 
   return (
-    <div style={{paddingBottom:"60px"}}>
+    <div /*style={{paddingBottom:"60px"}}*/ >
       <Title title="celebrity page" description="popular celebrities" />
       {data && (
         <div
           style={{
             textAlign: "center",
-            paddingBottom: "30px",
+            // paddingBottom: "30px",
           }}
         >
           <Pagination
@@ -44,7 +44,7 @@ const CelebrityPopularPage = () => {
         </div>
       )}
 
-      <Row gutter={[16, 12]} justify="center">
+      <Row gutter={[16, 12]} justify="center" style={{padding:"40px"}}>
         {loading ? (
           <div style={SpinContainer}>
             <Spin></Spin>
@@ -59,11 +59,12 @@ const CelebrityPopularPage = () => {
                     <Image
                       preview={false}
                       alt="example"
-                      src={`https://image.tmdb.org/t/p/w500${celeb.profile_path}`}
+                      src={`https://image.tmdb.org/t/p/w400${celeb.profile_path}`}
                     />
                   }
                 >
                   <Meta
+                    style={{height:"60px"}}
                     title={celeb.name}
                     description={`popularity: ${celeb.popularity}`}
                   />

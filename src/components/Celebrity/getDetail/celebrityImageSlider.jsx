@@ -21,7 +21,7 @@ const CelebrityImageSlider = ({ id }) => {
               
               <Image
                 preview={false}
-                src={`https://image.tmdb.org/t/p/w500${pic.file_path}`}
+                src={`https://image.tmdb.org/t/p/w400${pic.file_path}`}
                 width="400px"
               />
             </SwiperSlide>

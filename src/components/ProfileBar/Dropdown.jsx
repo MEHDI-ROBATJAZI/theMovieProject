@@ -1,18 +1,20 @@
 import React, { useState,useContext } from "react";
 import { LoginOutlined} from "@ant-design/icons";
-import { Menu, Dropdown} from "antd";
+import { Menu, Dropdown as Dd} from "antd";
 import { UserContext } from "../../context/UserContext";
 import Avatar from "antd/lib/avatar/avatar";
+import {Link} from 'react-router-dom'
+
 
 const localAddress = import.meta.env.VITE_LOCAL
 const productAddress = import.meta.env.VITE_PRODUCT
 const DevMode = String(import.meta.env.DEV)
 const Environment_Base_Url = DevMode ? localAddress : productAddress
+const url = "https://api.themoviedb.org/3/";
 
 
-const ProfileBar = () => {
-  const url = "https://api.themoviedb.org/3/";
 
+const Dropdown = () => {
   const Login = () => {
     fetch(
       `${url}authentication/token/new?api_key=cbaf0bf3f1b90c479d4e805aa371f6cb`
@@ -26,12 +28,10 @@ const ProfileBar = () => {
   };
 
   const { user } = useContext(UserContext);
-  console.log(user);
-
   const menu = (
-    <Menu /*theme="dark"*/ onClick={(e) => Login()}>
-      <Menu.Item key="login">
-        <div>
+    <Menu /*theme="dark"*/ >
+      <Menu.Item key="login" >
+        <div onClick={()=>Login()}>
           Login and Authentication
         </div>
       </Menu.Item>
@@ -40,18 +40,16 @@ const ProfileBar = () => {
 
 
   const profileBarMenu =(
-    <Menu /*theme="dark"*/ onClick={(e) => Login()}>
-      <Menu.Item key="username">
-        <div>
+    <Menu /*theme="dark"*/>
+      <Menu.Item key="username" disabled style={{cursor:"none"}}>
           {
             user.username
           }
-        </div>
       </Menu.Item>
       <Menu.Item key="profile">
-        <div>
+        <Link to="/profile">
           profile
-        </div>
+        </Link>
       </Menu.Item>
 
       <Menu.Item key="logout">
@@ -69,7 +67,7 @@ const ProfileBar = () => {
   return (
     <div>
       {user.id ? (
-        <Dropdown overlay={profileBarMenu} placement="bottomCenter" arrow>
+        <Dd overlay={profileBarMenu} placement="bottomCenter" arrow>
 
         <Avatar
         style={{verticalAlign: 'middle' }} size={50}
@@ -79,15 +77,14 @@ const ProfileBar = () => {
             />
           }
         ></Avatar>
-        </Dropdown>
-
+        </Dd>
       ) : (
-        <Dropdown overlay={menu} placement="bottomCenter" arrow>
+        <Dd overlay={menu} placement="bottomCenter" arrow>
           <LoginOutlined rotate={123} style={{ fontSize: "2rem" }} />
-        </Dropdown>
+        </Dd>
       )}
     </div>
   );
 };
 
-export default ProfileBar;
+export default Dropdown;

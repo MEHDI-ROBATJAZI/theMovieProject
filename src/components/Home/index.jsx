@@ -10,11 +10,11 @@ import {
   Spin,
   Tag,
   Radio,
+  Empty,
 } from "antd";
 import useMovieApi from "../../hooks/useMovieApi";
 import { Link } from "react-router-dom";
-import classes from "./home.module.scss";
-import "./home.css";
+import "./home.scss";
 import Title from "../../Seo/Title";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 const { Meta } = Card;
@@ -26,7 +26,8 @@ const Home = () => {
   const { data, error, reFetch, loading } = useMovieApi(`movie/${tabState}`);
 
   const [dataType, setDataType] = React.useState("movie");
-  const { data: ApiGenres, loading: genreLoading } = useMovieApi(`genre/movie/list`);
+  const { data: ApiGenres, loading: genreLoading } =
+    useMovieApi(`genre/movie/list`);
   const [MoviesId, setMoviesId] = useState([]);
   const [ActiveGenre, setActiveGenre] = useState({});
 
@@ -82,15 +83,11 @@ const Home = () => {
         />
       )}
       <Title title="Home" description="main page" />
-      <Radio.Group
-        onChange={changeDataType}
-        value={dataType}
-        id={classes.RadioGroup}
-      >
+      <Radio.Group onChange={changeDataType} value={dataType} id="RadioGroup">
         <Radio value={"movie"}>Movies</Radio>
         <Radio value={"tv"}>Tv Shows</Radio>
       </Radio.Group>
-      <div className={classes.TabsStyle}>
+      <div className="TabsStyle">
         <Tabs
           size="large"
           centered={true}
@@ -100,16 +97,16 @@ const Home = () => {
           }}
         >
           <TabPane tab="popular" key="popular" />
-          {
-            dataType === "movie" ? 
-            <TabPane tab="upcoming" key="upcoming" /> : 
+          {dataType === "movie" ? (
+            <TabPane tab="upcoming" key="upcoming" />
+          ) : (
             <TabPane tab="on_the_air" key="on_the_air" />
-          }
+          )}
           <TabPane tab="top rated" key="top_rated" />
         </Tabs>
       </div>
 
-      <div className={classes.HomeGlassMorphism}>
+      <div className="HomeGlassMorphism">
         {loading ? (
           <div className="spinContainer">
             <Spin />
@@ -143,7 +140,7 @@ const Home = () => {
                 style={{
                   display: "flex",
                   justifyContent: "space-around",
-                  paddingTop: "60px",
+                  paddingTop: "40px",
                 }}
               >
                 <div
@@ -174,20 +171,10 @@ const Home = () => {
               <Row
                 justify="center"
                 gutter={[20, 30]}
-                className={classes.CardsContainer}
+                className="CardsContainer"
               >
                 {data?.results?.map((movie) => (
-                  <Col
-                    style={
-                      ActiveGenre.id &&
-                        !movie.genre_ids.includes(ActiveGenre.id) &&
-                        eyeState === false && { padding: "0 0" } || {
-                        padding: "0 10px",
-                      }
-                    }
-                    key={movie.id}
-                    span={{ xs: 24, sm: 12, md: 8, lg: 6 }}
-                  >
+                  <Col key={movie.id} span={{ xs: 24, sm: 12, md: 8, lg: 6 }}>
                     <Link to={`/movieDetails/${movie.id}?flag=${dataType}`}>
                       <Card
                         hoverable
@@ -203,15 +190,19 @@ const Home = () => {
                             "CardFilter")
                         }
                         cover={
-                          <Image
-                            preview={false}
-                            alt={
-                              dataType === "movie"
-                                ? movie.original_title
-                                : movie.name
-                            }
-                            src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                          />
+                          movie.poster_path ? (
+                            <Image
+                              preview={false}
+                              alt={
+                                dataType === "movie"
+                                  ? movie.original_title
+                                  : movie.name
+                              }
+                              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                            />
+                          ) : (
+                            <Empty imageStyle={{height:"337px"}} />
+                          )
                         }
                       >
                         <Meta
