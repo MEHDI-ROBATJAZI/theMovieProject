@@ -12,15 +12,16 @@ const DevMode = String(import.meta.env.DEV)
 const Environment_Base_Url = DevMode ? localAddress : productAddress
 const url = "https://api.themoviedb.org/3/";
 
+
+
+
 const Dropdown = () => {
-
-
-  console.log(localAddress);
-  console.log(productAddress);
-  console.log(DevMode);
-  console.log(Environment_Base_Url);
-
-
+  
+    console.log(localAddress);
+    console.log(productAddress);
+    console.log(DevMode);
+    console.log(Environment_Base_Url);
+  
 
   const Login = () => {
     fetch(
