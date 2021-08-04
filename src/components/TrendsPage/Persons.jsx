@@ -98,12 +98,14 @@ const Persons = () => {
                 <SwiperSlide key={item.id}>
                   <div style={{ textAlign: "center" }}>
                     <h1 className="imageDesc">known with </h1>
+                    <Link to={`/movieDetails/${item.id}?flag=${item.media_type}`}>
                     <Image
                       height="600px"
                       preview={false}
                       alt={item.original_title}
                       src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
                     />
+                    </Link>
                   </div>
                 </SwiperSlide>
               ))}

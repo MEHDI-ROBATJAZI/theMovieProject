@@ -1,32 +1,22 @@
 import Title from '../../Seo/Title'
-import React,{useState,useEffect,useContext} from 'react'
+import React,{useEffect,useContext} from 'react'
 import { useLocation,useHistory } from 'react-router-dom'
-
 import { UserContext } from '../../context/UserContext'
+import UserService from '../../service/UserService'
 const Auth = () => {
   const {setSessionId} = useContext(UserContext)
   const history = useHistory()
   const location = useLocation()
   const requestToken = new URLSearchParams(location.search).get("request_token")
-  const url ="https://api.themoviedb.org/3/" 
 
   useEffect(() => {
     if(requestToken){
-    fetch(`${url}authentication/session/new?api_key=cbaf0bf3f1b90c479d4e805aa371f6cb`,{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify({
-        request_token : requestToken
+      
+    UserService.createRequestSession(requestToken).then(data=>{
+       setSessionId(data.session_id)
+       history.replace("/")
       })
-    })
-      .then(resp=>resp.json())
-      .then(data=>{
-        console.log(data);
-        setSessionId(data.session_id)
-        history.replace("/")
-      })
+
     }
   }, [])
 

@@ -13,6 +13,8 @@ const { Panel } = Collapse;
 
 // import Swiper core and required modules
 import SwiperCore, { Navigation, Autoplay } from "swiper/core";
+import Bar from "../ProfileBar/Bar";
+import { FrownOutlined, MehOutlined, SmileOutlined } from "@ant-design/icons";
 
 // install Swiper modules
 SwiperCore.use([Navigation, Autoplay]);
@@ -43,7 +45,7 @@ const MovieDetails = () => {
     });
     setImageState(filteredImages);
 
-    const filteredVideos = data?.videos?.results.filter((vid, index) => {
+    const filteredVideos = data?.videos?.results?.filter((vid, index) => {
       if (index <= 3) {
         return vid;
       }
@@ -58,6 +60,15 @@ const MovieDetails = () => {
     setCastState(filteredCredits);
   }, [data, credits]);
 
+
+  const customIcons = {
+    1: <FrownOutlined />,
+    2: <FrownOutlined />,
+    3: <MehOutlined />,
+    4: <SmileOutlined />,
+    5: <SmileOutlined />,
+  };
+
   return (
     <div id="container">
       <Title
@@ -71,7 +82,7 @@ const MovieDetails = () => {
       ) : (
         <div
           style={{
-            width:"100%",
+            width: "100%",
             backgroundImage: [
               `linear-gradient(to right, rgb(126 221 164 / 70%) 150px, rgb(255 202 106 / 58%) 100%)`,
               `url(
@@ -80,23 +91,25 @@ const MovieDetails = () => {
             ],
             backgroundSize: "100% 100%",
             backgroundRepeat: "no-repeat",
+            position: "relative",
           }}
         >
           <div id="logoStyle">
             {data.images.logos[0] && (
-                <Image
-                  preview={false}
-                  src={`https://image.tmdb.org/t/p/w500${data.images.logos[0].file_path}`}
-                  alt={"no image"}
-                />
+              <Image
+                preview={false}
+                src={`https://image.tmdb.org/t/p/w500${data.images.logos[0].file_path}`}
+                alt={"no image"}
+              />
             )}
             <Rate
               className="RateStyles"
               disabled={true}
               allowHalf
               defaultValue={data.vote_average / 2}
+              character={({ index }) => customIcons[index + 1]}
             />
-            <div className="TagStyles">
+            <div className="TagStyles disable-select">
               {data.genres &&
                 data.genres.map((genre) => (
                   <Tag key={genre.id} className="genre" color="success">
@@ -105,20 +118,21 @@ const MovieDetails = () => {
                 ))}
             </div>
           </div>
-
+          <div>
+            <Bar id={id} media_type={query.get("flag")} />
+          </div>
           <div
-            style={{ marginTop:"200px" , padding: "30px 0" }}
+            style={{ marginTop: "200px", padding: "30px 0" }}
             className="cardContainer"
           >
             <Tabs
+              className="disable-select"
               animated={true}
               type="card"
               centered
             >
-
-
               <TabPane className="glassMorphism" tab="images" key="1">
-              {/* movie images */}
+                {/* movie images */}
                 <Swiper
                   autoplay={{
                     delay: 2500,
@@ -127,18 +141,18 @@ const MovieDetails = () => {
                   spaceBetween={10}
                   slidesPerView={1}
                   breakpoints={{
-                    "640": {
-                      "slidesPerView": 2,
-                      "spaceBetween": 20
+                    640: {
+                      slidesPerView: 2,
+                      spaceBetween: 20,
                     },
-                    "768": {
-                      "slidesPerView": 3,
-                      "spaceBetween": 40
+                    768: {
+                      slidesPerView: 3,
+                      spaceBetween: 40,
                     },
-                    "1024": {
-                      "slidesPerView": 4,
-                      "spaceBetween": 50
-                    }
+                    1024: {
+                      slidesPerView: 4,
+                      spaceBetween: 50,
+                    },
                   }}
                 >
                   <div>
@@ -161,7 +175,6 @@ const MovieDetails = () => {
                     navigation={true}
                     spaceBetween={50}
                     slidesPerView={1}
-                   
                   >
                     {videoState?.map((vid) => (
                       <SwiperSlide
@@ -172,9 +185,7 @@ const MovieDetails = () => {
                           className="trailerIframeStyles"
                           width="80%"
                           src={`https://www.youtube.com/embed/${vid.key}`}
-                        >
-
-                        </iframe>
+                        ></iframe>
                       </SwiperSlide>
                     ))}
                   </Swiper>
@@ -182,7 +193,10 @@ const MovieDetails = () => {
               </TabPane>
               <TabPane className="glassMorphism" tab="informations" key="3">
                 {/* information */}
-                <Collapse bordered={false} style={{width:"600px" , margin:"auto"}}>
+                <Collapse
+                  bordered={false}
+                  style={{ width: "600px", margin: "auto" }}
+                >
                   <Panel header="Title" key="1">
                     {query.get("flag") === "movie" ? (
                       <strong>{data.title}</strong>
@@ -205,27 +219,27 @@ const MovieDetails = () => {
               <TabPane className="glassMorphism" tab="cast" key="4">
                 {/* cast  */}
                 <Swiper
-                autoplay={{
-                  "delay": 2500,
-                  "disableOnInteraction": false
-                }} 
+                  autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                  }}
                   className="mySwiper"
                   navigation={true}
                   spaceBetween={50}
                   slidesPerView={1}
                   breakpoints={{
-                    "640": {
-                      "slidesPerView": 2,
-                      "spaceBetween": 20
+                    640: {
+                      slidesPerView: 2,
+                      spaceBetween: 20,
                     },
-                    "768": {
-                      "slidesPerView": 3,
-                      "spaceBetween": 40
+                    768: {
+                      slidesPerView: 3,
+                      spaceBetween: 40,
                     },
-                    "1024": {
-                      "slidesPerView": 4,
-                      "spaceBetween": 50
-                    }
+                    1024: {
+                      slidesPerView: 4,
+                      spaceBetween: 50,
+                    },
                   }}
                 >
                   {castState?.map((cast) => (

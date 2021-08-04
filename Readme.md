@@ -1,4 +1,4 @@
-- Home Tv Section
++ Home Tv Section
 
 - Login Section
 
@@ -15,3 +15,15 @@
 + improve MovieDetail Page Gradiant
 
 - improve Header Searchbar
+
+- Rtl & DarkMode
+
+- full implement moviebar
+
+- implement service module
+
+- logout
+
+- burger responsive navbar
+
+- show rating favorite and watchlist count movies

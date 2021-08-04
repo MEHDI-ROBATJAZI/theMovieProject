@@ -1,0 +1,35 @@
+#BarContainer{
+  width:200px;
+  height:44px;  
+  background: black;
+  position: absolute;
+  top:250px;
+  right:0;
+  display: flex;
+  flex-wrap: wrap;
+  transition: all 1s ease ;
+
+  div.IconParent{
+    padding:4px 0 0 20px;
+    height:12px;
+    span{
+      color: white;
+      font-size: 1.7rem;
+      line-height: 44px;
+
+    }
+    
+  }
+  .UserRateMovie{
+    height:20px;
+    width:100%;
+    text-align: center;
+    .ant-rate{
+      width:100%;
+      font-size: 1.4rem;
+    }
+  }
+
+
+
+}
