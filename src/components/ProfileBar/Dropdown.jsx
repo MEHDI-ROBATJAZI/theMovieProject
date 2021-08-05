@@ -9,15 +9,16 @@ import UserService from "../../service/UserService";
 const Dropdown = () => {
   const localAddress = import.meta.env.VITE_LOCAL;
   const productAddress = import.meta.env.VITE_PRODUCT;
-  const DevMode = String(import.meta.env.DEV);
-  const Environment_Base_Url = DevMode === true ? productAddress : localAddress;
-
-  // console.log(localAddress);
-  // console.log(productAddress);
-  // console.log(DevMode);
-  // console.log(Environment_Base_Url);
-
+  const DevMode = import.meta.env.DEV;
+  const Environment_Base_Url = DevMode ? localAddress : productAddress;
+  
   const Login = () => {
+
+  console.log(localAddress);
+  console.log(productAddress);
+  console.log(DevMode);
+  console.log(Environment_Base_Url);
+
     UserService.createRequestToken().then((result) => {
       if (result.success) {
         window.location = `https://www.themoviedb.org/authenticate/${result.request_token}?redirect_to=${Environment_Base_Url}Auth`;
