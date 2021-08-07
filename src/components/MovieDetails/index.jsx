@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext, useCallback } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import useMovieApi from "../../hooks/useMovieApi";
-import { Image, Row, Col, Tabs, Collapse, Rate, Button, Tag, Spin } from "antd";
+import { Image, Tabs, Collapse, Rate,Tag, Spin } from "antd";
 import "./MovieDetails.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 import "swiper/components/pagination/pagination.min.css";
 import Title from "../../Seo/Title";
-
+import { UserContext } from "../../context/UserContext";
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
 
@@ -20,6 +20,8 @@ import { FrownOutlined, MehOutlined, SmileOutlined } from "@ant-design/icons";
 SwiperCore.use([Navigation, Autoplay]);
 
 const MovieDetails = () => {
+  const {user} = useContext(UserContext)
+  console.log(user);
   function useQuery() {
     return new URLSearchParams(useLocation().search);
   }
@@ -119,7 +121,10 @@ const MovieDetails = () => {
             </div>
           </div>
           <div>
-            <Bar id={id} media_type={query.get("flag")} />
+            {
+              user.id && <Bar id={id} media_type={query.get("flag")} />
+            }
+            
           </div>
           <div
             style={{ marginTop: "200px", padding: "30px 0" }}

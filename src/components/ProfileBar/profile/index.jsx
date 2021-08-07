@@ -5,11 +5,20 @@ import { UserContext } from "../../../context/UserContext";
 import Lists from "./list";
 import Title from "../../../Seo/Title";
 import useResponsive from "../../../hooks/useResponsive";
+import { useHistory } from "react-router-dom";
+
+
 const { TabPane } = Tabs;
 const Profile = () => {
+  const history = useHistory()
   const width = useResponsive()
   const { user } = useContext(UserContext);
 
+  useEffect(() => {
+    if(!user.success && !user.id){
+      history.push("/")
+    } 
+  }, [user])
   return (
     <>
     <Title
@@ -21,7 +30,12 @@ const Profile = () => {
           <aside>
             <Image
               alt={user.username}
-              src={`https://image.tmdb.org/t/p/w500${user.avatar.tmdb.avatar_path}`}
+              src={
+                user.avatar.tmdb.avatar_path ? 
+                `https://image.tmdb.org/t/p/w500${user.avatar.tmdb.avatar_path}`
+                :
+                "/userIcon.png"
+              }
             />
             <h3>{user.username}</h3>
           </aside>

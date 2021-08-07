@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Input, AutoComplete, Avatar, Image } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { Input, AutoComplete, Avatar } from "antd";
+import Request from "../../helpers/service";
 import classes from "./Search.module.scss";
 import useDelayFetch from "../../hooks/useDelayFetch";
 import { Link } from "react-router-dom";
@@ -8,51 +8,37 @@ import { Link } from "react-router-dom";
 const { Search } = Input;
 
 const renderTitle = (title) => (
-  <span>
-    {title}
-    <a
-      style={{
-        float: "right",
-      }}
-      href="https://www.google.com/search?q=antd"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      more
-    </a>
-  </span>
+  <span className="search-dropdown-items">{title}</span>
 );
 
 const renderItem = (media_type, title, id, profile_path) => ({
   value: title,
   label: (
     <Link
+      key={profile_path}
       to={
         (media_type === "movie" && `/movieDetails/${id}?flag=movie`) ||
         (media_type === "tv" && `/movieDetails/${id}?flag=tv`) ||
         (media_type === "person" && `/celebrity/${id}`)
       }
     >
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-      }}
-    >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
         {title}
-      {profile_path && (
-        <Avatar
-        size="medium"
-        icon={
-          <Image
-          preview={false}
-          src={`https://image.tmdb.org/t/p/w200${profile_path}`}
-          />
-        }
-        ></Avatar>
+        {profile_path && (
+          <Avatar
+            size="medium"
+            icon={
+              <img src={`https://image.tmdb.org/t/p/w200${profile_path}`} />
+            }
+          ></Avatar>
         )}
-    </div>
-        </Link>
+      </div>
+    </Link>
   ),
 });
 
@@ -60,20 +46,22 @@ const SearchComponent = () => {
   const [query, setQuery] = useState("");
   const debuncedQuery = useDelayFetch(query, 1000);
   const [data, setData] = useState([]);
-
-  useEffect(() => {
+  
+  useEffect(async () => {
     if (debuncedQuery) {
-      setData([])
-      fetch(
-        `https://api.themoviedb.org/3/search/multi?api_key=cbaf0bf3f1b90c479d4e805aa371f6cb&language=en-US&query=${debuncedQuery}&page=1&include_adult=false`
-      )
-        .then((resp) => resp.json())
-        .then((d) => setData(d.results));
+      try {
+        const data = await Request.get(
+          `https://api.themoviedb.org/3/search/multi?api_key=cbaf0bf3f1b90c479d4e805aa371f6cb&language=en-US&query=${debuncedQuery}&page=1&include_adult=false`
+        );
+        setData(data.results);
+      } catch (error) {
+        console.error(error);
+      }
     }
   }, [debuncedQuery]);
 
   const makeOptions = () => {
-    if (data.length, query) {
+    if ((data.length, query)) {
       return [
         {
           label: renderTitle("Persons"),
@@ -111,7 +99,11 @@ const SearchComponent = () => {
       <AutoComplete
         dropdownClassName={classes.certainCategorySearchDropdown}
         options={makeOptions()}
-        onSearch={v=> {setData([]) ; setQuery(v)}}
+        onSearch={(v) => {
+          setQuery(v);
+        }}
+        dropdownMatchSelectWidth={false}
+        open={false}
       >
         <Search
           id={classes.SearchInput}
@@ -122,7 +114,7 @@ const SearchComponent = () => {
         />
       </AutoComplete>
     </div>
-  );  
+  );
 };
 
 export default SearchComponent;

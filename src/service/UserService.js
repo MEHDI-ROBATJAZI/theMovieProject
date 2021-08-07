@@ -12,11 +12,17 @@ const createRequestSession=(request_token)=>{
   })
 }
 
+const logoutUser =(session_id)=>{
+  return Request.delete({path:"authentication/session"},{
+    session_id
+  })
+}
 
 
 const UserService = {
   createRequestToken,
-  createRequestSession
+  createRequestSession,
+  logoutUser
 }
 
 

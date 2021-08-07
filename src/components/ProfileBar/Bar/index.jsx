@@ -47,7 +47,7 @@ const removeSuccessfully = (icon) => {
   }
 };
 const Bar = ({ id, media_type }) => {
-  const { user } = useContext(UserContext);
+  const { user , session_id } = useContext(UserContext);
   const BarContainerRef = useRef(null);
   const RateParentRef = useRef(null);
 
@@ -74,7 +74,7 @@ const Bar = ({ id, media_type }) => {
   }, [rateBox]);
 
   return (
-    <div id="BarContainer" ref={BarContainerRef}>
+    <div id="BarContainer" ref={BarContainerRef} >
       <div className="IconParent">
         {isFavorate ? (
           <Tooltip

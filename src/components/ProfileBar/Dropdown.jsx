@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { LoginOutlined } from "@ant-design/icons";
+import { LoginOutlined, UserDeleteOutlined } from "@ant-design/icons";
 import { Menu, Dropdown as Dd } from "antd";
 import { UserContext } from "../../context/UserContext";
 import Avatar from "antd/lib/avatar/avatar";
@@ -12,12 +12,9 @@ const Dropdown = () => {
   const DevMode = import.meta.env.DEV;
   const Environment_Base_Url = DevMode ? localAddress : productAddress;
   
+  const {user , setUser ,setSessionId,session_id  } = useContext(UserContext);
+  
   const Login = () => {
-
-  console.log(localAddress);
-  console.log(productAddress);
-  console.log(DevMode);
-  console.log(Environment_Base_Url);
 
     UserService.createRequestToken().then((result) => {
       if (result.success) {
@@ -26,7 +23,19 @@ const Dropdown = () => {
     });
   };
 
-  const { user } = useContext(UserContext);
+  const Logout = ()=>{
+    const result = confirm("are your sure ?? logout now!!!")
+    if(result){
+      UserService.logoutUser(session_id).then(responce=>{
+        if(responce.success){
+          setUser({})
+          setSessionId({})
+          window.localStorage.removeItem("session_id")
+        }
+      })
+    }
+  }
+
   const menu = (
     <Menu /*theme="dark"*/>
       <Menu.Item key="login">
@@ -38,14 +47,14 @@ const Dropdown = () => {
   const profileBarMenu = (
     <Menu /*theme="dark"*/>
       <Menu.Item key="username" disabled style={{ cursor: "none" }}>
-        {user.username}
+        {user.name || user.username}
       </Menu.Item>
       <Menu.Item key="profile">
         <Link to="/profile">profile</Link>
       </Menu.Item>
 
       <Menu.Item key="logout">
-        <div>logout</div>
+        <div onClick={Logout}>logout</div>
       </Menu.Item>
     </Menu>
   );
@@ -58,9 +67,16 @@ const Dropdown = () => {
             style={{ verticalAlign: "middle" }}
             size={50}
             icon={
-              <img
-                src={`https://image.tmdb.org/t/p/w200${user.avatar.tmdb.avatar_path}`}
-              />
+                <img
+                  src={
+                    user.avatar.tmdb.avatar_path ?                  
+                    `https://image.tmdb.org/t/p/w200${user.avatar.tmdb.avatar_path}` || "/userIcon.png"
+                  
+                    :
+                    "/userIcon.png"
+                  }
+
+                />
             }
           ></Avatar>
         </Dd>

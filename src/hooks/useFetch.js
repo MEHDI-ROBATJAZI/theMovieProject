@@ -30,7 +30,7 @@ const useFetch = (url , query , method="GET")=>{
 
   useEffect(()=>{
     reFetch(url , query)
-  },[])
+  },[url])
 
   return {data,loading,error,reFetch}
 

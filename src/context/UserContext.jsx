@@ -5,18 +5,33 @@ const UserContext = React.createContext({})
 const UserContextProvider =({children})=>{
 
   const getLocalStorageSessionId = ()=>{
-    return window.localStorage.getItem("session_id")
+    const session = window.localStorage.getItem("session_id") 
+    if(session){
+      return session
+    }else{
+      return {}
+    }
   }
 
   const [user,setUser] = useState({})
   const [session_id,setSessionId] = useState(getLocalStorageSessionId)
-  useEffect(()=>{
-    if(session_id){
-      window.localStorage.setItem("session_id" , session_id)
-      
-      AccountService.GetDetails().then(data=>setUser(data))
-    }
+  useEffect(async()=>{
+    try{
+      if(session_id){
 
+        window.localStorage.setItem("session_id" , session_id)
+        
+        const data = await AccountService.GetDetails()
+        setUser(data)
+      }else{
+        setUser({})
+      }
+    
+    }catch(error){
+      setUser({})
+      console.error(error);
+    }
+    
   },[session_id])
 
 

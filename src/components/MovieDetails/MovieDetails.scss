@@ -52,8 +52,6 @@
   border-color: #141414;
 }
 
-
-
 .swiper-container {
   width: 100%;
   height: 100%;
@@ -85,17 +83,17 @@
     object-fit: cover;
   }
 }
-div#container{
-  height:1075px;
+div#container {
+  height: 1075px;
   overflow: hidden;
-  
+
   div#logoStyle {
-    margin:0;
+    margin: 0;
     max-width: 500px;
     position: relative;
-    top: 170px;
-    left: 200px;
-    
+    top: 30px;
+    left: 140px;
+
     img {
       max-width: 300px;
     }
@@ -116,44 +114,40 @@ div#container{
     }
   }
   .glassMorphism {
-  background: rgba(237, 132, 255, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(5.5px);
-  -webkit-backdrop-filter: blur(5.5px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  padding: 40px 10px;
-
-}
-
-.cardContainer {
-  .ant-tabs{
-    padding:0 !important ;
+    background: rgba(237, 132, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(5.5px);
+    -webkit-backdrop-filter: blur(5.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 40px 10px;
   }
-  .ant-tabs-tab {
-    background: rgba(237, 132, 255, 0.25) !important;
-    backdrop-filter: blur(5.5px) !important;
-    -webkit-backdrop-filter: blur(5.5px) !important;
-  }
-  .ant-tabs-tab-active {
-    border-radius: 10px 10px 0 0 !important;
-    border-bottom: none !important;
-    
-  }
-}
-#SpinContainer {
-  margin: 20px 0;
-  margin-bottom: 20px;
-  padding: 30px 50px;
-  text-align: center;
-  background: rgba(0, 0, 0, 0.05);
-  border-radius: 4px;
-}
 
+  .cardContainer {
+    .ant-tabs {
+      padding: 0 !important ;
+    }
+    .ant-tabs-tab {
+      background: rgba(237, 132, 255, 0.25) !important;
+      backdrop-filter: blur(5.5px) !important;
+      -webkit-backdrop-filter: blur(5.5px) !important;
+    }
+    .ant-tabs-tab-active {
+      border-radius: 10px 10px 0 0 !important;
+      border-bottom: none !important;
+    }
+  }
+  #SpinContainer {
+    margin: 20px 0;
+    margin-bottom: 20px;
+    padding: 30px 50px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+  }
 }
 
 @media only screen and (max-width: 768px) {
-  
   #container .ant-tabs-tab{
     width:140px;
   }
@@ -176,28 +170,25 @@ div#container{
 }
 
 @media only screen and (max-width: 600px) {
-  
-  #logoStyle{
-    left:20px;
+  div#container {
+    div#logoStyle {
+      left: 20px;
+    }
   }
 }
 
 @media only screen and (max-width: 1000px) {
-  
-  .trailerIframeStyles{
-    height:300px;
+  .trailerIframeStyles {
+    height: 300px;
   }
 }
 @media only screen and (max-width: 1200px) {
-  
-  .trailerIframeStyles{
-    height:400px;
+  .trailerIframeStyles {
+    height: 400px;
   }
 }
 @media only screen and (min-width: 1200px) {
-  
-  .trailerIframeStyles{
-    height:500px;
+  .trailerIframeStyles {
+    height: 500px;
   }
 }
-

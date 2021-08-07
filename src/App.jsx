@@ -24,10 +24,7 @@ const App = () => {
   const width = useResponsive()
 
   useEffect(() => {
-
-    
-    width > 767 ? setResponsive(false) : setResponsive(true)
-    
+    width > 767 ? setResponsive(false) : setResponsive(true)  
   }, [width])
 
 
