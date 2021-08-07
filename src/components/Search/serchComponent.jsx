@@ -102,8 +102,7 @@ const SearchComponent = () => {
         onSearch={(v) => {
           setQuery(v);
         }}
-        dropdownMatchSelectWidth={false}
-        open={false}
+
       >
         <Search
           id={classes.SearchInput}

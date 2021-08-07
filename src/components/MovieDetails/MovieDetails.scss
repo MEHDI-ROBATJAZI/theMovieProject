@@ -1,4 +1,5 @@
 .cardContainer {
+  margin-top: 200px; padding: 30px 130px;
   p {
     margin: 0;
   }
@@ -84,7 +85,7 @@
   }
 }
 div#container {
-  height: 1075px;
+  height: 1260px;
   overflow: hidden;
 
   div#logoStyle {
@@ -170,6 +171,9 @@ div#container {
 }
 
 @media only screen and (max-width: 600px) {
+  .cardContainer{
+    padding:14px;
+  }
   div#container {
     div#logoStyle {
       left: 20px;
@@ -178,6 +182,9 @@ div#container {
 }
 
 @media only screen and (max-width: 1000px) {
+  .cardContainer{
+    padding:50px;
+  }
   .trailerIframeStyles {
     height: 300px;
   }

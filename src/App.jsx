@@ -1,11 +1,11 @@
-import React ,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./App.module.scss";
 import Home from "./components/Home";
 import MovieDetails from "./components/MovieDetails";
 import TrendingRender from "./components/TrendsPage";
 import Celebrity from "./components/Celebrity/getDetail";
 import CelebrityPopularPage from "./components/Celebrity/celebrityPopularPage";
-import { Layout,Space } from "antd";
+import { Layout, Space } from "antd";
 import { Link, Route, Switch } from "react-router-dom";
 import SearchComponent from "./components/Search/serchComponent";
 import Page404 from "./components/Page404";
@@ -19,45 +19,74 @@ import Profile from "./components/ProfileBar/profile";
 const { Content } = Layout;
 
 const App = () => {
-  const [Responsive , setResponsive] = useState(false)
-  const [IconProfileResponsive , setIconProfileResponsive] = useState(false)
-  const width = useResponsive()
+  const [Responsive, setResponsive] = useState(false);
+  const [IconProfileResponsive, setIconProfileResponsive] = useState(false);
+  const [BurgerClick, setBurgerClick] = useState(false);
+  const width = useResponsive();
 
   useEffect(() => {
-    width > 767 ? setResponsive(false) : setResponsive(true)  
-  }, [width])
+    width > 767 ? setResponsive(false) : setResponsive(true);
+    if (width < 768 || width > 1200) {
+      setBurgerClick(false);
+    }
+  }, [width]);
 
+  const handleNavLinksChange = () => {
+    let navLinks = document.querySelectorAll("#_NavLinks_1fqut_1 span a");
+    if (navLinks[0] == undefined)
+      navLinks = document.querySelectorAll(
+        "#_NavLinksResponsive_1fqut_1 span a"
+      );
 
-  const handleNavLinksChange=() => {
-    let navLinks = document.querySelectorAll('#_NavLinks_1fqut_1 span a') 
-    if(navLinks[0] == undefined) navLinks = document.querySelectorAll('#_NavLinksResponsive_1fqut_1 span a');
-
-    navLinks.forEach(n=>{   
-      if(window.location.href === n.href){
-        n.classList.add("navActiveLinks")
-      }else{
-        n.classList.remove("navActiveLinks")
+    navLinks.forEach((n) => {
+      if (window.location.href === n.href) {
+        n.classList.add("navActiveLinks");
+      } else {
+        n.classList.remove("navActiveLinks");
       }
-    })
-  }
-
+    });
+  };
 
   return (
-    <div id={classes.Container}>                                                          
+    <div id={classes.Container}>
       <Layout style={{ background: "#d1d0e5" }}>
-        <header id={Responsive ? classes.HeaderResponsive : classes.HeaderStyles}>
-          <nav id={Responsive ? classes.NavStylesResponsive : classes.NavStyles}>
-            <div id={classes.MovieIcon}>
+        <header
+          id={Responsive ? classes.HeaderResponsive : classes.HeaderStyles}
+        >
+          <nav
+            id={Responsive ? classes.NavStylesResponsive : classes.NavStyles}
+          >
+            <div
+              id={classes.MovieIcon}
+              style={
+                BurgerClick
+                  ? {
+                      position: "absolute",
+                      top: "0",
+                      left: "120px",
+                    }
+                  : {}
+              }
+            >
               <MyMovieIcon />
             </div>
-            <div id={classes.Burger} 
-              onClick={()=>{setResponsive(!Responsive) ; setIconProfileResponsive(!IconProfileResponsive)}}>
+            <div
+              id={classes.Burger}
+              onClick={() => {
+                setResponsive(!Responsive);
+                setIconProfileResponsive(!IconProfileResponsive);
+                setBurgerClick(true);
+              }}
+            >
               <div></div>
               <div></div>
               <div></div>
             </div>
             <div id={classes.Spacing}></div>
-            <div id={Responsive ? classes.NavLinksResponsive : classes.NavLinks}>
+            <div
+              id={Responsive ? classes.NavLinksResponsive : classes.NavLinks}
+              style={BurgerClick ? {paddingTop:"60px"} : {}}
+            >
               <span onClick={handleNavLinksChange}>
                 <Link to="/">Home</Link>
               </span>
@@ -71,10 +100,27 @@ const App = () => {
                 <Link to="/aboutme">About-Me</Link>
               </span>
             </div>
-            <div id={Responsive ? classes.serachComponentResponsive : classes.SearchComponent }>
+            <div
+              id={
+                Responsive
+                  ? classes.serachComponentResponsive
+                  : classes.SearchComponent
+              }
+            >
               <SearchComponent />
             </div>
-            <Space id={classes.ProfileBar}>
+            <Space
+              id={classes.ProfileBar}
+              style={
+                BurgerClick
+                  ? {
+                      position: "absolute",
+                      top: "0",
+                      right: "120px",
+                    }
+                  : {}
+              }
+            >
               <Dropdown />
             </Space>
           </nav>
@@ -110,8 +156,7 @@ const App = () => {
         </Content>
       </Layout>
 
-    <Footer />
-
+      <Footer />
     </div>
   );
 };

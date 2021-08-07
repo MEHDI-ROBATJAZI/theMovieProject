@@ -15,13 +15,17 @@ $CustomGreen: rgb(91, 255, 50);
     border-radius: 13px;
     font-family: Montserrat;
     transition: 0.4s all ease;
+    position: relative;
   }
+
   #NavStyles {
     padding: 0 40px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-around;  
+
 
     #Burger {
+      margin:auto;
       height: 80px;
       padding: 20px 10px 0 10px;
       div {
@@ -95,6 +99,7 @@ $CustomGreen: rgb(91, 255, 50);
   border-radius: 13px;
   font-family: Montserrat;
   height: 380px;
+  position: relative; 
 }
 #NavStylesResponsive {
   flex-direction: column;
@@ -103,7 +108,7 @@ $CustomGreen: rgb(91, 255, 50);
 }
 
 #NavLinksResponsive {
-  // margin: 20px 0;
+
 
   span {
     height: 50px;

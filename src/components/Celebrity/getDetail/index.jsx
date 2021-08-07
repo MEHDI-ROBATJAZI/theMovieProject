@@ -24,43 +24,43 @@ const Celebrity = () => {
               xs={24}
               sm={24}
               md={14}
-              lg={18}
+              lg={15}
               span={24}
-              style={{ padding: "30px 20px" }}
             >
               <Typography.Title level={1}>
-                {" "}
-                <Typography.Text mark>name </Typography.Text> {data.name}{" "}
+                
+                <Typography.Text mark> name </Typography.Text> <Typography.Text className="data">{data.name}</Typography.Text>
               </Typography.Title>
               <Typography.Title level={1}>
-                {" "}
-                <Typography.Text mark>gender </Typography.Text>{" "}
-                {data.gender === 2 ? "male" : "female"}{" "}
+                
+                <Typography.Text mark>gender </Typography.Text>
+                <Typography.Text className="data">{data.gender === 2 ? "male" : "female"}</Typography.Text>
               </Typography.Title>
               <Typography.Title level={1}>
-                {" "}
+                
                 <Typography.Text mark>
-                  known for department{" "}
-                </Typography.Text>{" "}
-                {data.known_for_department}{" "}
+                  known for department
+                </Typography.Text>
+                
+                <Typography.Text className="data">{data.known_for_department}</Typography.Text>
               </Typography.Title>
               <Typography.Title level={1}>
-                {" "}
-                <Typography.Text mark>place of birth </Typography.Text>{" "}
-                {data.place_of_birth}{" "}
+               
+                <Typography.Text mark>place of birth </Typography.Text>
+                <Typography.Text className="data">{data.place_of_birth}</Typography.Text>
               </Typography.Title>
               <Typography.Title level={1}>
-                {" "}
-                <Typography.Text mark>birthday </Typography.Text>{" "}
-                {data.birthday}{" "}
+                
+                <Typography.Text mark>birthday </Typography.Text>
+                <Typography.Text className="data">{data.birthday}</Typography.Text>
               </Typography.Title>
               <Typography.Title level={1}>
-                {" "}
-                <Typography.Text mark>popularity </Typography.Text>{" "}
-                {data.popularity}{" "}
+                
+                <Typography.Text mark>popularity </Typography.Text>
+                <Typography.Text className="data">{data.popularity}</Typography.Text>
               </Typography.Title>
               <Typography.Title level={1}>
-                {" "}
+                
                 <Typography.Text mark>bio</Typography.Text>
               </Typography.Title>
               <Switch
@@ -74,7 +74,7 @@ const Celebrity = () => {
               </Typography.Paragraph>
             </Col>
 
-            <Col xs={24} sm={24} md={10} lg={6}>
+            <Col xs={24} sm={24} md={10} lg={9}>
               <CelebrityImageSlider id={id} />
             </Col>
           </Row>

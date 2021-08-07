@@ -30,3 +30,22 @@
     }
   }
 }
+.ant-modal-body{
+  min-height:150px;
+  display: flex;
+  flex-wrap: wrap;
+  // justify-content: center;
+  
+  .BlockList{
+    // width:fit-content;
+    cursor:pointer;
+    border-bottom:1px solid gray;
+    border-right:1px solid gray;
+    padding:20px;
+    font-weight: bold;
+    background: rgb(255, 227, 227);
+  }
+  .BlockList:hover{
+    background: rgb(230, 255, 239);
+  }
+}

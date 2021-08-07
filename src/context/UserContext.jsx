@@ -21,7 +21,7 @@ const UserContextProvider =({children})=>{
 
         window.localStorage.setItem("session_id" , session_id)
         
-        const data = await AccountService.GetDetails()
+        const data = await AccountService.GetProfileDetails()
         setUser(data)
       }else{
         setUser({})

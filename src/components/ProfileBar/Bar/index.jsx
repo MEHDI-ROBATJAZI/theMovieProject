@@ -5,7 +5,6 @@ import {
   HeartTwoTone,
   PushpinOutlined,
   PushpinTwoTone,
-  SelectOutlined,
   StarOutlined,
   StarTwoTone,
 } from "@ant-design/icons";
@@ -13,6 +12,7 @@ import { Tooltip, message, Rate } from "antd";
 import AccountService from "../../../service/AccountService";
 
 import { UserContext } from "../../../context/UserContext";
+import ListModal from "./listsModal";
 
 const AddSuccessfully = (icon) => {
   switch (icon) {
@@ -47,7 +47,7 @@ const removeSuccessfully = (icon) => {
   }
 };
 const Bar = ({ id, media_type }) => {
-  const { user , session_id } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const BarContainerRef = useRef(null);
   const RateParentRef = useRef(null);
 
@@ -84,7 +84,7 @@ const Bar = ({ id, media_type }) => {
             <HeartTwoTone
               twoToneColor="#eb2f96"
               onClick={() => {
-                AccountService.MarkAsFavorate(
+                AccountService.MarkAsFavorite(
                   user.id,
                   id,
                   media_type,
@@ -101,7 +101,7 @@ const Bar = ({ id, media_type }) => {
           <Tooltip placement="bottom" title={"add to your favorite list"}>
             <HeartOutlined
               onClick={() => {
-                AccountService.MarkAsFavorate(
+                AccountService.MarkAsFavorite(
                   user.id,
                   id,
                   media_type,
@@ -186,9 +186,7 @@ const Bar = ({ id, media_type }) => {
         </div>
       )}
       <div className="IconParent">
-        <Tooltip placement="bottom" title={"add to your list"}>
-          <SelectOutlined />
-        </Tooltip>
+        <ListModal accountId={user.id} />
       </div>
       <div
         className="UserRateMovie"

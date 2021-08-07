@@ -1,27 +1,21 @@
-import React, { useState, useEffect,useContext, useCallback } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import useMovieApi from "../../hooks/useMovieApi";
-import { Image, Tabs, Collapse, Rate,Tag, Spin } from "antd";
+import { Image, Tabs, Collapse, Rate, Tag, Spin } from "antd";
 import "./MovieDetails.scss";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper-bundle.min.css";
-import "swiper/components/pagination/pagination.min.css";
+import { SwiperSlide } from "swiper/react";
+import MySlider from "../Utils/mySlider";
 import Title from "../../Seo/Title";
 import { UserContext } from "../../context/UserContext";
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
 
 // import Swiper core and required modules
-import SwiperCore, { Navigation, Autoplay } from "swiper/core";
 import Bar from "../ProfileBar/Bar";
 import { FrownOutlined, MehOutlined, SmileOutlined } from "@ant-design/icons";
 
-// install Swiper modules
-SwiperCore.use([Navigation, Autoplay]);
-
 const MovieDetails = () => {
-  const {user} = useContext(UserContext)
-  console.log(user);
+  const { user } = useContext(UserContext);
   function useQuery() {
     return new URLSearchParams(useLocation().search);
   }
@@ -61,7 +55,6 @@ const MovieDetails = () => {
     });
     setCastState(filteredCredits);
   }, [data, credits]);
-
 
   const customIcons = {
     1: <FrownOutlined />,
@@ -120,16 +113,8 @@ const MovieDetails = () => {
                 ))}
             </div>
           </div>
-          <div>
-            {
-              user.id && <Bar id={id} media_type={query.get("flag")} />
-            }
-            
-          </div>
-          <div
-            style={{ marginTop: "200px", padding: "30px 0" }}
-            className="cardContainer"
-          >
+          <div>{user.id && <Bar id={id} media_type={query.get("flag")} />}</div>
+          <div className="cardContainer">
             <Tabs
               className="disable-select"
               animated={true}
@@ -138,28 +123,7 @@ const MovieDetails = () => {
             >
               <TabPane className="glassMorphism" tab="images" key="1">
                 {/* movie images */}
-                <Swiper
-                  autoplay={{
-                    delay: 2500,
-                    disableOnInteraction: false,
-                  }}
-                  spaceBetween={10}
-                  slidesPerView={1}
-                  breakpoints={{
-                    640: {
-                      slidesPerView: 2,
-                      spaceBetween: 20,
-                    },
-                    768: {
-                      slidesPerView: 3,
-                      spaceBetween: 40,
-                    },
-                    1024: {
-                      slidesPerView: 4,
-                      spaceBetween: 50,
-                    },
-                  }}
-                >
+                <MySlider slidesPerView={3}>
                   <div>
                     {imageState?.map((img) => (
                       <SwiperSlide key={img.file_path}>
@@ -170,15 +134,12 @@ const MovieDetails = () => {
                       </SwiperSlide>
                     ))}
                   </div>
-                </Swiper>
+                </MySlider>
               </TabPane>
               <TabPane className="glassMorphism" tab="trailers" key="2">
                 {/* trailer */}
                 <div>
-                  <Swiper
-                    className="mySwiper"
-                    navigation={true}
-                    spaceBetween={50}
+                  <MySlider
                     slidesPerView={1}
                   >
                     {videoState?.map((vid) => (
@@ -193,7 +154,7 @@ const MovieDetails = () => {
                         ></iframe>
                       </SwiperSlide>
                     ))}
-                  </Swiper>
+                  </MySlider>
                 </div>
               </TabPane>
               <TabPane className="glassMorphism" tab="informations" key="3">
@@ -223,42 +184,35 @@ const MovieDetails = () => {
               </TabPane>
               <TabPane className="glassMorphism" tab="cast" key="4">
                 {/* cast  */}
-                <Swiper
-                  autoplay={{
-                    delay: 2500,
-                    disableOnInteraction: false,
-                  }}
-                  className="mySwiper"
-                  navigation={true}
-                  spaceBetween={50}
-                  slidesPerView={1}
-                  breakpoints={{
-                    640: {
-                      slidesPerView: 2,
-                      spaceBetween: 20,
-                    },
-                    768: {
-                      slidesPerView: 3,
-                      spaceBetween: 40,
-                    },
-                    1024: {
-                      slidesPerView: 4,
-                      spaceBetween: 50,
-                    },
-                  }}
-                >
-                  {castState?.map((cast) => (
-                    <SwiperSlide span={6} key={cast.id}>
-                      <Link to={`/celebrity/${cast.id}`}>
-                        <Image
-                          preview={false}
-                          src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
-                          height={500}
-                        />
-                      </Link>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+
+                <MySlider slidesPerView={3}>
+                  {castLoading ? (
+                    <div className="spinContainer">
+                      <Spin />
+                    </div>
+                  ) : (
+                    <>
+                    {castState?.map((cast) => 
+                    <>
+                        {
+                          cast.profile_path && (
+                            <SwiperSlide span={6} key={cast.id}>
+                              <Link to={`/celebrity/${cast.id}`}>
+                                <Image
+                                  preview={false}
+                                  src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
+                                  height={500}
+                                />
+                              </Link>
+                            </SwiperSlide>
+                            
+                          )
+                        }
+                        </>
+                      )}
+                    </>
+                  )}
+                </MySlider>
               </TabPane>
             </Tabs>
           </div>
