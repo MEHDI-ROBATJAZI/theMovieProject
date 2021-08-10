@@ -1,9 +1,9 @@
 import { UpCircleOutlined } from "@ant-design/icons";
 import React from "react";
-import useResponsive from "../../hooks/useResponsive";
+import useWindowSize from "../../hooks/useWindowSize";
 
 const Footer = () => {
-  const width = useResponsive();
+  const width = useWindowSize();
 
   const glassFilters = {
     background: "#a19eda",

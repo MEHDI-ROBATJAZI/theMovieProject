@@ -43,6 +43,31 @@ const GetAccountLists = (accountId)=>{
   return Request.get({path:`account/${accountId}/lists`})
 }
 
+const AddMovieToList = (listId,movieId)=>{
+  return Request.post({path:`list/${listId}/add_item`},{
+    media_id:movieId
+  })
+}
+const AddNewList = (name,description)=>{
+  return Request.post({path:`list`},{
+      name,
+      description,
+      language: "en"
+    
+  })
+}
+const GetListData =(listId)=>{
+  return Request.get({path:`list/${listId}`})
+}
+const Remove_A_List = (listId)=>{
+  return Request.delete({path:`list/${listId}`})
+}
+
+const Remove_A_MovieFromList=(listId,movieId)=>{
+  return Request.post({path:`list/${listId}/remove_item`},{
+    media_id:movieId
+  })
+}
 
 const AccountService = {
   ProfilePageRequest,
@@ -51,7 +76,13 @@ const AccountService = {
   MarkInWatchList,
   UserRate,
   DeleteUserRate,
-  GetAccountLists
+  GetAccountLists,
+  AddMovieToList,
+  AddNewList,
+  GetListData,
+  RemoveList:Remove_A_List, 
+  RemoveMovieFromList:Remove_A_MovieFromList
+
 }
 
 

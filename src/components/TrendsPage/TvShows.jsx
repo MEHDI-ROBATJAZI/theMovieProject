@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useMovieApi from "../../hooks/useMovieApi";
 import { SwiperSlide } from "swiper/react";
 import MySlider from "../Utils/mySlider";
@@ -6,6 +6,8 @@ import MySlider from "../Utils/mySlider";
 import { Button, Space, Image, Spin } from "antd";
 import { Link } from "react-router-dom";
 const TvShows = () => {
+  const [ActiveButton, setActiveButton] = useState("day");
+
   const {
     data: tvs = {},
     reFetch: refetchTvs,
@@ -18,14 +20,40 @@ const TvShows = () => {
   const dayButtonClick = () => {
     refetchTvs("https://api.themoviedb.org/3/trending/tv/day");
   };
+
+  const ActiveStyle = {
+    background: "rgb(91, 255, 50)",
+    color: "black",
+    fontWeight: "bold",
+  };
+
   return (
     <div>
       <Space style={{ padding: "10px 0" }}>
         <h1 className="trendsTitle">tv shows</h1>
-        <Button type="dashed" shape="round" onClick={dayButtonClick}>
+        <Button
+          style={ActiveButton === "day" ? ActiveStyle : { background: "white" }}
+          type="dashed"
+          shape="round"
+          onClick={() => {
+            setActiveButton("day");
+            dayButtonClick();
+          }}
+        >
           day
         </Button>
-        <Button type="dashed" danger shape="round" onClick={weekButtonClick}>
+        <Button
+          style={
+            ActiveButton === "week" ? ActiveStyle : { background: "white" }
+          }
+          type="dashed"
+          danger
+          shape="round"
+          onClick={() => {
+            setActiveButton("week");
+            weekButtonClick();
+          }}
+        >
           week
         </Button>
       </Space>

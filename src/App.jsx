@@ -9,12 +9,13 @@ import { Layout, Space } from "antd";
 import { Link, Route, Switch } from "react-router-dom";
 import SearchComponent from "./components/Search/serchComponent";
 import Page404 from "./components/Page404";
+import About from "./components/About"
 import Footer from "./components/Footer";
-import useResponsive from "./hooks/useResponsive";
 import Dropdown from "./components/ProfileBar/Dropdown";
 import Auth from "./components/ProfileBar/Auth";
 import MyMovieIcon from "./Icon";
 import Profile from "./components/ProfileBar/profile";
+import useWindowSize from "./hooks/useWindowSize";
 
 const { Content } = Layout;
 
@@ -22,7 +23,7 @@ const App = () => {
   const [Responsive, setResponsive] = useState(false);
   const [IconProfileResponsive, setIconProfileResponsive] = useState(false);
   const [BurgerClick, setBurgerClick] = useState(false);
-  const width = useResponsive();
+  const width = useWindowSize();
 
   useEffect(() => {
     width > 767 ? setResponsive(false) : setResponsive(true);
@@ -97,7 +98,7 @@ const App = () => {
                 <Link to="/celebrity">Celebrity</Link>
               </span>
               <span onClick={handleNavLinksChange}>
-                <Link to="/aboutme">About-Me</Link>
+                <Link to="/about">About</Link>
               </span>
             </div>
             <div
@@ -136,6 +137,9 @@ const App = () => {
             </Route>
             <Route path="/Auth">
               <Auth />
+            </Route>
+            <Route path="/about">
+              <About />
             </Route>
             <Route exact path="/celebrity">
               <CelebrityPopularPage />

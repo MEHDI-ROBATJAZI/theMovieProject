@@ -57,7 +57,8 @@
         text-align: left;
         span{
           background-color: #d1d0e5;
-          padding:0 10px 
+          padding:0 10px;
+          font-weight:bold;
         }
       }
     }
@@ -99,11 +100,65 @@
   }
 }
 
+#ListboxContainer{
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  direction: rtl;
+  .ListBox{
+    position:relative;
+    background-color:#bab8d4;    
+    width: 50%;
+    height:125px;
+    text-align: center;
+    line-height:125px;
+    cursor: pointer;
+    z-index: 5;
+    span.ant-badge{
+      font-size:1.5rem;
+      padding:10px;
+    }
+    .deleteIcon{
+      z-index: 10;
+      position:absolute;
+      bottom:10px;
+      right:10px;  
+      padding:5px;
+      cursor: grabbing;
+    }
+    .deleteIcon:hover{
+      border-radius: 10px;
+      border: 1px solid gray;
+    }
+  }
+
+  .ListBox:hover{
+    background-color:#aeabda;
+    border:2px solid rgb(91, 255, 50);
+  }
+}
+
+#addListNameContainer{
+  border:1px dotted gray;
+
+#showInputButtonContainer{
+  height:60px;
+  text-align: center;
+}
+
+#addNewListContainer{
+  margin-bottom:20px;
+  padding:10px 180px;
+
+  .InputAddNewList{
+  }
+}
+
+}
+
+
 
 @media only screen and (max-width : 768px){
-
-
-
   #FavCards div.ant-card div.ant-card-body img{
     margin:0;
   }

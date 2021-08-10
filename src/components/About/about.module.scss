@@ -1,0 +1,56 @@
+#container{
+  min-height:120vh;
+  margin-top:50px;
+  font-family: IRAN-Sans-Regular;
+  section{
+    max-width:990px;
+    margin:auto;
+    display: flex;
+    justify-content: space-between;
+    
+    
+  }
+  
+}
+
+@media only screen and (max-width : 1000px){
+  #container{
+  section{
+    flex-direction: column;
+    width:600px;
+    aside{
+      margin: auto;
+    }
+    main{
+      width:400px;
+    }
+  }
+}
+}
+
+@media only screen and (max-width : 750px){
+  #container{
+    section{
+      flex-direction: column;
+      width:400px;
+      aside{
+        margin: auto;
+      }
+      main{
+        width:400px;
+      }
+    }
+}}
+
+@media only screen and (max-width : 450px){
+  #container{
+    section{
+      width:330px;
+
+
+      main{
+        width:330px
+      }
+    }
+  }
+}

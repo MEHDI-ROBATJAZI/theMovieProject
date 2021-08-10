@@ -1,17 +1,18 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext,useState,useEffect } from "react";
 import "./profile.scss";
 import { Tabs,Image } from "antd";
 import { UserContext } from "../../../context/UserContext";
-import Lists from "./list";
+import SavedMovies from "./savedMovies";
 import Title from "../../../Seo/Title";
-import useResponsive from "../../../hooks/useResponsive";
+import useWindowSize from "../../../hooks/useWindowSize";
 import { useHistory } from "react-router-dom";
+import List  from "./list";
 
 
 const { TabPane } = Tabs;
 const Profile = () => {
   const history = useHistory()
-  const width = useResponsive()
+  const width = useWindowSize()
   const { user } = useContext(UserContext);
 
   useEffect(() => {
@@ -19,6 +20,15 @@ const Profile = () => {
       history.push("/")
     } 
   }, [user])
+
+
+  const [selectedListId, setSelectedListId] = useState(0)
+
+  function listSelection(id){
+    setSelectedListId(id)
+  }
+
+
   return (
     <>
     <Title
@@ -42,17 +52,25 @@ const Profile = () => {
         )}
 
         <section>
-          <Tabs defaultActiveKey={1} tabPosition={width > 768 ? "left" : "top"}>
+          <Tabs defaultActiveKey={1} tabPosition={width > 768 ? "left" : "top"}  onChange={(k)=>listSelection(0)}>
             <TabPane tab="favorate list" key={1}>
-              <Lists state={"favorite"} />
+              <SavedMovies state={"favorite"} />
             </TabPane>
-            <TabPane tab="watch list" key={2}>
-              <Lists state={"watchlist"} />
+            <TabPane tab="watch list" key={2} >
+              <SavedMovies state={"watchlist"} />
             </TabPane>
-            <TabPane tab="rating" key={3}>
-              <Lists state={"rated"} />
+            <TabPane tab="rating" key={3} >
+              <SavedMovies state={"rated"} />
             </TabPane>
-            <TabPane disabled tab="lists" key={4}>Content of tab</TabPane>
+            <TabPane tab="lists" key={4} >
+              {
+                selectedListId === 0 ?(
+                  <List listSelection={listSelection} />
+                ) : (
+                  <SavedMovies state={"list"} listId={selectedListId} listSelection={listSelection} />
+                )
+              }
+            </TabPane>
           </Tabs>
         </section>
       </main>

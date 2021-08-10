@@ -1,51 +1,65 @@
-#BarContainer{
-  width:200px;
-  height:44px;  
+#BarContainer {
+  width: 200px;
+  height: 44px;
   background: black;
   position: absolute;
-  top:280px;
-  right:0;
+  top: 280px;
+  right: 0;
   display: flex;
   flex-wrap: wrap;
-  transition: all 1s ease ;
+  transition: all 1s ease;
 
-  div.IconParent{
-    padding:4px 0 0 20px;
-    height:12px;
-    span{
+  div.IconParent {
+    padding: 4px 0 0 20px;
+    height: 12px;
+    span {
       color: white;
       font-size: 1.7rem;
       line-height: 44px;
-
     }
-    
   }
-  .UserRateMovie{
-    height:20px;
-    width:100%;
+  .UserRateMovie {
+    height: 20px;
+    width: 100%;
     text-align: center;
-    .ant-rate{
-      width:100%;
+    .ant-rate {
+      width: 100%;
       font-size: 1.4rem;
     }
   }
 }
-.ant-modal-body{
-  min-height:150px;
+.ant-modal-body {
+  font-family:Montserrat;
+  min-height: 150px;
   display: flex;
   flex-wrap: wrap;
   // justify-content: center;
-  
-  .BlockList{
-    // width:fit-content;
-    cursor:pointer;
-    border-bottom:1px solid gray;
-    border-right:1px solid gray;
-    padding:20px;
+
+  .BlockList {
+    width:50%;
+    cursor: pointer;
+    border-bottom: 1px solid gray;
+    border-right: 1px solid gray;
+    padding: 20px;
     font-weight: bold;
     background: rgb(255, 227, 227);
   }
-  .BlockList:hover{
+  .BlockList:hover {
     background: rgb(230, 255, 239);
+  }
+}
+
+#NewListContainer{
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+  padding:10px;
+  border:1px solid gray;
+
+
+  button{
+    width: 100%;
+    text-align: center;
+    margin:10px 0;
   }
 }

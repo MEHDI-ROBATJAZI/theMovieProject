@@ -192,11 +192,11 @@ const MovieDetails = () => {
                     </div>
                   ) : (
                     <>
-                    {castState?.map((cast) => 
-                    <>
+                    {castState?.map((cast,index) => 
+                    <div key={cast.id+""+index}>
                         {
                           cast.profile_path && (
-                            <SwiperSlide span={6} key={cast.id}>
+                            <SwiperSlide span={6} >
                               <Link to={`/celebrity/${cast.id}`}>
                                 <Image
                                   preview={false}
@@ -208,7 +208,7 @@ const MovieDetails = () => {
                             
                           )
                         }
-                        </>
+                        </div>
                       )}
                     </>
                   )}

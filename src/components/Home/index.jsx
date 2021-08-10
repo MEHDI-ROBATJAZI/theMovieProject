@@ -23,11 +23,10 @@ const { TabPane } = Tabs;
 
 const Home = () => {
   const [tabState, setTabState] = useState("popular");
-  const { data, error, reFetch, loading } = useMovieApi(`movie/${tabState}`);
-
   const [dataType, setDataType] = React.useState("movie");
-  const { data: ApiGenres, loading: genreLoading } =
-    useMovieApi(`genre/movie/list`);
+  const { data, error, reFetch, loading } = useMovieApi(`${dataType}/${tabState}`);
+
+  const { data: ApiGenres,reFetch:GenreRefetch , loading: genreLoading } =useMovieApi(`genre/movie/list`);
   const [MoviesId, setMoviesId] = useState([]);
   const [ActiveGenre, setActiveGenre] = useState({});
 
@@ -51,7 +50,11 @@ const Home = () => {
   }, [data]);
 
   useEffect(() => {
+    console.log(tabState);
+    console.log(dataType);
+    
     reFetch(`https://api.themoviedb.org/3/${dataType}/${tabState}`);
+    GenreRefetch(`https://api.themoviedb.org/3/genre/${dataType}/list`);
     changeGenre();
     setActiveGenre({ id: 0, name: "no filter" });
   }, [tabState, dataType]);
@@ -66,10 +69,15 @@ const Home = () => {
   };
 
   const changeDataType = (e) => {
+    if(tabState === "upcoming"){
+      setTabState("on_the_air")
+    }else if (tabState === "on_the_air"){
+      setTabState("upcoming")
+    }
     setDataType(e.target.value);
   };
 
-  const [eyeState, setEyeState] = useState(true);
+  const [eyeState, setEyeState] = useState(false);
 
   return (
     <div>
@@ -174,21 +182,24 @@ const Home = () => {
                 className="CardsContainer"
               >
                 {data?.results?.map((movie) => (
-                  <Col key={movie.id} span={{ xs: 24, sm: 12, md: 8, lg: 6 }}>
+                  <Col key={movie.id} span={{ xs: 24, sm: 12, md: 8, lg: 6 }}
+                  className={
+                    (ActiveGenre.id &&
+                      !movie.genre_ids.includes(ActiveGenre.id) &&
+                      eyeState === true &&
+                      "BlurFilter") ||
+                    (ActiveGenre.id &&
+                      !movie.genre_ids.includes(ActiveGenre.id) &&
+                      eyeState === false &&
+                      "CardFilter")
+                  }
+                  
+                  
+                  >
                     <Link to={`/movieDetails/${movie.id}?flag=${dataType}`}>
                       <Card
                         hoverable
                         style={{ width: 240 }}
-                        className={
-                          (ActiveGenre.id &&
-                            !movie.genre_ids.includes(ActiveGenre.id) &&
-                            eyeState === true &&
-                            "BlurFilter") ||
-                          (ActiveGenre.id &&
-                            !movie.genre_ids.includes(ActiveGenre.id) &&
-                            eyeState === false &&
-                            "CardFilter")
-                        }
                         cover={
                           movie.poster_path ? (
                             <Image

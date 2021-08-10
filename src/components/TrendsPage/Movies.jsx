@@ -1,15 +1,16 @@
-import React from "react";
+import React,{useState} from "react";
 import useMovieApi from "../../hooks/useMovieApi";
 import { SwiperSlide } from "swiper/react";
 import MySlider from "../Utils/mySlider";
 
 import { Button, Space, Image, Spin } from "antd";
 // import classes from "./TrendsStyle.module.scss";
-import "./TrendsStyle.css"
+import "./TrendsStyle.css";
 import { Link } from "react-router-dom";
 
-
 const Movies = () => {
+  const [ActiveButton, setActiveButton] = useState("day");
+
   const {
     data: movies = {},
     reFetch: refetchMovies,
@@ -23,25 +24,44 @@ const Movies = () => {
     refetchMovies("https://api.themoviedb.org/3/trending/movie/day");
   };
 
+  const ActiveStyle ={
+    background:"rgb(91, 255, 50)",
+    color:'black',
+    fontWeight:"bold"
+  }
 
   return (
     <div className="mycarousel">
       <Space style={{ padding: "10px 0" }}>
         <h1 className="trendsTitle">movie</h1>
-        <Button type="dashed" shape="round" onClick={() => dayButtonClick()}>
+        <Button
+          shape="round"
+          onClick={() => {
+            setActiveButton("day");
+            dayButtonClick();
+          }}
+          style={
+            ActiveButton === "day" ? ActiveStyle :{background:"white"}
+          }
+        >
           day
         </Button>
         <Button
-          type="dashed"
-          danger
+          // type="dashed"
+          style={
+            ActiveButton === "week" ? ActiveStyle :{background:"white"}
+          }
           shape="round"
-          onClick={() => weekButtonClick()}
+          onClick={() => {
+            setActiveButton("week");
+            weekButtonClick();
+          }}
         >
           week
         </Button>
       </Space>
       <MySlider slidesPerView={3}>
-         {dayMoviesLoading ? (
+        {dayMoviesLoading ? (
           <div className="spinContainer">
             <Spin />
           </div>

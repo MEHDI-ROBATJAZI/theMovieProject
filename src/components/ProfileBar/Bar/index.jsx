@@ -186,7 +186,7 @@ const Bar = ({ id, media_type }) => {
         </div>
       )}
       <div className="IconParent">
-        <ListModal accountId={user.id} />
+        <ListModal accountId={user.id} movieId={id} />
       </div>
       <div
         className="UserRateMovie"

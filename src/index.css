@@ -41,3 +41,7 @@ body::-webkit-scrollbar-thumb {
  -moz-user-select: none; /* Firefox */
  -ms-user-select: none; /* Internet Explorer/Edge */
 }
+@font-face {
+  font-family: 'IRAN-Sans-Regular';
+  src: local('IRAN-Sans-Regular'), url(./fonts/IRAN-Sans-Regular.ttf) format('truetype');
+}

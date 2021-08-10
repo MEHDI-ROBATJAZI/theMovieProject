@@ -1,10 +1,10 @@
 import { Image } from 'antd'
 import React from 'react'
-import useResponsive from '../../hooks/useResponsive'
+import useWindowSize from '../../hooks/useWindowSize'
 
 const Page404 = () => {
 
-  const width = useResponsive()
+  const width = useWindowSize()
   
   return (
     <div>

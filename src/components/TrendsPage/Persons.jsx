@@ -7,19 +7,18 @@ import "./TrendsStyle.css";
 
 import { Link } from "react-router-dom";
 
-
 const Persons = () => {
+  const [ActiveButton, setActiveButton] = useState("day");
   const {
     data: persons = {},
     reFetch: refetchPersons,
     loading: PersonsLoading,
   } = useMovieApi(`trending/person/day`);
 
-  
   const dayButtonClick = () => {
     refetchPersons(`https://api.themoviedb.org/3/trending//person/day`);
   };
-  
+
   const weekButtonClick = () => {
     refetchPersons(`https://api.themoviedb.org/3/trending//person/week`);
   };
@@ -30,15 +29,39 @@ const Persons = () => {
     window.scrollTo({ top: 1200, behavior: "smooth" });
   };
 
-  
+  const ActiveStyle = {
+    background: "rgb(91, 255, 50)",
+    color: "black",
+    fontWeight: "bold",
+  };
+
   return (
     <div>
       <Space style={{ padding: "10px 0" }}>
         <h1 className="trendsTitle">persons</h1>
-        <Button type="dashed" shape="round" onClick={dayButtonClick}>
+        <Button
+          style={ActiveButton === "day" ? ActiveStyle : { background: "white" }}
+          type="dashed"
+          shape="round"
+          onClick={() => {
+            setActiveButton("day");
+            dayButtonClick();
+          }}
+        >
           day
         </Button>
-        <Button type="dashed" danger shape="round" onClick={weekButtonClick}>
+        <Button
+          style={
+            ActiveButton === "week" ? ActiveStyle : { background: "white" }
+          }
+          type="dashed"
+          danger
+          shape="round"
+          onClick={() => {
+            setActiveButton("week");
+            weekButtonClick();
+          }}
+        >
           week
         </Button>
       </Space>
@@ -98,13 +121,15 @@ const Persons = () => {
                 <SwiperSlide key={item.id}>
                   <div style={{ textAlign: "center" }}>
                     <h1 className="imageDesc">known with </h1>
-                    <Link to={`/movieDetails/${item.id}?flag=${item.media_type}`}>
-                    <Image
-                      height="600px"
-                      preview={false}
-                      alt={item.original_title}
-                      src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-                    />
+                    <Link
+                      to={`/movieDetails/${item.id}?flag=${item.media_type}`}
+                    >
+                      <Image
+                        height="600px"
+                        preview={false}
+                        alt={item.original_title}
+                        src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                      />
                     </Link>
                   </div>
                 </SwiperSlide>

@@ -1,7 +1,7 @@
 import {useState,useEffect} from 'react'
 
 
-const useResponsive = ()=>{
+const useWindowSize = ()=>{
 
   const [width , setWidth] = useState(0)
 
@@ -19,4 +19,4 @@ const useResponsive = ()=>{
 
 }
 
-export default useResponsive
+export default useWindowSize
