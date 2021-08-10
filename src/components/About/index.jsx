@@ -9,6 +9,7 @@ import {
   SkypeFilled,
 } from "@ant-design/icons";
 import useWindowSize from "../../hooks/useWindowSize";
+import Title from "../../Seo/Title";
 
 const { Panel } = Collapse;
 const { Link, Text } = Typography;
@@ -43,9 +44,10 @@ const About = () => {
   }
   return (
     <div id={styles.container}>
+      <Title title="About" description="about page" />
       <section>
         <aside>
-        <Image src="pic4.jpeg" width={300} id="imageMe" />
+        <Image src="pic4-min.jpeg" width={300} id="imageMe" />
 
         </aside>
         <main>
