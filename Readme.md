@@ -1,6 +1,6 @@
 + Home Tv Section
 
-- Login Section
++ Login Section
 
 + Responsive
 
@@ -8,7 +8,7 @@
 
 + 404 and Footer
 
-- About Me
++ About Me
 
 + Title Pages
 
@@ -18,12 +18,12 @@
 
 - Rtl & DarkMode
 
-- full implement moviebar
++ full implement moviebar
 
 - implement service module
 
-- logout
++ logout
 
-- burger responsive navbar
++ burger responsive navbar
 
-- show rating favorite and watchlist count movies
++ show rating favorite and watchlist count movies
