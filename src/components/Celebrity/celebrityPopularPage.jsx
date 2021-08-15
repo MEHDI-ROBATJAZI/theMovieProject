@@ -59,10 +59,15 @@ const CelebrityPopularPage = () => {
                     <Image
                       preview={false}
                       alt="example"
-                      src={`https://image.tmdb.org/t/p/w400${celeb.profile_path}`}
+                      src={
+                        celeb.profile_path ?
+                        `https://image.tmdb.org/t/p/w300${celeb.profile_path}`
+                        :
+                        "/public/userIcon.png"
+                      }
                     />
-                  }
-                >
+                    }
+                    >
                   <Meta
                     style={{height:"60px"}}
                     title={celeb.name}

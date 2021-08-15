@@ -24,6 +24,7 @@ const MovieDetails = () => {
   const { id } = useParams();
   const { data, loading } = useMovieApi(`/${query.get("flag")}/${id}`, {
     append_to_response: "videos,images",
+    include_image_language:"en"
   });
   const { data: credits = {}, loading: castLoading } = useMovieApi(
     `/movie/${id}/credits`

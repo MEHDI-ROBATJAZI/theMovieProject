@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import classes from "./App.module.scss";
 import Home from "./components/Home";
 import MovieDetails from "./components/MovieDetails";
@@ -8,6 +8,7 @@ import CelebrityPopularPage from "./components/Celebrity/celebrityPopularPage";
 import { Layout, Space } from "antd";
 import { Link, Route, Switch } from "react-router-dom";
 import SearchComponent from "./components/Search/serchComponent";
+import SearchPage from "./components/Search/searchPage";
 import Page404 from "./components/Page404";
 import About from "./components/About"
 import Footer from "./components/Footer";
@@ -47,6 +48,7 @@ const App = () => {
       }
     });
   };
+
 
   return (
     <div id={classes.Container}>
@@ -140,6 +142,12 @@ const App = () => {
             </Route>
             <Route path="/about">
               <About />
+            </Route>
+            <Route exact path="/search">
+              <SearchPage />
+            </Route>
+            <Route path="/search/:text">
+              <SearchPage />
             </Route>
             <Route exact path="/celebrity">
               <CelebrityPopularPage />

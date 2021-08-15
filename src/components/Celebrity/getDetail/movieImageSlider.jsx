@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const MovieImageSlider = ({ id }) => {
   const { data, loading } = useMovieApi(`person/${id}/movie_credits`);
-
+  console.log(data);
   return (
     <div style={{ margin: "100px 20px" }}>
       {!loading && (
@@ -28,6 +28,13 @@ const MovieImageSlider = ({ id }) => {
                   />
                   <p style={{ fontSize: "12px" }}>
                     {movie.title}
+                    {
+                      movie.release_date && (
+                        <small
+                          style={{color:"black"}}
+                        >___{movie.release_date.slice(0,4)}</small>
+                      )
+                    }
                   </p>
                 </Space>
                   </Link>

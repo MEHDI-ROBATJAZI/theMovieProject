@@ -1,16 +1,70 @@
 #SearchComponentStyles {
+  display: flex;
   input {
     max-width: 300px;
     border-color: rgb(68, 207, 33);
     border-radius: 13px 0 0 13px;
   }
 
-  span {
+  button {
     border-radius: 0 13px 13px 0 !important;
-    button {
-      border-radius: 0 13px 13px 0;
-      background-color: rgb(68, 207, 33);
-    }
+    border-radius: 0 13px 13px 0;
+    background-color: rgb(68, 207, 33);
   }
 }
 
+#SearchPage {
+  min-height: 120vh;
+  overflow: hidden;
+  #SearchHeader {
+    font-family: Tourney;
+    text-align: center;
+    #InputSearch {
+      font-family: Montserrat;
+      max-width: 700px;
+      text-align: center;
+    }
+  }
+  #board {
+    font-family: Montserrat;
+    padding: 40px 60px;
+    width: 100%;
+    display: flex;  
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    .banner {
+      margin:20px 10px;
+      border:1px solid gray;
+      direction: rtl;
+      margin:auto;
+      width: 400px;
+      height: 500px;
+      border-bottom: 3px solid gray;
+      overflow-y:scroll;
+      
+      .bannerHeader{
+        display: block;
+        font-size:1.4rem;
+        line-height:60px;
+        color:gray;
+        text-align: center;
+      }
+      .bannerBody{
+        direction: ltr;
+        cursor: pointer;
+        :hover{
+          background-color: gray;
+        }
+        .bannerCard{
+          padding:10px 20px;
+          border-bottom: 1px solid gray;
+          display: flex;
+          justify-content: space-between;
+          line-height:60px;
+          font-size:.9em;
+        }
+      }
+    }
+  }
+}
