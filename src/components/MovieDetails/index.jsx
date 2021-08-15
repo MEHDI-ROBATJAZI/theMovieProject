@@ -124,7 +124,7 @@ const MovieDetails = () => {
             >
               <TabPane className="glassMorphism" tab="images" key="1">
                 {/* movie images */}
-                <MySlider slidesPerView={3}>
+                <MySlider slidesPerView={5}>
                   <div>
                     {imageState?.map((img) => (
                       <SwiperSlide key={img.file_path}>
@@ -186,7 +186,7 @@ const MovieDetails = () => {
               <TabPane className="glassMorphism" tab="cast" key="4">
                 {/* cast  */}
 
-                <MySlider slidesPerView={3}>
+                <MySlider slidesPerView={4}>
                   {castLoading ? (
                     <div className="spinContainer">
                       <Spin />
@@ -202,7 +202,6 @@ const MovieDetails = () => {
                                 <Image
                                   preview={false}
                                   src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
-                                  height={500}
                                 />
                               </Link>
                             </SwiperSlide>

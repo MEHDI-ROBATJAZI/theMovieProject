@@ -1,5 +1,6 @@
 .cardContainer {
-  margin-top: 200px; padding: 30px 130px;
+  margin-top: 200px; 
+  padding: 30px 10px;
   p {
     margin: 0;
   }
@@ -166,7 +167,7 @@ div#container {
     height:350px !important;
   }
   #container .glassMorphism .trailerIframeStyles{
-    height:350px !important ;
+    max-height:350px !important ;
   }
 }
 
@@ -178,12 +179,20 @@ div#container {
     div#logoStyle {
       left: 20px;
     }
+
+    .glassMorphism {
+      padding: 0 10px;
+
+      .ant-image{
+        height:350px;
+      }
+    }
   }
 }
 
 @media only screen and (max-width: 1000px) {
   .cardContainer{
-    padding:50px;
+    padding:5px;
   }
   .trailerIframeStyles {
     height: 300px;
