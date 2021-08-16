@@ -45,7 +45,7 @@ const App = () => {
 
   return (
     <div id={classes.Container}>
-      <Layout style={{ background: "#d1d0e5" }}>
+      <Layout style={{ background: "#d1d0e5" ,paddingBottom:"50px" }}>
         <header
           id={Responsive ? classes.HeaderResponsive : classes.HeaderStyles}
         >

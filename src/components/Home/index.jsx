@@ -193,8 +193,6 @@ const Home = () => {
                       eyeState === false &&
                       "CardFilter")
                   }
-                  
-                  
                   >
                     <Link to={`/movieDetails/${movie.id}?flag=${dataType}`}>
                       <Card

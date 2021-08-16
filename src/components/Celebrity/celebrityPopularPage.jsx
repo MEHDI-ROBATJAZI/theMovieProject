@@ -54,8 +54,9 @@ const CelebrityPopularPage = () => {
                     celeb.profile_path ? (
                       <Image
                       preview={false}
-                      alt="example"
+                      alt={celeb.name}
                       src={`https://image.tmdb.org/t/p/w300${celeb.profile_path}`}
+                      height="100%"
                     />
                     ):(
                       <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />

@@ -95,7 +95,7 @@ const Persons = () => {
       </MySlider>
       {personDetail.name && (
         <Row>
-          <Col span={12} className="personInfoBox">
+          <Col xs={24} sm={24} md={24} lg={12} className="personInfoBox">
             <div className="infoBox">
               <h1>
                 <span>name</span>: {personDetail.name}
@@ -115,7 +115,7 @@ const Persons = () => {
               </Button>
             </div>
           </Col>
-          <Col span={12} style={{ marginTop: "40px" }}>
+          <Col xs={24} sm={24} md={24} lg={12} style={{ marginTop: "40px" }}>
             <Swiper navigation={true} className="mySwiper">
               {personDetail?.known_for?.map((item) => (
                 <SwiperSlide key={item.id}>

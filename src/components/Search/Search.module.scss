@@ -1,5 +1,9 @@
 #SearchComponentStyles {
   display: flex;
+  justify-content: center;
+  @media only screen and (max-width: 350px){
+    justify-content: flex-start;
+  }
   input {
     max-width: 300px;
     border-color: rgb(68, 207, 33);
