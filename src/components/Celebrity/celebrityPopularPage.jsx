@@ -1,37 +1,31 @@
-import { Card, Col, Image, Pagination, Row, Spin } from "antd";
+import { Card, Col, Empty, Image, Pagination, Row, Spin } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 import useMovieApi from "../../hooks/useMovieApi";
 import Title from "../../Seo/Title"
-const { Meta } = Card;
+import classes from './celebrity.module.scss'
 
+const { Meta } = Card;
 const CelebrityPopularPage = () => {
   const { data, loading, reFetch } = useMovieApi("person/popular");
-
+  
   const reloadData = (page) => {
     reFetch("https://api.themoviedb.org/3/person/popular", { page });
   };
 
-  const SpinContainer = {
-    margin: "20px 0",
-    marginBottom: "20px",
-    padding: "30px 50px",
-    textAlign: "center",
-    background: "rgba(0, 0, 0, 0.05)",
-    borderRadius: "4px",
-  };
 
   return (
-    <div /*style={{paddingBottom:"60px"}}*/ >
+    <div id={classes.celebrityContainer} >
       <Title title="celebrity page" description="popular celebrities" />
       {data && (
         <div
           style={{
             textAlign: "center",
-            // paddingBottom: "30px",
+            marginBottom:"10px"
           }}
         >
           <Pagination
+            size="small"
             defaultCurrent={1}
             pageSize={1}
             showSizeChanger={false}
@@ -44,9 +38,9 @@ const CelebrityPopularPage = () => {
         </div>
       )}
 
-      <Row gutter={[16, 12]} justify="center" style={{padding:"40px"}}>
+      <Row gutter={[16, 12]} justify="center" style={{padding:"10px"}}>
         {loading ? (
-          <div style={SpinContainer}>
+          <div id={classes.SpinContainer}>
             <Spin></Spin>
           </div>
         ) : (
@@ -54,27 +48,27 @@ const CelebrityPopularPage = () => {
             <Col xs={12} sm={8} md={6} lg={4} key={celeb.id}  >
               <Link to={`/celebrity/${celeb.id}`}>
                 <Card
+                  className={classes.cardStyles}
                   hoverable
                   cover={
-                    <Image
+                    celeb.profile_path ? (
+                      <Image
                       preview={false}
                       alt="example"
-                      src={
-                        celeb.profile_path ?
-                        `https://image.tmdb.org/t/p/w300${celeb.profile_path}`
-                        :
-                        "/public/userIcon.png"
-                      }
+                      src={`https://image.tmdb.org/t/p/w300${celeb.profile_path}`}
                     />
-                    }
-                    >
+                    ):(
+                      <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+                    )
+                  }
+                  >
                   <Meta
                     style={{height:"60px"}}
                     title={celeb.name}
                     description={`popularity: ${celeb.popularity}`}
                   />
-                </Card>
-              </Link>
+                  </Card>
+                  </Link>
             </Col>
           ))
         )}

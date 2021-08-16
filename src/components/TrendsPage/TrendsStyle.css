@@ -65,3 +65,10 @@
 .swiper-pagination{
   height:6px;
 }
+
+@media only screen and (max-width: 600px){
+  .GlassMorphism{
+    margin:20px 12px ;
+
+  }
+}

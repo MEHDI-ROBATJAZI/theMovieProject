@@ -143,7 +143,7 @@ const SavedMovies = (props) => {
       }
       {data && (
         <div id="FavCards">
-          {data.map((movie) => (
+          {data.reverse().map((movie) => (
             <Card key={movie.id} bordered={false} className="favCards">
               <Link
                 to={`/movieDetails/${movie.id}?flag=${

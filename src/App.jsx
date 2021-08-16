@@ -42,22 +42,6 @@ const App = () => {
     }
   }, [width]);
 
-  const handleNavLinksChange = () => {
-    let navLinks = document.querySelectorAll("#_NavLinks_1fqut_1 span a");
-    if (navLinks[0] == undefined)
-      navLinks = document.querySelectorAll(
-        "#_NavLinksResponsive_1fqut_1 span a"
-      );
-
-    navLinks.forEach((n) => {
-      if (window.location.href === n.href) {
-        n.classList.add("navActiveLinks");
-      } else {
-        n.classList.remove("navActiveLinks");
-      }
-    });
-  };
-
 
   return (
     <div id={classes.Container}>
@@ -99,16 +83,16 @@ const App = () => {
               id={Responsive ? classes.NavLinksResponsive : classes.NavLinks}
               style={BurgerClick ? {paddingTop:"60px"} : {}}
             >
-              <span onClick={handleNavLinksChange}>
+              <span>
                 <Link to="/">Home</Link>
               </span>
-              <span onClick={handleNavLinksChange}>
+              <span>
                 <Link to="/trending">Trending</Link>
               </span>
-              <span onClick={handleNavLinksChange}>
+              <span>
                 <Link to="/celebrity">Celebrity</Link>
               </span>
-              <span onClick={handleNavLinksChange}>
+              <span>
                 <Link to="/about">About</Link>
               </span>
             </div>
