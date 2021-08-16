@@ -86,7 +86,7 @@
   }
 }
 div#container {
-  height: 1260px;
+  height: 1060px;
   overflow: hidden;
 
   div#logoStyle {
@@ -125,6 +125,7 @@ div#container {
     padding: 40px 10px;
   }
 
+
   .cardContainer {
     .ant-tabs {
       padding: 0 !important ;
@@ -154,7 +155,7 @@ div#container {
     width:140px;
   }
   #container .ant-tabs-tab .ant-tabs-tab-btn{
-    font-size:1.3rem;
+    font-size:1rem;
   }
 
   #container #logoStyle{

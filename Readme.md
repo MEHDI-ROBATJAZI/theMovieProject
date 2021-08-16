@@ -13,17 +13,17 @@
 + Title Pages
 
 + improve MovieDetail Page Gradiant
-
-- improve Header Searchbar
-
-- Rtl & DarkMode
+ 
++ improve Header Searchbar
 
 + full implement moviebar
 
-- implement service module
++ implement service module
 
 + logout
 
 + burger responsive navbar
 
 + show rating favorite and watchlist count movies
+
+- Rtl & DarkMode & colors-pallet

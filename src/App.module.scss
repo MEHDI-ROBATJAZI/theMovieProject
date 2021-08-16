@@ -2,7 +2,7 @@ $CustomGreen: rgb(91, 255, 50);
 
 #Container {
   min-height: 100vh;
-
+  overflow: hidden;
   .shadow :hover {
     cursor: pointer;
     box-shadow: 9px 9px 18px #cacaca, -9px -9px 18px #f6f6f6;
@@ -21,11 +21,10 @@ $CustomGreen: rgb(91, 255, 50);
   #NavStyles {
     padding: 0 40px;
     display: flex;
-    justify-content: space-around;  
-
+    justify-content: space-around;
 
     #Burger {
-      margin:auto;
+      margin: auto;
       height: 80px;
       padding: 20px 10px 0 10px;
       div {
@@ -99,7 +98,7 @@ $CustomGreen: rgb(91, 255, 50);
   border-radius: 13px;
   font-family: Montserrat;
   height: 380px;
-  position: relative; 
+  position: relative;
 }
 #NavStylesResponsive {
   flex-direction: column;
@@ -128,7 +127,7 @@ $CustomGreen: rgb(91, 255, 50);
     }
   }
 }
-.ProfileBarResponsive{
+.ProfileBarResponsive {
   position: absolute;
   top: 20px;
   right: 50px;
@@ -141,8 +140,7 @@ $CustomGreen: rgb(91, 255, 50);
 
 #serachComponentResponsive {
   margin: 30px auto;
-  width:330px;
-
+  width: 330px;
 }
 @media only screen and (max-width: 1235px) {
   #HeaderStyles {

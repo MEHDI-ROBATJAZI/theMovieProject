@@ -53,6 +53,7 @@ const SearchPage = ({}) => {
       <div id={classes.SearchHeader}>
         <h1>Search</h1>
         <Input
+          placeholder="search in movies tv-shows and persons"
           onChange={(e) => setQuery(e.target.value)}
           value={query}
           id={classes.InputSearch}

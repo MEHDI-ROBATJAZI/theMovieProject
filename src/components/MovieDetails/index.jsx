@@ -24,7 +24,7 @@ const MovieDetails = () => {
   const { id } = useParams();
   const { data, loading } = useMovieApi(`/${query.get("flag")}/${id}`, {
     append_to_response: "videos,images",
-    include_image_language:"en"
+    include_image_language: "en",
   });
   const { data: credits = {}, loading: castLoading } = useMovieApi(
     `/movie/${id}/credits`
@@ -140,15 +140,18 @@ const MovieDetails = () => {
               <TabPane className="glassMorphism" tab="trailers" key="2">
                 {/* trailer */}
                 <div>
-                  <MySlider
-                    slidesPerView={1}
-                  >
+                  <MySlider slidesPerView={1}>
                     {videoState?.map((vid) => (
                       <SwiperSlide
                         key={vid.id}
                         style={{ background: "none", textAlign: "center" }}
                       >
                         <iframe
+                          allowfullscreen="allowfullscreen"
+                          mozallowfullscreen="mozallowfullscreen"
+                          msallowfullscreen="msallowfullscreen"
+                          oallowfullscreen="oallowfullscreen"
+                          webkitallowfullscreen="webkitallowfullscreen"
                           className="trailerIframeStyles"
                           width="80%"
                           src={`https://www.youtube.com/embed/${vid.key}`}
@@ -158,11 +161,16 @@ const MovieDetails = () => {
                   </MySlider>
                 </div>
               </TabPane>
-              <TabPane className="glassMorphism" tab="informations" key="3">
+              <TabPane
+                className="glassMorphism"
+                className="tabPaneStyles"
+                tab="informations"
+                key="3"
+              >
                 {/* information */}
                 <Collapse
                   bordered={false}
-                  style={{ width: "600px", margin: "auto" }}
+                  style={{ maxWidth: "600px", margin: "auto" }}
                 >
                   <Panel header="Title" key="1">
                     {query.get("flag") === "movie" ? (
@@ -193,11 +201,10 @@ const MovieDetails = () => {
                     </div>
                   ) : (
                     <>
-                    {castState?.map((cast,index) => 
-                    <div key={cast.id+""+index}>
-                        {
-                          cast.profile_path && (
-                            <SwiperSlide span={6} >
+                      {castState?.map((cast, index) => (
+                        <div key={cast.id + "" + index}>
+                          {cast.profile_path && (
+                            <SwiperSlide span={6}>
                               <Link to={`/celebrity/${cast.id}`}>
                                 <Image
                                   preview={false}
@@ -205,11 +212,9 @@ const MovieDetails = () => {
                                 />
                               </Link>
                             </SwiperSlide>
-                            
-                          )
-                        }
+                          )}
                         </div>
-                      )}
+                      ))}
                     </>
                   )}
                 </MySlider>

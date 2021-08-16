@@ -6,7 +6,7 @@ import TrendingRender from "./components/TrendsPage";
 import Celebrity from "./components/Celebrity/getDetail";
 import CelebrityPopularPage from "./components/Celebrity/celebrityPopularPage";
 import { Layout, Space } from "antd";
-import { Link, Route, Switch } from "react-router-dom";
+import { Link, Route, Switch ,useLocation } from "react-router-dom";
 import SearchComponent from "./components/Search/serchComponent";
 import SearchPage from "./components/Search/searchPage";
 import Page404 from "./components/Page404";
@@ -25,6 +25,15 @@ const App = () => {
   const [IconProfileResponsive, setIconProfileResponsive] = useState(false);
   const [BurgerClick, setBurgerClick] = useState(false);
   const width = useWindowSize();
+
+
+  
+  // when route is change , window scroll go top
+  const {pathname} = useLocation()
+  useEffect(()=>{
+    window.scrollTo({top:0 , behavior:"smooth"})
+  },[pathname])
+
 
   useEffect(() => {
     width > 767 ? setResponsive(false) : setResponsive(true);
