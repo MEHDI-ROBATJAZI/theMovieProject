@@ -26,4 +26,4 @@
 
 + show rating favorite and watchlist count movies
 
-- Rtl & DarkMode & colors-pallet
+- Rtl & - DarkMode & + color-pallet

@@ -1,23 +1,23 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./App.module.scss";
 import Home from "./components/Home";
 import MovieDetails from "./components/MovieDetails";
 import TrendingRender from "./components/TrendsPage";
 import Celebrity from "./components/Celebrity/getDetail";
 import CelebrityPopularPage from "./components/Celebrity/celebrityPopularPage";
-import { Layout, Space } from "antd";
-import { Link, Route, Switch ,useLocation } from "react-router-dom";
+import { BackTop, Layout, Space } from "antd";
+import { Link, Route, Switch, useLocation } from "react-router-dom";
 import SearchComponent from "./components/Search/serchComponent";
 import SearchPage from "./components/Search/searchPage";
 import Page404 from "./components/Page404";
-import About from "./components/About"
+import About from "./components/About";
 import Footer from "./components/Footer";
 import Dropdown from "./components/ProfileBar/Dropdown";
 import Auth from "./components/ProfileBar/Auth";
 import MyMovieIcon from "./Icon";
 import Profile from "./components/ProfileBar/profile";
 import useWindowSize from "./hooks/useWindowSize";
-
+import ColorPallet from "./components/ColorPallet";
 const { Content } = Layout;
 
 const App = () => {
@@ -26,14 +26,11 @@ const App = () => {
   const [BurgerClick, setBurgerClick] = useState(false);
   const width = useWindowSize();
 
-
-  
   // when route is change , window scroll go top
-  const {pathname} = useLocation()
-  useEffect(()=>{
-    window.scrollTo({top:0 , behavior:"smooth"})
-  },[pathname])
-
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [pathname]);
 
   useEffect(() => {
     width > 767 ? setResponsive(false) : setResponsive(true);
@@ -42,10 +39,37 @@ const App = () => {
     }
   }, [width]);
 
+  const [siteBackground, setPallet] = useState("#d1d0e5");
+  const [siteBackgrounds, setSiteBackground] = useState([
+    { color: "#d1d0e5", active: true },
+    { color: "#b2b2ff", active: false },
+    { color: "#ffaaaa", active: false },
+    { color: "#d8dab2", active: false },
+    {
+      color: "linear-gradient( rgb(194, 189, 91) , rgb(85 121 144))",
+      active: false,
+    },
+  ]);
+
+  const changeBackground = (pallet) => {
+    console.log(pallet);
+    setPallet(pallet.color);
+    setSiteBackground((prevState) =>
+      prevState.map((item) =>
+        item.color === pallet.color
+          ? { color: item.color, active: true }
+          : { color: item.color, active: false }
+      )
+    );
+  };
 
   return (
     <div id={classes.Container}>
-      <Layout style={{ background: "#d1d0e5" ,paddingBottom:"50px" }}>
+      <Layout style={{ background: siteBackground }}>
+        <ColorPallet
+          siteBackgrounds={siteBackgrounds}
+          changeBackground={changeBackground}
+        />
         <header
           id={Responsive ? classes.HeaderResponsive : classes.HeaderStyles}
         >
@@ -81,7 +105,7 @@ const App = () => {
             <div id={classes.Spacing}></div>
             <div
               id={Responsive ? classes.NavLinksResponsive : classes.NavLinks}
-              style={BurgerClick ? {paddingTop:"60px"} : {}}
+              style={BurgerClick ? { paddingTop: "60px" } : {}}
             >
               <span>
                 <Link to="/">Home</Link>
