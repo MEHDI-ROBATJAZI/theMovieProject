@@ -18,9 +18,7 @@ const UserContextProvider =({children})=>{
   useEffect(async()=>{
     try{
       if(session_id){
-
         window.localStorage.setItem("session_id" , session_id)
-        
         const data = await AccountService.GetProfileDetails()
         setUser(data)
       }else{

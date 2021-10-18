@@ -4,7 +4,7 @@ import useWindowSize from '../../hooks/useWindowSize'
 
 const Page404 = () => {
 
-  const width = useWindowSize()
+  const [width] = useWindowSize()
   
   return (
     <div>

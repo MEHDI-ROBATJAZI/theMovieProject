@@ -24,7 +24,7 @@ const App = () => {
   const [Responsive, setResponsive] = useState(false);
   const [IconProfileResponsive, setIconProfileResponsive] = useState(false);
   const [BurgerClick, setBurgerClick] = useState(false);
-  const width = useWindowSize();
+  const [width] = useWindowSize();
 
   // when route is change , window scroll go top
   const { pathname } = useLocation();

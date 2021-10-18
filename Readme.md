@@ -26,4 +26,6 @@
 
 + show rating favorite and watchlist count movies
 
+- improve vpn and internet connection alert
+
 - Rtl & - DarkMode & + color-pallet

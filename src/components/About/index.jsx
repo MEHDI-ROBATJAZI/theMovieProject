@@ -32,7 +32,7 @@ const Text_Details_Styles = {
 
 const About = () => {
 
-  const width = useWindowSize()
+  const [width] = useWindowSize()
   const calculateWidth = ()=>{
     if(width>1000){
       return 700

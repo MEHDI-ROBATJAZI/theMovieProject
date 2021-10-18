@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import "./home.scss";
 import Title from "../../Seo/Title";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
+import AlertMessage from "./alertMessage";
 const { Meta } = Card;
 
 const { TabPane } = Tabs;
@@ -81,7 +82,8 @@ const Home = () => {
 
   return (
     <div>
-      {error !== "" && (
+      <AlertMessage loading={loading} />
+      {/* {error !== "" && (
         <Alert
           message="Warning"
           description="please check your Interent and Vpn Connection"
@@ -89,7 +91,7 @@ const Home = () => {
           showIcon
           closable
         />
-      )}
+      )} */}
       <Title title="Home" description="main page" />
       <Radio.Group onChange={changeDataType} value={dataType} id="RadioGroup">
         <Radio value={"movie"}>Movies</Radio>

@@ -12,7 +12,7 @@ import List  from "./list";
 const { TabPane } = Tabs;
 const Profile = () => {
   const history = useHistory()
-  const width = useWindowSize()
+  const [width] = useWindowSize()
   const { user } = useContext(UserContext);
 
   useEffect(() => {
