@@ -57,11 +57,9 @@ const About = () => {
           style={{width:calculateWidth(),margin:"auto" , direction: "rtl",background: "#aba8cc"}}
         >
           <Panel header={"معرفی"} key="1">
+        
             <Text style={Introduce_Text_Styles}>
-              مهدی رباط جزی اصالتا اهل خراسان رضوی بزرگ شده قم ساکن تهران،
-            </Text>
-            <Text style={Introduce_Text_Styles}>
-              عاشق برنامه نویسی و تکنولوژی های سمت وب و جاوااسکریپت ،
+            مهدی رباط جزی ، عاشق برنامه نویسی و تکنولوژی های سمت وب و جاوااسکریپت  
             </Text>
             <Text style={Introduce_Text_Styles}>
               این پروژه دوره فرانت مپصا بوت کمپ است ،
@@ -118,10 +116,10 @@ const About = () => {
             >
               <SkypeFilled style={Link_Logo_Styles} />
             </Link>
-            <Link href="https://github.com/MEHDI-ROBATJAZI" target="_blank">
+            <Link href="https://github.com/mahdi-robatjazi78" target="_blank">
               <GithubFilled style={Link_Logo_Styles} />
             </Link>
-              <MailFilled style={Link_Logo_Styles} onClick={()=>alert(`my email : realmehdi1999m@gmail.com`)} />
+              <MailFilled style={Link_Logo_Styles} onClick={()=>alert(`my email : mahdi.robatjazi78@gmail.com`)} />
             
           </Panel>
         </Collapse>
