@@ -66,7 +66,7 @@ const Movies = () => {
             <Spin />
           </div>
         ) : (
-          movies.results.map((m) => (
+          movies?.results?.map((m) => (
             <SwiperSlide key={m.id}>
               <Link to={`/movieDetails/${m.id}?flag=movie`}>
                 <div className="swiper-card-flex">

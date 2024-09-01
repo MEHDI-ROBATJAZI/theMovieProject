@@ -16,11 +16,11 @@ const Persons = () => {
   } = useMovieApi(`trending/person/day`);
 
   const dayButtonClick = () => {
-    refetchPersons(`https://api.themoviedb.org/3/trending//person/day`);
+    refetchPersons(`https://api.themoviedb.org/3/trending/person/day`);
   };
 
   const weekButtonClick = () => {
-    refetchPersons(`https://api.themoviedb.org/3/trending//person/week`);
+    refetchPersons(`https://api.themoviedb.org/3/trending/person/week`);
   };
 
   const [personDetail, setPersonDetail] = useState({});
@@ -34,6 +34,7 @@ const Persons = () => {
     color: "black",
     fontWeight: "bold",
   };
+  console.log("🚀 ~ Persons ~ ActiveStyle.fontWeight:", persons)
 
   return (
     <div>
@@ -71,7 +72,7 @@ const Persons = () => {
             <Spin />
           </div>
         ) : (
-          persons.results.map((p) => (
+          (persons && persons?.results?.length) && persons?.results.map((p) => (
             <SwiperSlide key={p.id} onClick={() => showDetailPerson(p)}>
               <div className="swiper-card-flex">
                 <Image

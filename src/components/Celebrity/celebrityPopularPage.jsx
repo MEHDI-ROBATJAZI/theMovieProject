@@ -7,7 +7,7 @@ import classes from './celebrity.module.scss'
 
 const { Meta } = Card;
 const CelebrityPopularPage = () => {
-  const { data, loading, reFetch } = useMovieApi("person/popular");
+  const { data, loading, reFetch } = useMovieApi("/person/popular");
   
   const reloadData = (page) => {
     reFetch("https://api.themoviedb.org/3/person/popular", { page });
@@ -44,7 +44,7 @@ const CelebrityPopularPage = () => {
             <Spin></Spin>
           </div>
         ) : (
-          data.results.map((celeb) => (
+          (data&&data?.results.length )&& data?.results.map((celeb) => (
             <Col xs={12} sm={8} md={6} lg={4} key={celeb.id}  >
               <Link to={`/celebrity/${celeb.id}`}>
                 <Card

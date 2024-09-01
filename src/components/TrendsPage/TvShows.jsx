@@ -63,7 +63,7 @@ const TvShows = () => {
             <Spin />
           </div>
         ) : (
-          tvs.results.map((t) => (
+          tvs?.results?.map((t) => (
             <SwiperSlide key={t.id}>
               <Link to={`movieDetails/${t.id}?flag=tv`}>
                 <div className="swiper-card-flex">
