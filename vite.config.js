@@ -1,11 +1,15 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-refresh";
-import { VitePWA } from "vite-plugin-pwa";
+import { VitePWA } from "vite-plugin-pwa"
 
 const pwaConfigManifest = {
-  registerType: "prompt",
+  registerType: "autoUpdate",
   includeAssets: ["favicon.ico", "apple-touch-icon.png", "maskable-icon.png"],
-
+  workbox: {
+    clientsClaim: true,
+    skipWaiting: true
+  },
+  injectRegister: 'auto',
   manifest: {
     name: "The Movie Project",
     short_name: "The Movie Project",

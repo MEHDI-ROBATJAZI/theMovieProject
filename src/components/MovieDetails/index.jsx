@@ -94,7 +94,7 @@ const MovieDetails = () => {
             {data?.images?.logos[0] && (
               <Image
                 preview={false}
-                src={`https://image.tmdb.org/t/p/w500${data?.images?.logos[0].file_path}`}
+                src={`https://image.tmdb.org/t/p/w500${data?.images?.logos[0]?.file_path}`}
                 alt={"no image"}
               />
             )}
@@ -162,8 +162,7 @@ const MovieDetails = () => {
                 </div>
               </TabPane>
               <TabPane
-                className="glassMorphism"
-                className="tabPaneStyles"
+                className="glassMorphism tabPaneStyles"
                 tab="informations"
                 key="3"
               >
