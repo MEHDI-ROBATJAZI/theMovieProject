@@ -11,9 +11,12 @@ const useFetch = (url , query , method="GET")=>{
   const reFetch=(URL=url ,ExtraQuery={})=>{
 
     const newQuery = {...query,...ExtraQuery}
-
+    
     const queryParams = Object.keys(newQuery).length ? new URLSearchParams(newQuery).toString() : null
-
+    
+    console.log("🚀 ~ reFetch ~ URL:", URL)
+    console.log("🚀 ~ reFetch ~ newQuery:", newQuery)
+    console.log("🚀 ~ reFetch ~ queryParams:", queryParams)
 
 
     fetch(`${URL}${`${queryParams ? `?${queryParams}` : ""}`}` ,{

@@ -91,10 +91,10 @@ const MovieDetails = () => {
           }}
         >
           <div id="logoStyle">
-            {data.images.logos[0] && (
+            {data?.images?.logos[0] && (
               <Image
                 preview={false}
-                src={`https://image.tmdb.org/t/p/w500${data.images.logos[0].file_path}`}
+                src={`https://image.tmdb.org/t/p/w500${data?.images?.logos[0].file_path}`}
                 alt={"no image"}
               />
             )}

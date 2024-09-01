@@ -18,6 +18,7 @@ import "./home.scss";
 import Title from "../../Seo/Title";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 import AlertMessage from "./alertMessage";
+import { truncateText } from "../../helpers/tools";
 const { Meta } = Card;
 
 const { TabPane } = Tabs;
@@ -200,6 +201,8 @@ const Home = () => {
                       <Card
                         hoverable
                         style={{ width: 240 }}
+                            className="the-movie-card-metadata"
+
                         cover={
                           movie.poster_path ? (
                             <Image
@@ -217,16 +220,30 @@ const Home = () => {
                         }
                       >
                         <Meta
+                        
                           title={
-                            dataType === "movie"
+
+                            truncateText(
+
+                              
+                              
+                              dataType === "movie"
                               ? movie.original_title
-                              : movie.name
-                          }
+                              : movie.name 
+
+                              , 20
+                            )
+                            }
                           description={
-                            dataType === "movie"
+                            truncateText(
+
+                              dataType === "movie"
                               ? movie.release_date
                               : movie.first_air_date
-                          }
+                            ,20
+                            )
+
+                            }
                         />
                       </Card>
                     </Link>
